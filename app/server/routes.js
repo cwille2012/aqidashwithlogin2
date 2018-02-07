@@ -6,19 +6,27 @@ module.exports = function(app) {
 
     // main login page //
     app.get('/', function(req, res) {
-        // check if the user's credentials are saved in a cookie //
-        if (req.cookies.user == undefined || req.cookies.pass == undefined) {
-            res.render('login', { title: 'Hello - Please Login To Your Account' });
-        } else {
-            // attempt automatic login //
-            AM.autoLogin(req.cookies.user, req.cookies.pass, function(o) {
-                if (o != null) {
-                    req.session.user = o;
-                    res.redirect('/control');
-                } else {
-                    res.render('login', { title: 'Hello - Please Login To Your Account' });
+        if (req.session.user != null) {
+            res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
+                if (err) {
+                    res.end("Not found");
                 }
             });
+        } else {
+            // check if the user's credentials are saved in a cookie //
+            if (req.cookies.user == undefined || req.cookies.pass == undefined) {
+                res.render('login', { title: 'Hello - Please Login To Your Account' });
+            } else {
+                // attempt automatic login //
+                AM.autoLogin(req.cookies.user, req.cookies.pass, function(o) {
+                    if (o != null) {
+                        req.session.user = o;
+                        res.redirect('/control');
+                    } else {
+                        res.render('login', { title: 'Hello - Please Login To Your Account' });
+                    }
+                });
+            }
         }
     });
 
@@ -26,7 +34,6 @@ module.exports = function(app) {
         var pag = req.params.page;
         console.log(pag);
         if (req.session.user == null) {
-            // if user is not logged-in redirect back to login page //
             res.redirect('/');
         } else {
             res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
@@ -56,7 +63,6 @@ module.exports = function(app) {
 
     app.get('/control', function(req, res) {
         if (req.session.user == null) {
-            // if user is not logged-in redirect back to login page //
             res.redirect('/');
         } else {
             res.render('control', {
