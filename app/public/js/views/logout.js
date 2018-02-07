@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    $("#btn-logout").click(() => {
-        console.log("click")
+    function logout() {
+        console.log("logout pressed")
         $.ajax({
             url: "/logout",
             type: "POST",
@@ -17,6 +17,6 @@ $(document).ready(function() {
                 console.log(jqXHR.responseText + ' :: ' + jqXHR.statusText);
             }
         });
-    });
+    }
 
 });
