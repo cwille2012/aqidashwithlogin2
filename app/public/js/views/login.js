@@ -16,8 +16,16 @@ $(document).ready(function() {
             }
         },
         success: function(responseText, status, xhr, $form) {
-            console.log(responseText);
-            //if (status == 'success') window.location.href = '/web/index.html';
+            //console.log(responseText);
+            if (status == 'success') {
+                localStorage.setItem("dataDashFullName", responseText['name']);
+                localStorage.setItem("dataDashEmail", responseText['email']);
+                localStorage.setItem("dataDashUserName", responseText['user']);
+                localStorage.setItem("dataDashCountry", responseText['country']);
+                localStorage.setItem("dataDashUserID", responseText['_id']);
+                localStorage.setItem("dataDashPassHash", responseText['pass']);
+                window.location.href = '/web/index.html';
+            }
         },
         error: function(e) {
             lv.showLoginError('Login Failure', 'Please check your username and/or password');
