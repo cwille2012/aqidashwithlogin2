@@ -5,7 +5,7 @@ var EM = require('./modules/email-dispatcher');
 module.exports = function(app) {
 
     // main login page //
-    app.get('/', function(req, res) {
+    app.get('/account', function(req, res) {
         // check if the user's credentials are saved in a cookie //
         if (req.cookies.user == undefined || req.cookies.pass == undefined) {
             res.render('login', { title: 'Hello - Please Login To Your Account' });
@@ -29,7 +29,6 @@ module.exports = function(app) {
             // if user is not logged-in redirect back to login page //
             res.redirect('/');
         } else {
-
             res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
                 if (err) {
                     res.end("Not found");
