@@ -16,6 +16,7 @@ $(document).ready(function() {
             }
         },
         success: function(responseText, status, xhr, $form) {
+            console.log(responseText);
             if (status == 'success') window.location.href = '/web/index.html';
         },
         error: function(e) {
