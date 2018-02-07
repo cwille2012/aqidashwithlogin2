@@ -23,7 +23,7 @@ module.exports = function(app) {
     });
 
     app.get('/web/:page', function(req, res) {
-        let pag = req.params.page;
+        var pag = req.params.page;
         console.log(pag);
         if (req.session.user == null) {
             // if user is not logged-in redirect back to login page //
