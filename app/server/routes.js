@@ -5,7 +5,7 @@ var EM = require('./modules/email-dispatcher');
 module.exports = function(app) {
 
     // main login page //
-    app.get('/account', function(req, res) {
+    app.get('/', function(req, res) {
         // check if the user's credentials are saved in a cookie //
         if (req.cookies.user == undefined || req.cookies.pass == undefined) {
             res.render('login', { title: 'Hello - Please Login To Your Account' });
