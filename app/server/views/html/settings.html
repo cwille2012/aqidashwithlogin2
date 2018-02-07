@@ -309,7 +309,8 @@
                 return xmlHttp.responseText;
             }
             var address = String(window.location.href);
-            var userAccounts = JSON.parse((address.replace(/settings/g, 'print')));
+            var userAccounts = httpGet(address.replace(/settings/g, 'print'));
+            userAccounts = JSON.parse(userAccounts);
             console.log(userAccounts);
         }
     </script>
