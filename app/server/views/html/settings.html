@@ -247,154 +247,152 @@
                 </div>
                 <div class="card-footer small text-muted">Some text in footer</div>
             </div>
+            <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
+            <div style="height: 1000px;"></div>
         </div>
-    </div>
-    <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
-    <div style="height: 1000px;"></div>
-    </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-        <div class="container">
-            <div class="text-center">
-                <small>Copyright © FIT X Lab 2018</small>
+        <!-- /.container-fluid-->
+        <!-- /.content-wrapper-->
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © FIT X Lab 2018</small>
+                </div>
             </div>
-        </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button id="btn-logout" type="button" class="btn btn-primary">Logout</button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <button id="btn-logout" type="button" class="btn btn-primary">Logout</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--External Script Files-->
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="/vendor/chart.js/Chart.min.js"></script>
-    <script src="/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
-    <script src="/js/dashboard/sb-admin.js"></script>
-    <script src="/js/dashboard/sb-admin-datatables.js"></script>
-    <script src="/js/dashboard/sb-admin-charts.js"></script>
+        <!--External Script Files-->
+        <script src="/vendor/jquery/jquery.min.js"></script>
+        <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="/vendor/chart.js/Chart.min.js"></script>
+        <script src="/vendor/datatables/jquery.dataTables.js"></script>
+        <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+        <script src="/js/dashboard/sb-admin.js"></script>
+        <script src="/js/dashboard/sb-admin-datatables.js"></script>
+        <script src="/js/dashboard/sb-admin-charts.js"></script>
 
-    <!--Local Script Files-->
-    <!--Toggle between fixed and moving navbar-->
-    <script>
-        $('#toggleNavPosition').click(function() {
-            $('body').toggleClass('fixed-nav');
-            $('nav').toggleClass('fixed-top static-top');
-        });
-    </script>
-
-    <!--Toggle between dark and light navbar-->
-    <script>
-        $('#toggleNavColor').click(function() {
-            $('nav').toggleClass('navbar-dark navbar-light');
-            $('nav').toggleClass('bg-dark bg-light');
-            $('body').toggleClass('bg-dark bg-light');
-        });
-    </script>
-
-    <script>
-        function loadScript() {
-            if (!!document.getElementById('usersTableBody')) {
-                function httpGet(theUrl) {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.open("GET", theUrl, false); // false for synchronous request
-                    xmlHttp.send(null);
-                    return xmlHttp.responseText;
-                }
-                var address = String(window.location.href);
-                var userAccounts = httpGet(address.replace(/settings/g, 'print'));
-                userAccounts = JSON.parse(userAccounts);
-                for (var account in userAccounts) {
-                    var userID = userAccounts[account]['_id'];
-                    var userName = userAccounts[account]['user'];
-                    var userEmail = userAccounts[account]['email'];
-                    var userFullName = userAccounts[account]['name'];
-                    var userCountry = userAccounts[account]['country'];
-
-                    var tr = document.createElement("tr");
-
-                    var td0 = document.createElement("td");
-                    var text0 = document.createTextNode(userID);
-                    td0.appendChild(text0);
-                    tr.appendChild(td0);
-
-                    var td1 = document.createElement("td");
-                    var text1 = document.createTextNode(userName);
-                    td1.appendChild(text1);
-                    tr.appendChild(td1);
-
-                    var td2 = document.createElement("td");
-                    var text2 = document.createTextNode(userFullName);
-                    td2.appendChild(text2);
-                    tr.appendChild(td2);
-
-                    var td3 = document.createElement("td");
-                    var text3 = document.createTextNode(userEmail);
-                    td3.appendChild(text3);
-                    tr.appendChild(td3);
-
-                    var td4 = document.createElement("td");
-                    var text4 = document.createTextNode(userCountry);
-                    td4.appendChild(text4);
-                    tr.appendChild(td4);
-
-                    document.getElementById('usersTableBody').appendChild(tr);
-                }
-            }
-            if (!!document.getElementById('usersTableUpdateTime')) {
-                var today = new Date();
-                var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
-                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                var updateTimeString = "Updated " + date + " at " + time;
-                document.getElementById('usersTableUpdateTime').innerHTML = updateTimeString;
-            }
-        }
-    </script>
-
-    <script>
-        $("#btn-logout").click(() => {
-            localStorage.removeItem("dataDashFullName");
-            localStorage.removeItem("dataDashEmail");
-            localStorage.removeItem("dataDashUserName");
-            localStorage.removeItem("dataDashCountry");
-            localStorage.removeItem("dataDashUserID");
-            localStorage.removeItem("dataDashPassHash");
-            $.ajax({
-                url: "/logout",
-                type: "POST",
-                data: {
-                    logout: true
-                },
-                success: function(data) {
-                    console.log("hup");
-                    location.reload();
-                },
-                error: function(jqXHR) {
-                    console.log(jqXHR.responseText + ' :: ' + jqXHR.statusText);
-                }
+        <!--Local Script Files-->
+        <!--Toggle between fixed and moving navbar-->
+        <script>
+            $('#toggleNavPosition').click(function() {
+                $('body').toggleClass('fixed-nav');
+                $('nav').toggleClass('fixed-top static-top');
             });
-        });
-    </script>
+        </script>
+
+        <!--Toggle between dark and light navbar-->
+        <script>
+            $('#toggleNavColor').click(function() {
+                $('nav').toggleClass('navbar-dark navbar-light');
+                $('nav').toggleClass('bg-dark bg-light');
+                $('body').toggleClass('bg-dark bg-light');
+            });
+        </script>
+
+        <script>
+            function loadScript() {
+                if (!!document.getElementById('usersTableBody')) {
+                    function httpGet(theUrl) {
+                        var xmlHttp = new XMLHttpRequest();
+                        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+                        xmlHttp.send(null);
+                        return xmlHttp.responseText;
+                    }
+                    var address = String(window.location.href);
+                    var userAccounts = httpGet(address.replace(/settings/g, 'print'));
+                    userAccounts = JSON.parse(userAccounts);
+                    for (var account in userAccounts) {
+                        var userID = userAccounts[account]['_id'];
+                        var userName = userAccounts[account]['user'];
+                        var userEmail = userAccounts[account]['email'];
+                        var userFullName = userAccounts[account]['name'];
+                        var userCountry = userAccounts[account]['country'];
+
+                        var tr = document.createElement("tr");
+
+                        var td0 = document.createElement("td");
+                        var text0 = document.createTextNode(userID);
+                        td0.appendChild(text0);
+                        tr.appendChild(td0);
+
+                        var td1 = document.createElement("td");
+                        var text1 = document.createTextNode(userName);
+                        td1.appendChild(text1);
+                        tr.appendChild(td1);
+
+                        var td2 = document.createElement("td");
+                        var text2 = document.createTextNode(userFullName);
+                        td2.appendChild(text2);
+                        tr.appendChild(td2);
+
+                        var td3 = document.createElement("td");
+                        var text3 = document.createTextNode(userEmail);
+                        td3.appendChild(text3);
+                        tr.appendChild(td3);
+
+                        var td4 = document.createElement("td");
+                        var text4 = document.createTextNode(userCountry);
+                        td4.appendChild(text4);
+                        tr.appendChild(td4);
+
+                        document.getElementById('usersTableBody').appendChild(tr);
+                    }
+                }
+                if (!!document.getElementById('usersTableUpdateTime')) {
+                    var today = new Date();
+                    var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var updateTimeString = "Updated " + date + " at " + time;
+                    document.getElementById('usersTableUpdateTime').innerHTML = updateTimeString;
+                }
+            }
+        </script>
+
+        <script>
+            $("#btn-logout").click(() => {
+                localStorage.removeItem("dataDashFullName");
+                localStorage.removeItem("dataDashEmail");
+                localStorage.removeItem("dataDashUserName");
+                localStorage.removeItem("dataDashCountry");
+                localStorage.removeItem("dataDashUserID");
+                localStorage.removeItem("dataDashPassHash");
+                $.ajax({
+                    url: "/logout",
+                    type: "POST",
+                    data: {
+                        logout: true
+                    },
+                    success: function(data) {
+                        console.log("hup");
+                        location.reload();
+                    },
+                    error: function(jqXHR) {
+                        console.log(jqXHR.responseText + ' :: ' + jqXHR.statusText);
+                    }
+                });
+            });
+        </script>
     </div>
 </body>
 
