@@ -665,6 +665,7 @@
         <script src="/js/dashboard/sb-admin-datatables.js"></script>
         <script src="/js/dashboard/sb-admin-charts.js"></script>
 
+        <!--Local Script Files-->
         <script>
             function loadScript() {
                 document.getElementById("userID").innerHTML = localStorage.getItem("dataDashUserID");
@@ -693,7 +694,6 @@
                     success: function(data) {
                         console.log("hup");
                         location.reload();
-                        //that.showLockedAlert('You are now logged out.<br>Redirecting you back to the homepage.');
                     },
                     error: function(jqXHR) {
                         console.log(jqXHR.responseText + ' :: ' + jqXHR.statusText);

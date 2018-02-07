@@ -16,7 +16,6 @@ $(document).ready(function() {
             }
         },
         success: function(responseText, status, xhr, $form) {
-            //console.log(responseText);
             if (status == 'success') {
                 localStorage.setItem("dataDashFullName", responseText['name']);
                 localStorage.setItem("dataDashEmail", responseText['email']);
