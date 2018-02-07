@@ -22,6 +22,22 @@ module.exports = function(app) {
         }
     });
 
+    app.get('/web/:page', function(req, res) {
+        let pag = req.params.page;
+        console.log(pag);
+        if (req.session.user == null) {
+            // if user is not logged-in redirect back to login page //
+            res.redirect('/');
+        } else {
+
+            res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
     app.post('/', function(req, res) {
         AM.manualLogin(req.body['user'], req.body['pass'], function(e, o) {
             if (!o) {
