@@ -8,17 +8,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Data Dashboard</title>
+    <!--CSS Style Files-->
+    <link href="/css/sb-admin.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css">
+    <!--External Script Files-->
     <script src="/vendor/jquery-2.2.3.min.js"></script>
     <script src="/vendor/jquery.form.min.js"></script>
+    <script src="/public/js/views/logout.js"></script>
 </head>
 
 <body>
     This is the home page.</body><br><br>
 
 <button id="btn-logout" class="navbar-btn btn btn-default" onclick="logout()">Sign Out</button>
-<script src="/public/js/views/logout.js"></script>
 
-<!--<script>
+<script>
     $("#btn-logout").click(() => {
         console.log("click")
         $.ajax({
@@ -37,7 +43,7 @@
             }
         });
     });
-</script>-->
+</script>
 
 </body>
 
