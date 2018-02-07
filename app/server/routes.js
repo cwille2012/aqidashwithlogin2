@@ -198,7 +198,9 @@ module.exports = function(app) {
             AM.getAllRecords(function(e, accounts) {
                 //res.render('print', { title: 'Account List', accts: accounts });
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                accounts['pass'] = 'hidden';
+                for (var account in accounts) {
+                    accounts[account]['pass'] = 'hidden';
+                }
                 console.log(accounts);
                 res.end(JSON.stringify(accounts));
             })
