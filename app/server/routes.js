@@ -196,7 +196,7 @@ module.exports = function(app) {
             //res.render('print', { title: 'Account List', accts: accounts });
             res.writeHead(200, { 'Content-Type': 'application/x-www-form-urlencoded' });
             //res.end(JSON.stringify(accounts));
-            res.json(accounts);
+            res.end(accounts);
         })
     });
 
