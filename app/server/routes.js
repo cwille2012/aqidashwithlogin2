@@ -201,7 +201,6 @@ module.exports = function(app) {
                 for (var account in accounts) {
                     accounts[account]['pass'] = 'hidden';
                 }
-                console.log(accounts);
                 res.end(JSON.stringify(accounts));
             })
         }
