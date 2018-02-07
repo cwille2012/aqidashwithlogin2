@@ -17,7 +17,7 @@ $(document).ready(function() {
         },
         success: function(responseText, status, xhr, $form) {
             console.log(responseText);
-            if (status == 'success') window.location.href = '/web/index.html';
+            //if (status == 'success') window.location.href = '/web/index.html';
         },
         error: function(e) {
             lv.showLoginError('Login Failure', 'Please check your username and/or password');
