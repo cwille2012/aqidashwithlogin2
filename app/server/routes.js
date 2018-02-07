@@ -44,6 +44,18 @@ module.exports = function(app) {
         }
     });
 
+    app.get('/settings', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/settings.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
     app.post('/', function(req, res) {
         AM.manualLogin(req.body['user'], req.body['pass'], function(e, o) {
             if (!o) {
