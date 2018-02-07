@@ -192,11 +192,15 @@ module.exports = function(app) {
     // view & delete accounts //
 
     app.get('/print', function(req, res) {
-        AM.getAllRecords(function(e, accounts) {
-            //res.render('print', { title: 'Account List', accts: accounts });
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify(accounts));
-        })
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            AM.getAllRecords(function(e, accounts) {
+                //res.render('print', { title: 'Account List', accts: accounts });
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify(accounts));
+            })
+        }
     });
 
     app.post('/delete', function(req, res) {
