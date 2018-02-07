@@ -199,6 +199,7 @@ module.exports = function(app) {
                 //res.render('print', { title: 'Account List', accts: accounts });
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 accounts['pass'] = 'hidden';
+                console.log(accounts);
                 res.end(JSON.stringify(accounts));
             })
         }
