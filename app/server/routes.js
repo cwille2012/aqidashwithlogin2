@@ -195,7 +195,7 @@ module.exports = function(app) {
         AM.getAllRecords(function(e, accounts) {
             //res.render('print', { title: 'Account List', accts: accounts });
             res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(String(accounts));
+            res.end(JSON.stringify(accounts));
         })
     });
 
