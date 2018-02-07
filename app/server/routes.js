@@ -7,7 +7,7 @@ module.exports = function(app) {
     // main login page //
     app.get('/', function(req, res) {
         if (req.session.user != null) {
-            res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
+            res.sendFile(__dirname + '/views/html/index.html', (err, html) => {
                 if (err) {
                     res.end("Not found");
                 }
