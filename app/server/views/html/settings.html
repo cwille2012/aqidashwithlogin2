@@ -234,7 +234,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                <div class="card-footer small text-muted" id="usersTableUpdateTime"></div>
             </div>
         </div>
         <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
@@ -333,12 +333,12 @@
                     tr.appendChild(td1);
 
                     var td2 = document.createElement("td");
-                    var text2 = document.createTextNode(userEmail);
+                    var text2 = document.createTextNode(userFullName);
                     td2.appendChild(text2);
                     tr.appendChild(td2);
 
                     var td3 = document.createElement("td");
-                    var text3 = document.createTextNode(userFullName);
+                    var text3 = document.createTextNode(userEmail);
                     td3.appendChild(text3);
                     tr.appendChild(td3);
 
@@ -349,6 +349,13 @@
 
                     document.getElementById('usersTableBody').appendChild(tr);
                 }
+            }
+            if (!!document.getElementById('usersTableUpdateTime')) {
+                var today = new Date();
+                var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var updateTimeString = "Updated " + date + " at " + time;
+                document.getElementById('usersTableUpdateTime').innerHTML = updateTimeString;
             }
         }
     </script>
