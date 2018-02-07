@@ -67,19 +67,6 @@ module.exports = function(app) {
         }
     });
 
-    // app.get('/control', function(req, res) {
-    //     if (req.session.user == null) {
-    //         // if user is not logged-in redirect back to login page //
-    //         res.redirect('/');
-    //     } else {
-    //         res.sendFile(__dirname + "/views/dash.html", {
-    //             title: 'Data Dashboard',
-    //             countries: CT,
-    //             udata: req.session.user
-    //         });
-    //     }
-    // });
-
     app.post('/control', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
@@ -207,23 +194,37 @@ module.exports = function(app) {
     });
 
     app.post('/delete', function(req, res) {
-        AM.deleteAccount(req.body.id, function(e, obj) {
-            if (!e) {
-                res.clearCookie('user');
-                res.clearCookie('pass');
-                req.session.destroy(function(e) { res.status(200).send('ok'); });
-            } else {
-                res.status(400).send('record not found');
-            }
-        });
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            AM.deleteAccount(req.body.id, function(e, obj) {
+                if (!e) {
+                    res.clearCookie('user');
+                    res.clearCookie('pass');
+                    req.session.destroy(function(e) { res.status(200).send('ok'); });
+                } else {
+                    res.status(400).send('record not found');
+                }
+            });
+        }
     });
 
     app.get('/reset', function(req, res) {
-        AM.delAllRecords(function() {
-            res.redirect('/print');
-        });
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            AM.delAllRecords(function() {
+                res.redirect('/print');
+            });
+        }
     });
 
-    app.get('*', function(req, res) { res.render('404', { title: 'Page Not Found' }); });
+    app.get('*', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.render('404', { title: 'Page Not Found' });
+        }
+    });
 
 };
