@@ -195,8 +195,7 @@ module.exports = function(app) {
         AM.getAllRecords(function(e, accounts) {
             //res.render('print', { title: 'Account List', accts: accounts });
             res.writeHead(200, { 'Content-Type': 'application/x-www-form-urlencoded' });
-            //res.end(JSON.stringify(accounts));
-            res.end(accounts);
+            res.end(JSON.stringify(accounts));
         })
     });
 
