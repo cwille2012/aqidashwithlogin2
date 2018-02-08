@@ -434,6 +434,13 @@
                             var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
                             var data = request.responseText; // Returned data, e.g., an HTML document.
                             console.log('status:' + status + ':' + data);
+                            if (status == 200) {
+                                var verifyData = JSON.parse(data);
+                                var updatedID = String(verifyData['id'] + '-' + verifyData['field']);
+                                var updatedValue = String(verifyData['value']);
+                                document.getElementById(updatedID).innerHTML = updatedValue;
+                            }
+
                         }
 
                         request.open(method, url, shouldBeAsync);
