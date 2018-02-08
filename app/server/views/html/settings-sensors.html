@@ -288,6 +288,7 @@
                         td0.setAttribute("id", sensorID + '-id');
                         td0.addEventListener('click', function(event) {
                             var name = $(this).text();
+                            console.log(name);
                             $(this).html('');
                             $('<input></input>')
                                 .attr({
