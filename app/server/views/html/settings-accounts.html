@@ -339,7 +339,8 @@
         </script>
 
         <script>
-            $('#addUserWhitelist').click(function() {
+            $('#addUserWhitelist').click(function($e) {
+                $e.preventDefault();
                 var tr = document.createElement("tr");
 
                 var td0 = document.createElement("td");
