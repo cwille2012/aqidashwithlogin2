@@ -304,7 +304,6 @@
                     }
                     var address = String(window.location.href);
                     var sensorData = httpGet(address.replace(/settings\/sensors/g, 'sensors'));
-                    console.log(sensorData);
                     sensorData = JSON.parse(sensorData);
                     for (var sensor in sensorData) {
                         var sensorID = sensorData[sensor];

@@ -8,3 +8,6 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#usersTable').DataTable();
 });
+$(document).ready(function() {
+    $('#sensorTable').DataTable();
+});
