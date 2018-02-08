@@ -290,7 +290,12 @@
                 //$('nav').toggleClass('navbar-dark navbar-light');
                 //$('nav').toggleClass('bg-dark bg-light');
                 //$('body').toggleClass('bg-dark bg-light');
-                $('nav').toggleClass('bg-purple bg-dark');
+                $('nav').classList.remove('bg-purple');
+                $('nav').classList.remove('navbar-purple');
+                $('nav').classList.add('bg-dark');
+                $('nav').classList.add('navbar-dark');
+                $('body').classList.remove('bg-purple');
+                $('body').classList.add('bg-dark');
                 //$('body').toggleClass('bg-purple bg-dark');
             });
         </script>
