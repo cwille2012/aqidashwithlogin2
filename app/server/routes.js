@@ -381,6 +381,7 @@ module.exports = function(app) {
             console.log(req.body);
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
+            //edit field in database
         }
     });
 
