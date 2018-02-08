@@ -226,7 +226,7 @@
             <h1>Settings</h1>
             <hr>
             <h3>Dashboard Settings</h3>
-            <p>The navbar position can be either fixed or static, and it supports the navbar-light and navbar-dark Bootstrap 4 classes.</p>
+            <p>The navbar position can be either fixed or static, and it supports the dark and purple color schemes.</p>
             <a class="btn btn-primary" href="#" id="toggleNavPosition">Toggle Fixed/Static Navbar</a><br>
             <a class="btn btn-primary" href="#" id="toggleNavColor" style="margin-top: 15px">Toggle Navbar Color</a>
             <hr>
@@ -276,6 +276,12 @@
         <script src="/js/dashboard/sb-admin-charts.js"></script>
 
         <!--Local Script Files-->
+        <script>
+            $(window).on('hashchange', function(e) {
+                history.replaceState("", document.title, e.originalEvent.oldURL);
+            });
+        </script>
+
         <!--Toggle between fixed and moving navbar-->
         <script>
             $('#toggleNavPosition').click(function() {
