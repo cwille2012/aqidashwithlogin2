@@ -23,7 +23,7 @@ $(document).ready(function() {
                 localStorage.setItem("dataDashCountry", responseText['country']);
                 localStorage.setItem("dataDashUserID", responseText['_id']);
                 localStorage.setItem("dataDashPassHash", responseText['pass']);
-                window.location.href = '/web/index.html';
+                window.location.href = '/dashboard';
             }
         },
         error: function(e) {
