@@ -27,51 +27,40 @@
       <span class="navbar-toggler-icon"></span>
     </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <ul class="navbar-nav navbar-sidenav" id="navAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="/dashboard">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Purchasing">
-                    <a class="nav-link" href="purchasing.html">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Grapgs">
+                    <a class="nav-link" href="/graphs">
                         <i class="fa fa-fw fa-area-chart"></i>
                         <span class="nav-link-text">Graphs</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Map">
-                    <a class="nav-link" href="map.html">
-                        <i class="fa fa-fw fa-map"></i>
-                        <span class="nav-link-text">Quality Map</span>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sensor Map">
+                    <a class="nav-link" href="/map">
+                        <i class="fa fa-fw fa-map-o"></i>
+                        <span class="nav-link-text">Sensor Map</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="/tables">
                         <i class="fa fa-fw fa-table"></i>
                         <span class="nav-link-text">Tables</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-wrench"></i>
-                        <span class="nav-link-text">Settings</span>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alarms">
+                    <a class="nav-link" href="/alarms">
+                        <i class="fa fa-fw fa-bell-o"></i>
+                        <span class="nav-link-text">Alarms</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                        <li>
-                            <a href="/settings/dashboard">Dashboard Settings</a>
-                        </li>
-                        <li>
-                            <a href="/settings/sensors">Sensor Settings</a>
-                        </li>
-                        <li>
-                            <a href="/settings/accounts">Account Management</a>
-                        </li>
-                    </ul>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sensor Data">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSensorData" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-file"></i>
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSensorData" data-parent="#navAccordion">
+                        <i class="fa fa-fw fa-podcast"></i>
                         <span class="nav-link-text">Sensor Data</span>
                     </a>
                     <ul class="sidenav-second-level collapse" id="collapseSensorData">
@@ -83,27 +72,41 @@
                         </li>
                         <li>
                             <a href="carbonmonoxide.html">Carbon Monoxide</a>
-                            <!--mq7-->
                         </li>
                         <li>
                             <a href="propane.html">Propane</a>
-                            <!--mq2-->
                         </li>
                         <li>
                             <a href="butane.html">Butane</a>
-                            <!--mq6-->
                         </li>
                         <li>
                             <a href="hydrogen.html">Hydrogen</a>
-                            <!--mq5-->
                         </li>
                         <li>
                             <a href="methane.html">Methane</a>
-                            <!--mq4-->
                         </li>
                         <li>
                             <a href="benzine.html">Benzine</a>
-                            <!--mq3-->
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSettings" data-parent="#navAccordion">
+                        <i class="fa fa-fw fa-wrench"></i>
+                        <span class="nav-link-text">Settings</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseSettings">
+                        <li>
+                            <a href="/settings/accounts">Account Management</a>
+                        </li>
+                        <li>
+                            <a href="/settings/alarms">Alarm Settings</a>
+                        </li>
+                        <li>
+                            <a href="/settings/dashboard">Dashboard Settings</a>
+                        </li>
+                        <li>
+                            <a href="/settings/sensors">Sensor Settings</a>
                         </li>
                     </ul>
                 </li>
