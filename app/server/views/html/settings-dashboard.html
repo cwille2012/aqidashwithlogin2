@@ -18,7 +18,7 @@
     <script src="/public/js/views/logout.js"></script>
     <style>
         .bg-purple {
-            background-color: "#703081";
+            background-color: "#703081 !important";
         }
     </style>
 </head>
@@ -255,9 +255,11 @@
         <!--Toggle between dark and light navbar-->
         <script>
             $('#toggleNavColor').click(function() {
-                $('nav').toggleClass('navbar-dark navbar-light');
-                $('nav').toggleClass('bg-dark bg-light');
-                $('body').toggleClass('bg-dark bg-light');
+                //$('nav').toggleClass('navbar-dark navbar-light');
+                //$('nav').toggleClass('bg-dark bg-light');
+                //$('body').toggleClass('bg-dark bg-light');
+                $('nav').toggleClass('bg-dark bg-purple');
+                $('body').toggleClass('bg-dark bg-purple');
             });
         </script>
 
