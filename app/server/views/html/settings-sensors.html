@@ -306,7 +306,7 @@
                     var sensorData = httpGet(address.replace(/settings\/sensors/g, 'sensors'));
                     sensorData = JSON.parse(sensorData);
                     for (var sensor in sensorData) {
-                        var sensorID = sensorData[sensor];
+                        var sensorID = sensor;
                         var sensorName = sensorData[sensor]['name'];
                         var sensorGroup = sensorData[sensor]['group'];
                         var sensorLocation = sensorData[sensor]['location'];
