@@ -279,8 +279,23 @@
         <!--Toggle between fixed and moving navbar-->
         <script>
             $('#toggleNavPosition').click(function() {
-                $('body').toggleClass('fixed-nav');
-                $('nav').toggleClass('fixed-top static-top');
+                var navbarPosition = "";
+                if ($('#page-top').hasClass('fixed-nav')) {
+                    $('#page-top').removeClass('fixed-nav');
+                    navbarPosition = "static";
+                } else {
+                    $('#page-top').addClass('fixed-nav');
+                    navbarPosition = "fixed";
+                }
+                if ($('#mainNav').hasClass('fixed-top')) {
+                    $('#mainNav').removeClass('fixed-top');
+                    $('#mainNav').addClass('static-top');
+                } else {
+                    $('#mainNav').addClass('fixed-top');
+                    $('#mainNav').removeClass('static-top');
+                }
+                //$('body').toggleClass('fixed-nav');
+                //$('nav').toggleClass('fixed-top static-top');
             });
         </script>
 
@@ -315,8 +330,6 @@
                     "field": "defaultColor",
                     "value": defaultColor
                 });
-
-                console.log(postData);
 
                 var url = String(window.location.href);
                 url = url.replace(/settings\/dashboard/g, 'dashsettings');
