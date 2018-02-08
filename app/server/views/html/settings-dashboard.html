@@ -335,6 +335,27 @@
                     } else {
                         console.log("default color could not be changed");
                         console.log(status + ': ' + data);
+                        if ($('#mainNav').hasClass('bg-purple')) {
+                            $('#mainNav').removeClass('bg-purple');
+                            $('#mainNav').addClass('bg-dark');
+                        } else {
+                            $('#mainNav').addClass('bg-purple');
+                            $('#mainNav').removeClass('bg-dark');
+                        }
+                        if ($('#mainNav').hasClass('navbar-purple')) {
+                            $('#mainNav').removeClass('navbar-purple');
+                            $('#mainNav').addClass('navbar-dark');
+                        } else {
+                            $('#mainNav').addClass('navbar-purple');
+                            $('#mainNav').removeClass('navbar-dark');
+                        }
+                        if ($('#page-top').hasClass('bg-purple')) {
+                            $('#page-top').removeClass('bg-purple');
+                            $('#page-top').addClass('bg-dark');
+                        } else {
+                            $('#page-top').addClass('bg-purple');
+                            $('#page-top').removeClass('bg-dark');
+                        }
                     }
                 }
                 request.open(method, url, shouldBeAsync);
