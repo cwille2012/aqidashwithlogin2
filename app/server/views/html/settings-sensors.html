@@ -439,8 +439,10 @@
                                 var updatedID = String(verifyData['id'] + '-' + verifyData['field']);
                                 var updatedValue = String(verifyData['value']);
                                 document.getElementById(updatedID).innerHTML = updatedValue;
+                                document.getElementById(updatedID).style.color = "green";
+                            } else {
+                                document.getElementById($changedElement[0]['id']).style.color = "red";
                             }
-
                         }
 
                         request.open(method, url, shouldBeAsync);
