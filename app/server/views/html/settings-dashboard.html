@@ -284,7 +284,8 @@
 
         <!--Toggle between fixed and moving navbar-->
         <script>
-            $('#toggleNavPosition').click(function() {
+            $('#toggleNavPosition').click(function($e) {
+                $e.preventDefault();
                 var navbarPosition = "";
                 if ($('#page-top').hasClass('fixed-nav')) {
                     $('#page-top').removeClass('fixed-nav');
@@ -344,7 +345,8 @@
 
         <!--Toggle between dark and light navbar-->
         <script>
-            $('#toggleNavColor').click(function() {
+            $('#toggleNavColor').click(function($e) {
+                $e.preventDefault();
                 var defaultColor = "";
                 if ($('#mainNav').hasClass('bg-purple')) {
                     $('#mainNav').removeClass('bg-purple');

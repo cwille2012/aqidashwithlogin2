@@ -346,16 +346,61 @@
                 var td0 = document.createElement("td");
                 var text0 = document.createTextNode("Email");
                 td0.appendChild(text0);
+                td0.addEventListener('click', function(event) {
+                    var $this = $(this);
+                    var listenID = String(event.target.id);
+                    var $input = $('<input>', {
+                        value: $this.text(),
+                        type: 'text',
+                        id: String(listenID + '-email'),
+                        blur: function() {
+                            $this.text(this.value);
+                        },
+                        keyup: function(e) {
+                            if (e.which === 13) $input.blur();
+                        }
+                    }).appendTo($this.empty()).focus();
+                });
                 tr.appendChild(td0);
 
                 var td1 = document.createElement("td");
                 var text1 = document.createTextNode("Access");
                 td1.appendChild(text1);
+                td1.addEventListener('click', function(event) {
+                    var $this = $(this);
+                    var listenID = String(event.target.id);
+                    var $input = $('<input>', {
+                        value: $this.text(),
+                        type: 'text',
+                        id: String(listenID + '-access'),
+                        blur: function() {
+                            $this.text(this.value);
+                        },
+                        keyup: function(e) {
+                            if (e.which === 13) $input.blur();
+                        }
+                    }).appendTo($this.empty()).focus();
+                });
                 tr.appendChild(td1);
 
                 var td2 = document.createElement("td");
                 var text2 = document.createTextNode("Remove Button");
                 td2.appendChild(text2);
+                td2.addEventListener('click', function(event) {
+                    var $this = $(this);
+                    var listenID = String(event.target.id);
+                    var $input = $('<input>', {
+                        value: $this.text(),
+                        type: 'text',
+                        id: String(listenID + '-remove'),
+                        blur: function() {
+                            $this.text(this.value);
+                        },
+                        keyup: function(e) {
+                            if (e.which === 13) $input.blur();
+                        }
+                    }).appendTo($this.empty()).focus();
+                });
                 tr.appendChild(td2);
 
                 document.getElementById('whitelistTableBody').appendChild(tr);
