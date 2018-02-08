@@ -439,6 +439,12 @@
         </script>
 
         <script>
+            $("input").change(function() {
+                console.log("The text has been changed.");
+            });
+        </script>
+
+        <script>
             $("#btn-logout").click(() => {
                 localStorage.removeItem("dataDashFullName");
                 localStorage.removeItem("dataDashEmail");
