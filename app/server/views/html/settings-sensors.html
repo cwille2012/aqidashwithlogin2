@@ -439,8 +439,14 @@
         </script>
 
         <script>
-            $("input").change(function() {
-                console.log("The text has been changed.");
+            $(document).ready(function() {
+                $('input, select').live('change'function() {
+                    var $changedElement = $(this);
+
+                    if ($changedElement.val() != '') {
+                        // code to keep track of which elements are checked..
+                    }
+                });
             });
         </script>
 
