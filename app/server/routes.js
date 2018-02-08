@@ -44,11 +44,35 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/settings', function(req, res) {
+    app.get('/settings/dashboard', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            res.sendFile(__dirname + '/views/html/settings.html', (err, html) => {
+            res.sendFile(__dirname + '/views/html/settings-dashboard.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/settings/sensors', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/settings-sensors.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/settings/accounts', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/settings-accounts.html', (err, html) => {
                 if (err) {
                     res.end("Not found");
                 }
