@@ -294,8 +294,45 @@
                     $('#mainNav').addClass('fixed-top');
                     $('#mainNav').removeClass('static-top');
                 }
-                //$('body').toggleClass('fixed-nav');
-                //$('nav').toggleClass('fixed-top static-top');
+                var postData = new Object({
+                    "field": "defaultNavbarPos",
+                    "value": navbarPosition
+                });
+
+                var url = String(window.location.href);
+                url = url.replace(/settings\/dashboard/g, 'dashsettings');
+                var method = "POST";
+
+                var shouldBeAsync = true;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+                    var data = request.responseText; // Returned data, e.g., an HTML document.
+                    console.log('status:' + status + ':' + data);
+                    if (status == 200) {
+                        console.log("default nav position successfully");
+                        console.log(data);
+                    } else {
+                        console.log("default nav position could not be changed");
+                        console.log(status + ': ' + data);
+                        if ($('#page-top').hasClass('fixed-nav')) {
+                            $('#page-top').removeClass('fixed-nav');
+                        } else {
+                            $('#page-top').addClass('fixed-nav');
+                        }
+                        if ($('#mainNav').hasClass('fixed-top')) {
+                            $('#mainNav').removeClass('fixed-top');
+                            $('#mainNav').addClass('static-top');
+                        } else {
+                            $('#mainNav').addClass('fixed-top');
+                            $('#mainNav').removeClass('static-top');
+                        }
+                    }
+                }
+                request.open(method, url, shouldBeAsync);
+                request.setRequestHeader("Content-Type", "application/json");
+                request.send(JSON.stringify(postData));
             });
         </script>
 
