@@ -43,7 +43,7 @@
             color: #703081 !important;
         }
         
-        .nav-link-text {
+        .bg-purple .nav-link-text {
             color: #fff !important;
         }
         
@@ -287,16 +287,12 @@
         <!--Toggle between dark and light navbar-->
         <script>
             $('#toggleNavColor').click(function() {
-                //$('nav').toggleClass('navbar-dark navbar-light');
-                //$('nav').toggleClass('bg-dark bg-light');
-                //$('body').toggleClass('bg-dark bg-light');
                 $('#mainNav').removeClass('bg-purple');
                 $('#mainNav').removeClass('navbar-purple');
                 $('#mainNav').addClass('bg-dark');
                 $('#mainNav').addClass('navbar-dark');
                 $('#page-top').removeClass('bg-purple');
                 $('#page-top').addClass('bg-dark');
-                //$('body').toggleClass('bg-purple bg-dark');
             });
         </script>
 
