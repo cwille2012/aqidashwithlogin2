@@ -282,7 +282,7 @@
 
                         var tr = document.createElement("tr");
 
-                        var td0 = document.createElement("td");
+                        var td0 = document.createElement("div");
                         var text0 = document.createTextNode(sensorID);
                         td0.appendChild(text0);
                         td0.setAttribute("id", sensorID + '-id');
@@ -347,6 +347,7 @@
         </script>
 
         <script>
+            //this is jusr a test, remove it later
             $('#sensorTableUpdateTime').click(function() {
                 var name = $(this).text();
                 $(this).html('');
