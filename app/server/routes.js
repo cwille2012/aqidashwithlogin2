@@ -10,11 +10,6 @@ module.exports = function(app) {
 
     app.get('/', function(req, res) {
         if (req.session.user != null) {
-            // res.sendFile(__dirname + '/views/html/index.html', (err, html) => {
-            //     if (err) {
-            //         res.end("Not found");
-            //     }
-            // });
             res.redirect('/dashboard');
         } else {
             // check if user credentials are saved
@@ -64,22 +59,6 @@ module.exports = function(app) {
         })
     });
 
-
-
-    // app.get('/web/:page', function(req, res) {
-    //     var pag = req.params.page;
-    //     console.log(pag);
-    //     if (req.session.user == null) {
-    //         res.redirect('/');
-    //     } else {
-    //         res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
-    //             if (err) {
-    //                 res.end("Not found");
-    //             }
-    //         });
-    //     }
-    // });
-
     //*****************//
     //Dashboard Loading//
     //*****************//
@@ -89,6 +68,42 @@ module.exports = function(app) {
             res.redirect('/');
         } else {
             res.sendFile(__dirname + '/views/html/index.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/map', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/map.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/graphs', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/graphs.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/tables', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/tables.html', (err, html) => {
                 if (err) {
                     res.end("Not found");
                 }
