@@ -5,3 +5,9 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#indexDataTable').DataTable();
 });
+$(document).ready(function() {
+    $('#usersTable').DataTable();
+});
+$(document).ready(function() {
+    $('#whitelistTable').DataTable();
+});
