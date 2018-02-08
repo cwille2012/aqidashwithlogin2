@@ -287,21 +287,21 @@
         <!--Toggle between dark and light navbar-->
         <script>
             $('#toggleNavColor').click(function() {
-                if (document.getElementById('#mainNav').classList.contains('bg-purple')) {
+                if ($('#mainNav').hasClass('bg-purple')) {
                     $('#mainNav').removeClass('bg-purple');
                     $('#mainNav').addClass('bg-dark');
                 } else {
                     $('#mainNav').addClass('bg-purple');
                     $('#mainNav').removeClass('bg-dark');
                 }
-                if (document.getElementById('#mainNav').classList.contains('navbar-purple')) {
+                if ($('#mainNav').hasClass('navbar-purple')) {
                     $('#mainNav').removeClass('navbar-purple');
                     $('#mainNav').addClass('navbar-dark');
                 } else {
                     $('#mainNav').addClass('navbar-purple');
                     $('#mainNav').removeClass('navbar-dark');
                 }
-                if (document.getElementById('#page-top').classList.contains('bg-purple')) {
+                if (('#page-top').hasClass('bg-purple')) {
                     $('#page-top').removeClass('bg-purple');
                     $('#page-top').addClass('bg-dark');
                 } else {
