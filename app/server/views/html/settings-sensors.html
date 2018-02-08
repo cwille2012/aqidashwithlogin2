@@ -445,15 +445,30 @@
 
         <script>
             $(document).ready(function() {
-                //$('input, select').live('change', function(){
                 $('#sensorTableBody').on('change', 'input', function() {
                     var $changedElement = $(this);
                     console.log('change');
                     if ($changedElement.val() != '') {
-                        console.log($changedElement.val());
-                        console.log($changedElement);
-                        console.log($changedElement[0]['id']);
-                        // code to keep track of which elements are checked..
+                        var postData = String($changedElement[0]['id'] + '=' + $changedElement.val());
+                        console.log(postData);
+
+                        var url = String(window.location.href);
+                        url = address.replace(/settings\/sensors/g, 'sensors');
+                        var method = "POST";
+
+                        var shouldBeAsync = true;
+                        var request = new XMLHttpRequest();
+
+                        request.onload = function() {
+                            var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+                            var data = request.responseText; // Returned data, e.g., an HTML document.
+                        }
+
+                        request.open(method, url, shouldBeAsync);
+                        //request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+
+                        request.send(postData);
                     }
                 });
             });

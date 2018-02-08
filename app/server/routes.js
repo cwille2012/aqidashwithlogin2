@@ -369,6 +369,15 @@ module.exports = function(app) {
     //Dashboard POST Handlers//
     //***********************//
 
+    app.post('/sensors', function(req, res) {
+        if (req.session.user == null) {
+            res.status(400).send('not authorized');
+        } else {
+            console.log("POST to sensors received:");
+            console.log(req);
+            res.status(200).send('ok');
+        }
+    });
 
     //************//
     //GET Handlers//
