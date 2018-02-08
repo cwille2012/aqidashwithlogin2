@@ -282,7 +282,7 @@
 
                         var tr = document.createElement("tr");
 
-                        var td0 = document.createElement("div");
+                        var td0 = document.createElement("td");
                         var text0 = document.createTextNode(sensorID);
                         td0.appendChild(text0);
                         td0.setAttribute("id", sensorID + '-id');
@@ -347,8 +347,32 @@
         </script>
 
         <script>
+            //B8:27:EB:DA:8F:F5-id
+
+            $('#B8:27:EB:DA:8F:F5-id').click(function() {
+                var name = $(this).text();
+                $(this).html('');
+                $('<input></input>')
+                    .attr({
+                        'type': 'text',
+                        'name': 'fname',
+                        'id': 'txt_fullname',
+                        'size': '30',
+                        'value': name
+                    })
+                    .appendTo('#B8:27:EB:DA:8F:F5-id');
+                $('#txt_fullname').focus();
+            });
+
+            $(document).on('blur', '#txt_fullname', function() {
+                var name = $(this).val();
+                //alert('Make an AJAX call and pass this parameter >> name=' + name);
+                $('#B8:27:EB:DA:8F:F5-id').text(name);
+            });
+
+
             //this is jusr a test, remove it later
-            $('#sensorTableUpdateTime').click(function() {
+            /*$('#sensorTableUpdateTime').click(function() {
                 var name = $(this).text();
                 $(this).html('');
                 $('<input></input>')
@@ -367,7 +391,7 @@
                 var name = $(this).val();
                 //alert('Make an AJAX call and pass this parameter >> name=' + name);
                 $('#sensorTableUpdateTime').text(name);
-            });
+            });*/
         </script>
 
         <script>
