@@ -10,11 +10,12 @@ module.exports = function(app) {
 
     app.get('/', function(req, res) {
         if (req.session.user != null) {
-            res.sendFile(__dirname + '/views/html/index.html', (err, html) => {
-                if (err) {
-                    res.end("Not found");
-                }
-            });
+            // res.sendFile(__dirname + '/views/html/index.html', (err, html) => {
+            //     if (err) {
+            //         res.end("Not found");
+            //     }
+            // });
+            res.redirect('/dashboard');
         } else {
             // check if user credentials are saved
             if (req.cookies.user == undefined || req.cookies.pass == undefined) {
@@ -24,7 +25,7 @@ module.exports = function(app) {
                 AM.autoLogin(req.cookies.user, req.cookies.pass, function(o) {
                     if (o != null) {
                         req.session.user = o;
-                        res.redirect('/control');
+                        res.redirect('/dashboard');
                     } else {
                         res.render('login', { title: 'Hello - Please Login To Your Account' });
                     }
@@ -82,6 +83,18 @@ module.exports = function(app) {
     //*****************//
     //Dashboard Loading//
     //*****************//
+
+    app.get('/dashboard', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/index.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
 
     app.get('/settings/dashboard', function(req, res) {
         if (req.session.user == null) {
