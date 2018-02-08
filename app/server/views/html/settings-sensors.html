@@ -446,7 +446,7 @@
         <script>
             $(document).ready(function() {
                 //$('input, select').live('change', function(){
-                $('body').on('change', 'input', function() {
+                $('#sensorTableBody').on('change', 'input', function() {
                     var $changedElement = $(this);
                     console.log('change');
                     if ($changedElement.val() != '') {
