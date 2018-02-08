@@ -375,6 +375,10 @@ module.exports = function(app) {
         } else {
             console.log("POST to sensors received:");
             console.log(req);
+            console.log("From user:");
+            console.log(req.session.user);
+            console.log("Data:");
+            console.log(req.body);
             res.status(200).send('ok');
         }
     });
