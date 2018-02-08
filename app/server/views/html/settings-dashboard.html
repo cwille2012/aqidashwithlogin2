@@ -290,12 +290,12 @@
                 //$('nav').toggleClass('navbar-dark navbar-light');
                 //$('nav').toggleClass('bg-dark bg-light');
                 //$('body').toggleClass('bg-dark bg-light');
-                document.getElementById('#mainNav').classList.remove('bg-purple');
-                document.getElementById('#mainNav').classList.remove('navbar-purple');
-                document.getElementById('#mainNav').classList.add('bg-dark');
-                document.getElementById('#mainNav').classList.add('navbar-dark');
-                document.getElementById('#page-top').classList.remove('bg-purple');
-                document.getElementById('#page-top').classList.add('bg-dark');
+                $('#mainNav').removeClass('bg-purple');
+                $('#mainNav').removeClass('navbar-purple');
+                $('#mainNav').addClass('bg-dark');
+                $('#mainNav').addClassd('navbar-dark');
+                $('#page-top').removeClass('bg-purple');
+                $('#page-top').addClass('bg-dark');
                 //$('body').toggleClass('bg-purple bg-dark');
             });
         </script>
