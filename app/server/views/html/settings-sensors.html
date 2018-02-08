@@ -334,7 +334,7 @@
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: $this.id(),
+                                id: String(sensorID + '-name'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -354,7 +354,7 @@
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: $this.id(),
+                                id: String(sensorID + '-group'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -374,7 +374,7 @@
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: $this.id(),
+                                id: String(sensorID + '-location'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -394,7 +394,7 @@
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: $this.id(),
+                                id: String(sensorID + '-long'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -414,7 +414,7 @@
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: $this.id(),
+                                id: String(sensorID + '-lat'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
