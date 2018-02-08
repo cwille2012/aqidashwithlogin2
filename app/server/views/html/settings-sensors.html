@@ -421,9 +421,6 @@
                             "value": newValue
                         })
 
-                        //String($changedElement[0]['id'] + '=' + $changedElement.val());
-                        //postData = postData.split('=');
-                        //postData = new Object(postData);
                         console.log(postData);
 
                         var url = String(window.location.href);
@@ -436,6 +433,7 @@
                         request.onload = function() {
                             var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
                             var data = request.responseText; // Returned data, e.g., an HTML document.
+                            console.log('status:' + status + ':' + data);
                         }
 
                         request.open(method, url, shouldBeAsync);

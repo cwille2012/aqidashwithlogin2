@@ -374,12 +374,13 @@ module.exports = function(app) {
             res.status(400).send('not authorized');
         } else {
             console.log("POST to sensors received:");
-            console.log(req);
-            console.log("From user:");
-            console.log(req.session.user);
-            console.log("Data:");
+            console.log("From user: " + req.session.user._id);
+            console.log("Name: " + req.session.user.name);
+            console.log("Email: " + req.session.user.email);
+            console.log("Data received: ");
             console.log(req.body);
-            res.status(200).send('ok');
+            var responseText = JSON.stringify(req.body);
+            res.status(200).send(responseText);
         }
     });
 
