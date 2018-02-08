@@ -414,6 +414,7 @@
                         var changedID = $changedElement[0]['id'].split('-');
                         var changedField = changedID[1];
                         changedID = changedID[0];
+                        console.log(changedID);
                         var newValue = $changedElement.val();
                         var postData = new Object({
                             "id": changedID,
