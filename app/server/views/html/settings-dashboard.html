@@ -292,60 +292,7 @@
 
         <script>
             function loadScript() {
-                if (!!document.getElementById('usersTableBody')) {
-                    function httpGet(theUrl) {
-                        var xmlHttp = new XMLHttpRequest();
-                        xmlHttp.open("GET", theUrl, false); // false for synchronous request
-                        xmlHttp.send(null);
-                        return xmlHttp.responseText;
-                    }
-                    var address = String(window.location.href);
-                    var userAccounts = httpGet(address.replace(/settings/g, 'print'));
-                    userAccounts = JSON.parse(userAccounts);
-                    for (var account in userAccounts) {
-                        var userID = userAccounts[account]['_id'];
-                        var userName = userAccounts[account]['user'];
-                        var userEmail = userAccounts[account]['email'];
-                        var userFullName = userAccounts[account]['name'];
-                        var userCountry = userAccounts[account]['country'];
-
-                        var tr = document.createElement("tr");
-
-                        var td0 = document.createElement("td");
-                        var text0 = document.createTextNode(userID);
-                        td0.appendChild(text0);
-                        tr.appendChild(td0);
-
-                        var td1 = document.createElement("td");
-                        var text1 = document.createTextNode(userName);
-                        td1.appendChild(text1);
-                        tr.appendChild(td1);
-
-                        var td2 = document.createElement("td");
-                        var text2 = document.createTextNode(userFullName);
-                        td2.appendChild(text2);
-                        tr.appendChild(td2);
-
-                        var td3 = document.createElement("td");
-                        var text3 = document.createTextNode(userEmail);
-                        td3.appendChild(text3);
-                        tr.appendChild(td3);
-
-                        var td4 = document.createElement("td");
-                        var text4 = document.createTextNode(userCountry);
-                        td4.appendChild(text4);
-                        tr.appendChild(td4);
-
-                        document.getElementById('usersTableBody').appendChild(tr);
-                    }
-                }
-                if (!!document.getElementById('usersTableUpdateTime')) {
-                    var today = new Date();
-                    var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
-                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    var updateTimeString = "Updated " + date + " at " + time;
-                    document.getElementById('usersTableUpdateTime').innerHTML = updateTimeString;
-                }
+                //nothing to do on load
             }
         </script>
 

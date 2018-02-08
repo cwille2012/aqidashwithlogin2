@@ -223,6 +223,30 @@
             <h1>Settings</h1>
             <hr>
             <h3>Sensor Settings</h3>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Connected Sensors</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="sensorTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Sensor ID</th>
+                                    <th>Name</th>
+                                    <th>Location</th>
+                                    <th>Group</th>
+                                    <th>Longitude</th>
+                                    <th>Latitude</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sensorTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted" id="sensorTableUpdateTime"></div>
+            </div>
             <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
             <div style="height: 1000px;"></div>
         </div>
@@ -269,26 +293,9 @@
         <script src="/js/dashboard/sb-admin-charts.js"></script>
 
         <!--Local Script Files-->
-        <!--Toggle between fixed and moving navbar-->
-        <script>
-            $('#toggleNavPosition').click(function() {
-                $('body').toggleClass('fixed-nav');
-                $('nav').toggleClass('fixed-top static-top');
-            });
-        </script>
-
-        <!--Toggle between dark and light navbar-->
-        <script>
-            $('#toggleNavColor').click(function() {
-                $('nav').toggleClass('navbar-dark navbar-light');
-                $('nav').toggleClass('bg-dark bg-light');
-                $('body').toggleClass('bg-dark bg-light');
-            });
-        </script>
-
         <script>
             function loadScript() {
-                if (!!document.getElementById('usersTableBody')) {
+                if (!!document.getElementById('sensorTableBody')) {
                     function httpGet(theUrl) {
                         var xmlHttp = new XMLHttpRequest();
                         xmlHttp.open("GET", theUrl, false); // false for synchronous request
@@ -296,51 +303,63 @@
                         return xmlHttp.responseText;
                     }
                     var address = String(window.location.href);
-                    var userAccounts = httpGet(address.replace(/settings/g, 'print'));
-                    userAccounts = JSON.parse(userAccounts);
-                    for (var account in userAccounts) {
-                        var userID = userAccounts[account]['_id'];
-                        var userName = userAccounts[account]['user'];
-                        var userEmail = userAccounts[account]['email'];
-                        var userFullName = userAccounts[account]['name'];
-                        var userCountry = userAccounts[account]['country'];
+                    var sensorData = httpGet(address.replace(/settings\/accounts/g, 'sensors'));
+                    sensorData = JSON.parse(sensorData);
+                    for (var sensor in sensorData) {
+                        var sensorID = sensorData[sensor];
+                        var sensorName = sensorData[sensor]['name'];
+                        var sensorGroup = sensorData[sensor]['group'];
+                        var sensorLocation = sensorData[sensor]['location'];
+                        var sensorLong = sensorData[sensor]['long'];
+                        var sensorLat = sensorData[sensor]['lat'];
+                        var sensorStatus = sensorData[sensor]['status'];
 
                         var tr = document.createElement("tr");
 
                         var td0 = document.createElement("td");
-                        var text0 = document.createTextNode(userID);
+                        var text0 = document.createTextNode(sensorID);
                         td0.appendChild(text0);
                         tr.appendChild(td0);
 
                         var td1 = document.createElement("td");
-                        var text1 = document.createTextNode(userName);
+                        var text1 = document.createTextNode(sensorName);
                         td1.appendChild(text1);
                         tr.appendChild(td1);
 
                         var td2 = document.createElement("td");
-                        var text2 = document.createTextNode(userFullName);
+                        var text2 = document.createTextNode(sensorGroup);
                         td2.appendChild(text2);
                         tr.appendChild(td2);
 
                         var td3 = document.createElement("td");
-                        var text3 = document.createTextNode(userEmail);
+                        var text3 = document.createTextNode(sensorLocation);
                         td3.appendChild(text3);
                         tr.appendChild(td3);
 
                         var td4 = document.createElement("td");
-                        var text4 = document.createTextNode(userCountry);
+                        var text4 = document.createTextNode(sensorLong);
                         td4.appendChild(text4);
                         tr.appendChild(td4);
 
-                        document.getElementById('usersTableBody').appendChild(tr);
+                        var td5 = document.createElement("td");
+                        var text5 = document.createTextNode(sensorLat);
+                        td5.appendChild(text5);
+                        tr.appendChild(td5);
+
+                        var td6 = document.createElement("td");
+                        var text6 = document.createTextNode(sensorStatus);
+                        td6.appendChild(text6);
+                        tr.appendChild(td6);
+
+                        document.getElementById('sensorTableBody').appendChild(tr);
                     }
                 }
-                if (!!document.getElementById('usersTableUpdateTime')) {
+                if (!!document.getElementById('sensorTableUpdateTime')) {
                     var today = new Date();
                     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
                     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var updateTimeString = "Updated " + date + " at " + time;
-                    document.getElementById('usersTableUpdateTime').innerHTML = updateTimeString;
+                    document.getElementById('sensorTableUpdateTime').innerHTML = updateTimeString;
                 }
             }
         </script>
