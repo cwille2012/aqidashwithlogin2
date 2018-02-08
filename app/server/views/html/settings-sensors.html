@@ -410,11 +410,20 @@
             $(document).ready(function() {
                 $('#sensorTableBody').on('change', 'input', function() {
                     var $changedElement = $(this);
-                    console.log('change');
                     if ($changedElement.val() != '') {
-                        var postData = String($changedElement[0]['id'] + '=' + $changedElement.val());
-                        postData = postData.split('=');
-                        postData = new Object(postData);
+                        var changedID = $changedElement[0]['id'].split('-');
+                        var changedField = changedID[1];
+                        changedID = changedID[0];
+                        var newValue = $changedElement.val();
+                        var postData = new Object({
+                            "id": changedID,
+                            "field": changedField,
+                            "value": newValue
+                        })
+
+                        //String($changedElement[0]['id'] + '=' + $changedElement.val());
+                        //postData = postData.split('=');
+                        //postData = new Object(postData);
                         console.log(postData);
 
                         var url = String(window.location.href);
