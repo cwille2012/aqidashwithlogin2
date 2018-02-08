@@ -4,7 +4,10 @@ var EM = require('./modules/email-dispatcher');
 
 module.exports = function(app) {
 
-    // main login page //
+    //***************//
+    //Account Loading//
+    //***************//
+
     app.get('/', function(req, res) {
         if (req.session.user != null) {
             res.sendFile(__dirname + '/views/html/index.html', (err, html) => {
@@ -13,11 +16,11 @@ module.exports = function(app) {
                 }
             });
         } else {
-            // check if the user's credentials are saved in a cookie //
+            // check if user credentials are saved
             if (req.cookies.user == undefined || req.cookies.pass == undefined) {
                 res.render('login', { title: 'Hello - Please Login To Your Account' });
             } else {
-                // attempt automatic login //
+                // attempt auto login
                 AM.autoLogin(req.cookies.user, req.cookies.pass, function(o) {
                     if (o != null) {
                         req.session.user = o;
@@ -30,19 +33,55 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/web/:page', function(req, res) {
-        var pag = req.params.page;
-        console.log(pag);
+    app.get('/control', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
-                if (err) {
-                    res.end("Not found");
-                }
+            res.render('control', {
+                title: 'Control Panel',
+                countries: CT,
+                udata: req.session.user
             });
         }
     });
+
+    app.get('/signup', function(req, res) {
+        res.render('signup', { title: 'Signup', countries: CT });
+    });
+
+    app.get('/reset-password', function(req, res) {
+        var email = req.query["e"];
+        var passH = req.query["p"];
+        AM.validateResetLink(email, passH, function(e) {
+            if (e != 'ok') {
+                res.redirect('/');
+            } else {
+                // save the users email in a session instead of sending to client
+                req.session.reset = { email: email, passHash: passH };
+                res.render('reset', { title: 'Reset Password' });
+            }
+        })
+    });
+
+
+
+    // app.get('/web/:page', function(req, res) {
+    //     var pag = req.params.page;
+    //     console.log(pag);
+    //     if (req.session.user == null) {
+    //         res.redirect('/');
+    //     } else {
+    //         res.sendFile(__dirname + '/views/html/' + pag, (err, html) => {
+    //             if (err) {
+    //                 res.end("Not found");
+    //             }
+    //         });
+    //     }
+    // });
+
+    //*****************//
+    //Dashboard Loading//
+    //*****************//
 
     app.get('/settings/dashboard', function(req, res) {
         if (req.session.user == null) {
@@ -80,6 +119,10 @@ module.exports = function(app) {
         }
     });
 
+    //*********************//
+    //Account POST Handlers//
+    //*********************//
+
     app.post('/', function(req, res) {
         AM.manualLogin(req.body['user'], req.body['pass'], function(e, o) {
             if (!o) {
@@ -93,20 +136,6 @@ module.exports = function(app) {
                 res.status(200).send(o);
             }
         });
-    });
-
-    // logged-in user homepage //
-
-    app.get('/control', function(req, res) {
-        if (req.session.user == null) {
-            res.redirect('/');
-        } else {
-            res.render('control', {
-                title: 'Control Panel',
-                countries: CT,
-                udata: req.session.user
-            });
-        }
     });
 
     app.post('/control', function(req, res) {
@@ -124,7 +153,7 @@ module.exports = function(app) {
                     res.status(400).send('error-updating-account');
                 } else {
                     req.session.user = o;
-                    // update the user's login cookies if they exists //
+                    // update user login cookies if they exist
                     if (req.cookies.user != undefined && req.cookies.pass != undefined) {
                         res.cookie('user', o.user, { maxAge: 900000 });
                         res.cookie('pass', o.pass, { maxAge: 900000 });
@@ -140,12 +169,6 @@ module.exports = function(app) {
         res.clearCookie('pass');
         req.session.destroy(function(e) { res.status(200).send('ok'); });
     })
-
-    // creating new accounts //
-
-    app.get('/signup', function(req, res) {
-        res.render('signup', { title: 'Signup', countries: CT });
-    });
 
     app.post('/signup', function(req, res) {
         if (true) { // if (req.body['email'] is in whitelist)
@@ -167,10 +190,8 @@ module.exports = function(app) {
         }
     });
 
-    // password reset //
-
     app.post('/lost-password', function(req, res) {
-        // look up the user's account via their email //
+        // look up user account by email
         AM.getAccountByEmail(req.body['email'], function(o) {
             if (o) {
                 EM.dispatchResetPasswordLink(o, function(e, m) {
@@ -189,20 +210,6 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/reset-password', function(req, res) {
-        var email = req.query["e"];
-        var passH = req.query["p"];
-        AM.validateResetLink(email, passH, function(e) {
-            if (e != 'ok') {
-                res.redirect('/');
-            } else {
-                // save the user's email in a session instead of sending to the client //
-                req.session.reset = { email: email, passHash: passH };
-                res.render('reset', { title: 'Reset Password' });
-            }
-        })
-    });
-
     app.post('/reset-password', function(req, res) {
         var nPass = req.body['pass'];
         // retrieve the user's email from the session to lookup their account and reset password //
@@ -217,22 +224,6 @@ module.exports = function(app) {
             }
         })
     });
-
-    // view & delete accounts //
-
-    // app.get('/users', function(req, res) {
-    //     if (req.session.user == null) {
-    //         res.redirect('/');
-    //     } else {
-    //         AM.getAllRecords(function(e, accounts) {
-    //             res.writeHead(200, { 'Content-Type': 'application/json' });
-    //             for (var account in accounts) {
-    //                 accounts[account]['pass'] = 'hidden';
-    //             }
-    //             res.end(JSON.stringify(accounts));
-    //         })
-    //     }
-    // });
 
     app.post('/delete', function(req, res) {
         if (req.session.user == null) {
@@ -250,41 +241,70 @@ module.exports = function(app) {
         }
     });
 
-    // app.get('/sensors', function(req, res) {
-    //     if (req.session.user == null) {
-    //         res.redirect('/');
-    //     } else {
-    //         //temporary object data, replace with database table
-    //         var sensorData = new Object({
-    //             "B8:27:EB:CE:93:69": {
-    //                 "name": "Sensor 2",
-    //                 "group": "Test Group 2",
-    //                 "location": "Melbourne",
-    //                 "long": "-80.6081",
-    //                 "lat": "28.0836",
-    //                 "status": "danger"
-    //             },
-    //             "B8:27:EB:DA:8F:F5": {
-    //                 "name": "Sensor 1",
-    //                 "group": "Test Group 1",
-    //                 "location": "Orlando",
-    //                 "long": "-81.4712688539999",
-    //                 "lat": "28.5224150600001",
-    //                 "status": "ok"
-    //             },
-    //             "B8:27:EB:97:19:1E": {
-    //                 "name": "Sensor 3",
-    //                 "group": "Test Group 1",
-    //                 "location": "Orlando",
-    //                 "long": "-81.4076",
-    //                 "lat": "28.2920",
-    //                 "status": "ok"
-    //             }
-    //         })
-    //         res.writeHead(200, { 'Content-Type': 'application/json' });
-    //         res.end(JSON.stringify(sensorData));
-    //     }
-    // });
+    //***********************//
+    //Dashboard POST Handlers//
+    //***********************//
+
+
+    //************//
+    //GET Handlers//
+    //************//
+
+    app.get('/users', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            AM.getAllRecords(function(e, accounts) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                for (var account in accounts) {
+                    accounts[account]['pass'] = 'hidden';
+                }
+                res.end(JSON.stringify(accounts));
+            })
+        }
+    });
+
+    app.get('/sensors', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            //temporary object data, replace with database table
+            var sensorData = new Object({
+                "B8:27:EB:CE:93:69": {
+                    "name": "Sensor 2",
+                    "group": "Test Group 2",
+                    "location": "Melbourne",
+                    "long": "-80.6081",
+                    "lat": "28.0836",
+                    "status": "danger"
+                },
+                "B8:27:EB:DA:8F:F5": {
+                    "name": "Sensor 1",
+                    "group": "Test Group 1",
+                    "location": "Orlando",
+                    "long": "-81.4712688539999",
+                    "lat": "28.5224150600001",
+                    "status": "ok"
+                },
+                "B8:27:EB:97:19:1E": {
+                    "name": "Sensor 3",
+                    "group": "Test Group 1",
+                    "location": "Orlando",
+                    "long": "-81.4076",
+                    "lat": "28.2920",
+                    "status": "ok"
+                }
+            })
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(sensorData));
+        }
+    });
+
+
+
+    //*********//
+    //404 Catch//
+    //*********//
 
     app.get('*', function(req, res) {
         if (req.session.user == null) {
