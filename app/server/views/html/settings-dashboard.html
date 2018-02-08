@@ -16,6 +16,11 @@
     <script src="/vendor/jquery-2.2.3.min.js"></script>
     <script src="/vendor/jquery.form.min.js"></script>
     <script src="/public/js/views/logout.js"></script>
+    <style>
+        .navbar-purple {
+            background-color: "#f1eaf2 !important";
+        }
+    </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="loadScript()">
@@ -250,7 +255,8 @@
         <!--Toggle between dark and light navbar-->
         <script>
             $('#toggleNavColor').click(function() {
-                $('nav').toggleClass('navbar-dark navbar-light');
+                //$('nav').toggleClass('navbar-dark navbar-light');
+                $('nav').toggleClass('navbar-dark navbar-purple');
                 $('nav').toggleClass('bg-dark bg-light');
                 $('body').toggleClass('bg-dark bg-light');
             });
