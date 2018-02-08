@@ -369,6 +369,22 @@ module.exports = function(app) {
     //Dashboard POST Handlers//
     //***********************//
 
+    app.post('/dashsettings', function(req, res) {
+        if (req.session.user == null) {
+            res.status(400).send('not authorized');
+        } else {
+            console.log("POST to dashboard settings received:");
+            console.log("From user: " + req.session.user._id);
+            console.log("Name: " + req.session.user.name);
+            console.log("Email: " + req.session.user.email);
+            console.log("Data received: ");
+            console.log(req.body);
+            var responseText = JSON.stringify(req.body);
+            res.status(200).send(responseText);
+            //Change default settings in database
+        }
+    });
+
     app.post('/whitelist', function(req, res) {
         if (req.session.user == null) {
             res.status(400).send('not authorized');

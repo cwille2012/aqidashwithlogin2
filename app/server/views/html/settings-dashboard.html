@@ -287,12 +287,15 @@
         <!--Toggle between dark and light navbar-->
         <script>
             $('#toggleNavColor').click(function() {
+                var defaultColor = "";
                 if ($('#mainNav').hasClass('bg-purple')) {
                     $('#mainNav').removeClass('bg-purple');
                     $('#mainNav').addClass('bg-dark');
+                    defaultColor = "dark";
                 } else {
                     $('#mainNav').addClass('bg-purple');
                     $('#mainNav').removeClass('bg-dark');
+                    defaultColor = "purple";
                 }
                 if ($('#mainNav').hasClass('navbar-purple')) {
                     $('#mainNav').removeClass('navbar-purple');
@@ -308,6 +311,36 @@
                     $('#page-top').addClass('bg-purple');
                     $('#page-top').removeClass('bg-dark');
                 }
+                var postData = new Object({
+                    "field": "defaultColor",
+                    "value": defaultColor
+                });
+
+                console.log(postData);
+
+                var url = String(window.location.href);
+                url = url.replace(/settings\/dashboard/g, 'dashsettings');
+                var method = "POST";
+
+                var shouldBeAsync = true;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+                    var data = request.responseText; // Returned data, e.g., an HTML document.
+                    console.log('status:' + status + ':' + data);
+                    if (status == 200) {
+                        console.log("default color changed successfully");
+                        console.log(data);
+                    } else {
+                        console.log("default color could not be changed");
+                        console.log(status + ': ' + data);
+                    }
+                }
+                request.open(method, url, shouldBeAsync);
+                request.setRequestHeader("Content-Type", "application/json");
+                request.send(JSON.stringify(postData));
+
             });
         </script>
 
