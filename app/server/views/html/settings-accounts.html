@@ -326,7 +326,7 @@
                         return xmlHttp.responseText;
                     }
                     var address = String(window.location.href);
-                    var userAccounts = httpGet(address.replace(/settings\/accounts/g, 'print'));
+                    var userAccounts = httpGet(address.replace(/settings\/accounts/g, 'users'));
                     userAccounts = JSON.parse(userAccounts);
                     for (var account in userAccounts) {
                         var userID = userAccounts[account]['_id'];
