@@ -349,25 +349,18 @@
         <script>
             //B8:27:EB:DA:8F:F5-id
 
-            $('#B8:27:EB:DA:8F:F5-id').click(function() {
-                var name = $(this).text();
-                $(this).html('');
-                $('<input></input>')
-                    .attr({
-                        'type': 'text',
-                        'name': 'fname',
-                        'id': 'txt_fullname',
-                        'size': '30',
-                        'value': name
-                    })
-                    .appendTo('#B8:27:EB:DA:8F:F5-id');
-                $('#txt_fullname').focus();
-            });
-
-            $(document).on('blur', '#txt_fullname', function() {
-                var name = $(this).val();
-                //alert('Make an AJAX call and pass this parameter >> name=' + name);
-                $('#B8:27:EB:DA:8F:F5-id').text(name);
+            $('td').on('click', function() {
+                var $this = $(this);
+                var $input = $('<input>', {
+                    value: $this.text(),
+                    type: 'text',
+                    blur: function() {
+                        $this.text(this.value);
+                    },
+                    keyup: function(e) {
+                        if (e.which === 13) $input.blur();
+                    }
+                }).appendTo($this.empty()).focus();
             });
 
 
