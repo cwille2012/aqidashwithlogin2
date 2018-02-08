@@ -384,23 +384,16 @@
                 tr.appendChild(td1);
 
                 var td2 = document.createElement("td");
-                var text2 = document.createTextNode("Remove Button");
-                td2.appendChild(text2);
-                td2.addEventListener('click', function(event) {
-                    var $this = $(this);
-                    var listenID = String(event.target.id);
-                    var $input = $('<input>', {
-                        value: $this.text(),
-                        type: 'text',
-                        id: String(listenID + '-remove'),
-                        blur: function() {
-                            $this.text(this.value);
-                        },
-                        keyup: function(e) {
-                            if (e.which === 13) $input.blur();
-                        }
-                    }).appendTo($this.empty()).focus();
+
+                var removeButton = document.createElement("button");
+                removeButton.setAttribute("type", "button");
+                var removeText = document.createTextNode("Remove Email");
+                removeButton.appendChild(removeText);
+                removeButton.addEventListener('click', function(event) {
+
+
                 });
+                td2.appendChild(removeButton);
                 tr.appendChild(td2);
 
                 document.getElementById('whitelistTableBody').appendChild(tr);
