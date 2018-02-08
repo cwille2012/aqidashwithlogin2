@@ -294,10 +294,13 @@
                         td1.setAttribute("id", sensorID + '-name');
                         td1.addEventListener('click', function(event) {
                             var $this = $(this);
+                            var listenID = String(event.target.id);
+                            listenID = listenID.split('-');
+                            listenID = listenID[0];
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: String(sensorID + '-name'),
+                                id: String(listenID + '-name'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -420,7 +423,7 @@
                             "id": changedID,
                             "field": changedField,
                             "value": newValue
-                        })
+                        });
 
                         console.log(postData);
 
