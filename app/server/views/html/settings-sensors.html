@@ -413,6 +413,8 @@
                     console.log('change');
                     if ($changedElement.val() != '') {
                         var postData = String($changedElement[0]['id'] + '=' + $changedElement.val());
+                        postData = postData.split('=');
+                        postData = new Object(postData);
                         console.log(postData);
 
                         var url = String(window.location.href);
@@ -428,8 +430,8 @@
                         }
 
                         request.open(method, url, shouldBeAsync);
-                        //request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                        request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+                        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        //request.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
 
                         request.send(postData);
                     }
