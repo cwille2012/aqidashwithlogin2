@@ -317,10 +317,13 @@
                         td2.setAttribute("id", sensorID + '-group');
                         td2.addEventListener('click', function(event) {
                             var $this = $(this);
+                            var listenID = String(event.target.id);
+                            listenID = listenID.split('-');
+                            listenID = listenID[0];
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: String(sensorID + '-group'),
+                                id: String(listenID + '-group'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -337,10 +340,13 @@
                         td3.setAttribute("id", sensorID + '-location');
                         td3.addEventListener('click', function(event) {
                             var $this = $(this);
+                            var listenID = String(event.target.id);
+                            listenID = listenID.split('-');
+                            listenID = listenID[0];
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: String(sensorID + '-location'),
+                                id: String(listenID + '-location'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -357,10 +363,13 @@
                         td4.setAttribute("id", sensorID + '-long');
                         td4.addEventListener('click', function(event) {
                             var $this = $(this);
+                            var listenID = String(event.target.id);
+                            listenID = listenID.split('-');
+                            listenID = listenID[0];
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: String(sensorID + '-long'),
+                                id: String(listenID + '-long'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -377,10 +386,13 @@
                         td5.setAttribute("id", sensorID + '-lat');
                         td5.addEventListener('click', function(event) {
                             var $this = $(this);
+                            var listenID = String(event.target.id);
+                            listenID = listenID.split('-');
+                            listenID = listenID[0];
                             var $input = $('<input>', {
                                 value: $this.text(),
                                 type: 'text',
-                                id: String(sensorID + '-lat'),
+                                id: String(listenID + '-lat'),
                                 blur: function() {
                                     $this.text(this.value);
                                 },
@@ -443,9 +455,9 @@
                                 var updatedID = String(verifyData['id'] + '-' + verifyData['field']);
                                 var updatedValue = String(verifyData['value']);
                                 document.getElementById(updatedID).innerHTML = updatedValue;
-                                document.getElementById(updatedID).style.color = "black";
+                                document.getElementById(updatedID).style.color = "green";
                                 setTimeout(function() {
-                                    document.getElementById(updatedID).style.color = "green";
+                                    document.getElementById(updatedID).style.color = "black";
                                 }, 3000);
                             } else {
                                 document.getElementById($changedElement[0]['id']).style.color = "red";
