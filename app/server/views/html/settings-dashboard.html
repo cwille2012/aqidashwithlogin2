@@ -287,12 +287,27 @@
         <!--Toggle between dark and light navbar-->
         <script>
             $('#toggleNavColor').click(function() {
-                $('#mainNav').removeClass('bg-purple');
-                $('#mainNav').removeClass('navbar-purple');
-                $('#mainNav').addClass('bg-dark');
-                $('#mainNav').addClass('navbar-dark');
-                $('#page-top').removeClass('bg-purple');
-                $('#page-top').addClass('bg-dark');
+                if (document.getElementById('#mainNav').classList.contains('bg-purple')) {
+                    $('#mainNav').removeClass('bg-purple');
+                    $('#mainNav').addClass('bg-dark');
+                } else {
+                    $('#mainNav').addClass('bg-purple');
+                    $('#mainNav').removeClass('bg-dark');
+                }
+                if (document.getElementById('#mainNav').classList.contains('navbar-purple')) {
+                    $('#mainNav').removeClass('navbar-purple');
+                    $('#mainNav').addClass('navbar-dark');
+                } else {
+                    $('#mainNav').addClass('navbar-purple');
+                    $('#mainNav').removeClass('navbar-dark');
+                }
+                if (document.getElementById('#page-top').classList.contains('bg-purple')) {
+                    $('#page-top').removeClass('bg-purple');
+                    $('#page-top').addClass('bg-dark');
+                } else {
+                    $('#page-top').addClass('bg-purple');
+                    $('#page-top').removeClass('bg-dark');
+                }
             });
         </script>
 
