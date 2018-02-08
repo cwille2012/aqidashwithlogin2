@@ -26,83 +26,80 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <ul class="navbar-nav navbar-sidenav" id="navAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="/dashboard">
                         <i class="fa fa-fw fa-dashboard"></i>
                         <span class="nav-link-text">Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Purchasing">
-                    <a class="nav-link" href="purchasing.html">
-                        <i class="fa fa-fw fa-area-chart"></i>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sensor Map">
+                    <a class="nav-link" href="/map">
+                        <i class="fa fa-fw fa-map-o"></i>
+                        <span class="nav-link-text">Sensor Map</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Graphs">
+                    <a class="nav-link" href="/graphs">
+                        <i class="fa fa-fw fa-bar-chart-o"></i>
                         <span class="nav-link-text">Graphs</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Map">
-                    <a class="nav-link" href="map.html">
-                        <i class="fa fa-fw fa-map"></i>
-                        <span class="nav-link-text">Quality Map</span>
-                    </a>
-                </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="/tables">
                         <i class="fa fa-fw fa-table"></i>
                         <span class="nav-link-text">Tables</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Alarms">
+                    <a class="nav-link" href="/alarms">
+                        <i class="fa fa-fw fa-bell-o"></i>
+                        <span class="nav-link-text">Alarms</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Sensor Data">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSensorData" data-parent="#navAccordion">
+                        <i class="fa fa-fw fa-podcast"></i>
+                        <span class="nav-link-text">Sensor Data</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="collapseSensorData">
+                        <li>
+                            <a href="/sensors/temperature">Temperature</a>
+                        </li>
+                        <li>
+                            <a href="/sensors/humidity">Humidity</a>
+                        </li>
+                        <li>
+                            <a href="/sensors/so3">Sulfur Dioxide</a>
+                        </li>
+                        <li>
+                            <a href="/sensors/co">Carbon Monoxide</a>
+                        </li>
+                        <li>
+                            <a href="/sensors/no2">Nitrogen Dioxide</a>
+                        </li>
+                        <li>
+                            <a href="/sensors/o3">Ozone</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSettings" data-parent="#navAccordion">
                         <i class="fa fa-fw fa-wrench"></i>
                         <span class="nav-link-text">Settings</span>
                     </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+                    <ul class="sidenav-second-level collapse" id="collapseSettings">
+                        <li>
+                            <a href="/settings/accounts">Account Management</a>
+                        </li>
+                        <li>
+                            <a href="/settings/alarms">Alarm Settings</a>
+                        </li>
                         <li>
                             <a href="/settings/dashboard">Dashboard Settings</a>
                         </li>
                         <li>
                             <a href="/settings/sensors">Sensor Settings</a>
-                        </li>
-                        <li>
-                            <a href="/settings/accounts">Account Management</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-file"></i>
-                        <span class="nav-link-text">Sensor Data</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                        <li>
-                            <a href="pm25.html">Particles (PM2.5)</a>
-                        </li>
-                        <li>
-                            <a href="pm10.html">Particles (PM10)</a>
-                        </li>
-                        <li>
-                            <a href="carbonmonoxide.html">Carbon Monoxide</a>
-                            <!--mq7-->
-                        </li>
-                        <li>
-                            <a href="propane.html">Propane</a>
-                            <!--mq2-->
-                        </li>
-                        <li>
-                            <a href="butane.html">Butane</a>
-                            <!--mq6-->
-                        </li>
-                        <li>
-                            <a href="hydrogen.html">Hydrogen</a>
-                            <!--mq5-->
-                        </li>
-                        <li>
-                            <a href="methane.html">Methane</a>
-                            <!--mq4-->
-                        </li>
-                        <li>
-                            <a href="benzine.html">Benzine</a>
-                            <!--mq3-->
                         </li>
                     </ul>
                 </li>
@@ -115,76 +112,45 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <!--<li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-fw fa-envelope"></i>
-                  <span class="d-lg-none">Messages
-        <span class="badge badge-pill badge-primary">12 New</span>
-                  </span>
-                  <span class="indicator text-primary d-none d-lg-block">
-        <i class="fa fa-fw fa-circle"></i>
-      </span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-                  <h6 class="dropdown-header">New Messages:</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">
-                      <strong>David Miller</strong>
-                      <span class="small float-right text-muted">11:21 AM</span>
-                      <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">
-                      <strong>Jane Smith</strong>
-                      <span class="small float-right text-muted">11:21 AM</span>
-                      <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">
-                      <strong>John Doe</strong>
-                      <span class="small float-right text-muted">11:21 AM</span>
-                      <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item small" href="#">View all messages</a>
-              </div>
-          </li>-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-fw fa-bell"></i>
-                        <span class="d-lg-none">Alerts
-        <span class="badge badge-pill badge-warning">3 New</span>
+                        <span class="d-lg-none">Alarms
+                        <span class="badge badge-pill badge-warning">3 New</span>
                         </span>
                         <span class="indicator text-warning d-none d-lg-block">
-        <i class="fa fa-fw fa-circle"></i>
-      </span>
+                        <i class="fa fa-fw fa-circle"></i>
+                    </span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="alertsDropdown">
                         <h6 class="dropdown-header">New Alerts:</h6>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
                             <span class="text-success">
-          <strong>
-            <i class="fa fa-long-arrow-up fa-fw"></i>Credit Applied</strong>
-        </span>
+                            <strong>
+                                <i class="fa fa-long-arrow-up fa-fw"></i>Credit Applied
+                            </strong>
+                        </span>
                             <span class="small float-right text-muted">11:21 AM</span>
                             <div class="dropdown-message small">Transfer initiated from authorized user.</div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
                             <span class="text-danger">
-          <strong>
-            <i class="fa fa-long-arrow-down fa-fw"></i>New Purchase</strong>
-        </span>
+                            <strong>
+                                <i class="fa fa-long-arrow-down fa-fw"></i>New Purchase
+                            </strong>
+                        </span>
                             <span class="small float-right text-muted">1:28 PM</span>
                             <div class="dropdown-message small">Online purchase made (Living Expenses)</div>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">
                             <span class="text-success">
-          <strong>
-            <i class="fa fa-long-arrow-up fa-fw"></i>Credit Applied</strong>
-        </span>
+                            <strong>
+                                <i class="fa fa-long-arrow-up fa-fw"></i>Credit Applied
+                            </strong>
+                        </span>
                             <span class="small float-right text-muted">10:08 PM</span>
                             <div class="dropdown-message small">Transfer initiated from authorized user.</div>
                         </a>
@@ -197,10 +163,10 @@
                         <div class="input-group">
                             <input class="form-control" type="text" placeholder="Search for...">
                             <span class="input-group-append">
-          <button class="btn btn-primary" type="button">
-            <i class="fa fa-search"></i>
-          </button>
-        </span>
+                            <button class="btn btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
                         </div>
                     </form>
                 </li>

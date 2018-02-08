@@ -59,9 +59,9 @@ module.exports = function(app) {
         })
     });
 
-    //*****************//
-    //Dashboard Loading//
-    //*****************//
+    //**********************//
+    //Dashboard HTML Loading//
+    //**********************//
 
     app.get('/dashboard', function(req, res) {
         if (req.session.user == null) {
