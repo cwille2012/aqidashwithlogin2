@@ -111,6 +111,114 @@ module.exports = function(app) {
         }
     });
 
+    app.get('/alarms', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/alarms.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/sensors/temperature', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/sensors-temperature.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/sensors/humidity', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/sensors-humidity.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/sensors/so3', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/sensors-so3.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/sensors/co', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/sensors-co.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/sensors/no2', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/sensors-no2.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/sensors/o3', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/sensors-o3.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/settings/accounts', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/settings-accounts.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
+    app.get('/settings/alarms', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/views/html/settings-alarms.html', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
     app.get('/settings/dashboard', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
@@ -128,18 +236,6 @@ module.exports = function(app) {
             res.redirect('/');
         } else {
             res.sendFile(__dirname + '/views/html/settings-sensors.html', (err, html) => {
-                if (err) {
-                    res.end("Not found");
-                }
-            });
-        }
-    });
-
-    app.get('/settings/accounts', function(req, res) {
-        if (req.session.user == null) {
-            res.redirect('/');
-        } else {
-            res.sendFile(__dirname + '/views/html/settings-accounts.html', (err, html) => {
                 if (err) {
                     res.end("Not found");
                 }
