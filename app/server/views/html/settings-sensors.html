@@ -285,6 +285,21 @@
                         var td0 = document.createElement("td");
                         var text0 = document.createTextNode(sensorID);
                         td0.appendChild(text0);
+                        td0.setAttribute("id", sensorID + '-id');
+                        td0.addEventListener('click', function(event) {
+                            var name = $(this).text();
+                            $(this).html('');
+                            $('<input></input>')
+                                .attr({
+                                    'type': 'text',
+                                    'name': 'fname',
+                                    'id': String(sensorID + '-id-edit'),
+                                    'size': '30',
+                                    'value': name
+                                })
+                                .appendTo('#' + sensorID + '-id');
+                            $(String('#' + sensorID + '-id-edit')).focus();
+                        });
                         tr.appendChild(td0);
 
                         var td1 = document.createElement("td");
