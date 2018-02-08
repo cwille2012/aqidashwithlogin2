@@ -229,7 +229,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a class="btn btn-primary" href="#" id="toggleNavPosition">Toggle Fixed/Static Navbar</a><br>
+                    <a class="btn btn-primary" href="#" id="addUserWhitelist">Add email to whitelist</a><br>
                 </div>
                 <div class="card-footer small text-muted">Some text in footer</div>
             </div>
@@ -336,6 +336,35 @@
                     document.getElementById('usersTableUpdateTime').innerHTML = updateTimeString;
                 }
             }
+        </script>
+
+        <script>
+            $('#addUserWhitelist').click(function() {
+                var tr = document.createElement("tr");
+
+                var td0 = document.createElement("td");
+                var text0 = document.createTextNode("Email");
+                td0.appendChild(text0);
+                tr.appendChild(td0);
+
+                var td1 = document.createElement("td");
+                var text1 = document.createTextNode("Access");
+                td1.appendChild(text1);
+                tr.appendChild(td1);
+
+                var td2 = document.createElement("td");
+                var text2 = document.createTextNode("Remove Button");
+                td2.appendChild(text2);
+                tr.appendChild(td2);
+
+                document.getElementById('#whitelistTableBody').appendChild(tr);
+            });
+        </script>
+
+        <script>
+            $(window).on('hashchange', function(e) {
+                history.replaceState("", document.title, e.originalEvent.oldURL);
+            });
         </script>
 
         <script>
