@@ -323,7 +323,13 @@
                         var text0 = document.createTextNode(sensorID);
                         td0.appendChild(text0);
                         td0.setAttribute("id", sensorID + '-id');
-                        td0.addEventListener('click', function(event) {
+                        tr.appendChild(td0);
+
+                        var td1 = document.createElement("td");
+                        var text1 = document.createTextNode(sensorName);
+                        td1.appendChild(text1);
+                        td1.setAttribute("id", sensorID + '-name');
+                        td1.addEventListener('click', function(event) {
                             var $this = $(this);
                             var $input = $('<input>', {
                                 value: $this.text(),
@@ -336,31 +342,82 @@
                                 }
                             }).appendTo($this.empty()).focus();
                         });
-                        tr.appendChild(td0);
-
-                        var td1 = document.createElement("td");
-                        var text1 = document.createTextNode(sensorName);
-                        td1.appendChild(text1);
                         tr.appendChild(td1);
 
                         var td2 = document.createElement("td");
                         var text2 = document.createTextNode(sensorGroup);
                         td2.appendChild(text2);
+                        td2.setAttribute("id", sensorID + '-group');
+                        td2.addEventListener('click', function(event) {
+                            var $this = $(this);
+                            var $input = $('<input>', {
+                                value: $this.text(),
+                                type: 'text',
+                                blur: function() {
+                                    $this.text(this.value);
+                                },
+                                keyup: function(e) {
+                                    if (e.which === 13) $input.blur();
+                                }
+                            }).appendTo($this.empty()).focus();
+                        });
                         tr.appendChild(td2);
 
                         var td3 = document.createElement("td");
                         var text3 = document.createTextNode(sensorLocation);
                         td3.appendChild(text3);
+                        td3.setAttribute("id", sensorID + '-location');
+                        td3.addEventListener('click', function(event) {
+                            var $this = $(this);
+                            var $input = $('<input>', {
+                                value: $this.text(),
+                                type: 'text',
+                                blur: function() {
+                                    $this.text(this.value);
+                                },
+                                keyup: function(e) {
+                                    if (e.which === 13) $input.blur();
+                                }
+                            }).appendTo($this.empty()).focus();
+                        });
                         tr.appendChild(td3);
 
                         var td4 = document.createElement("td");
                         var text4 = document.createTextNode(sensorLong);
                         td4.appendChild(text4);
+                        td4.setAttribute("id", sensorID + '-long');
+                        td4.addEventListener('click', function(event) {
+                            var $this = $(this);
+                            var $input = $('<input>', {
+                                value: $this.text(),
+                                type: 'text',
+                                blur: function() {
+                                    $this.text(this.value);
+                                },
+                                keyup: function(e) {
+                                    if (e.which === 13) $input.blur();
+                                }
+                            }).appendTo($this.empty()).focus();
+                        });
                         tr.appendChild(td4);
 
                         var td5 = document.createElement("td");
                         var text5 = document.createTextNode(sensorLat);
                         td5.appendChild(text5);
+                        td5.setAttribute("id", sensorID + '-lat');
+                        td5.addEventListener('click', function(event) {
+                            var $this = $(this);
+                            var $input = $('<input>', {
+                                value: $this.text(),
+                                type: 'text',
+                                blur: function() {
+                                    $this.text(this.value);
+                                },
+                                keyup: function(e) {
+                                    if (e.which === 13) $input.blur();
+                                }
+                            }).appendTo($this.empty()).focus();
+                        });
                         tr.appendChild(td5);
 
                         var td6 = document.createElement("td");
@@ -379,47 +436,6 @@
                     document.getElementById('sensorTableUpdateTime').innerHTML = updateTimeString;
                 }
             }
-        </script>
-
-        <script>
-            //B8:27:EB:DA:8F:F5-id
-
-            $('td').on('click', function() {
-                var $this = $(this);
-                var $input = $('<input>', {
-                    value: $this.text(),
-                    type: 'text',
-                    blur: function() {
-                        $this.text(this.value);
-                    },
-                    keyup: function(e) {
-                        if (e.which === 13) $input.blur();
-                    }
-                }).appendTo($this.empty()).focus();
-            });
-
-
-            //this is jusr a test, remove it later
-            /*$('#sensorTableUpdateTime').click(function() {
-                var name = $(this).text();
-                $(this).html('');
-                $('<input></input>')
-                    .attr({
-                        'type': 'text',
-                        'name': 'fname',
-                        'id': 'txt_fullname',
-                        'size': '30',
-                        'value': name
-                    })
-                    .appendTo('#sensorTableUpdateTime');
-                $('#txt_fullname').focus();
-            });
-
-            $(document).on('blur', '#txt_fullname', function() {
-                var name = $(this).val();
-                //alert('Make an AJAX call and pass this parameter >> name=' + name);
-                $('#sensorTableUpdateTime').text(name);
-            });*/
         </script>
 
         <script>
