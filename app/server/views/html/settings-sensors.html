@@ -303,7 +303,7 @@
                         return xmlHttp.responseText;
                     }
                     var address = String(window.location.href);
-                    var sensorData = httpGet(address.replace(/settings\/accounts/g, 'sensors'));
+                    var sensorData = httpGet(address.replace(/settings\/sensors/g, 'sensors'));
                     console.log(sensorData);
                     sensorData = JSON.parse(sensorData);
                     for (var sensor in sensorData) {
