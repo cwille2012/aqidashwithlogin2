@@ -347,7 +347,6 @@
                     var address = String(window.location.href);
                     var whitelistAccounts = httpGet(address.replace(/settings\/accounts/g, 'whitelist'));
                     whitelistAccounts = JSON.parse(whitelistAccounts);
-                    console.log(whitelistAccounts);
                     for (var account in whitelistAccounts) {
                         var userEmail = whitelistAccounts[account]['email'];
                         var userAccess = whitelistAccounts[account]['access'];
@@ -436,13 +435,12 @@
                 tr.appendChild(td1);
 
                 var td2 = document.createElement("td");
-                var removeButton = document.createElement("button");
-                removeButton.setAttribute("type", "button");
-                removeButton.setAttribute("class", "btn btn-secondary");
-                var removeText = document.createTextNode("Remove Email");
-                removeButton.appendChild(removeText);
-                removeButton.addEventListener('click', function(event) {
-
+                var addButton = document.createElement("button");
+                addButton.setAttribute("type", "button");
+                addButton.setAttribute("class", "btn btn-primary");
+                var addText = document.createTextNode("Add Email");
+                addButton.appendChild(addText);
+                addButton.addEventListener('click', function(event) {
 
                 });
                 td2.appendChild(removeButton);
