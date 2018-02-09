@@ -347,6 +347,7 @@
                     var address = String(window.location.href);
                     var whitelistAccounts = httpGet(address.replace(/settings\/accounts/g, 'whitelist'));
                     whitelistAccounts = JSON.parse(whitelistAccounts);
+                    console.log(whitelistAccounts);
                     for (var account in whitelistAccounts) {
                         var userEmail = whitelistAccounts[account]['email'];
                         var userAccess = whitelistAccounts[account]['access'];
