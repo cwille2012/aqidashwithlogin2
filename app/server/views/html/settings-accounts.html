@@ -372,7 +372,34 @@
                         removeButton.appendChild(removeText);
                         removeButton.addEventListener('click', function(event) {
                             var accountEmail = String(event.target.id);
-                            console.log(accountEmail);
+
+                            var postData = new Object({
+                                "command": "remove",
+                                "email": accountEmail
+                            });
+
+                            var url = String(window.location.href);
+                            url = url.replace(/settings\/accounts/g, 'whitelist');
+                            var method = "POST";
+
+                            var shouldBeAsync = true;
+                            var request = new XMLHttpRequest();
+
+                            request.onload = function() {
+                                var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+                                var data = request.responseText; // Returned data, e.g., an HTML document.
+                                console.log('status:' + status + ':' + data);
+                                if (status == 200) {
+                                    console.log("added user to whitelist successfully");
+                                    console.log(data);
+                                } else {
+                                    console.log("added user to whitelist failed");
+                                    console.log(data);
+                                }
+                            }
+                            request.open(method, url, shouldBeAsync);
+                            request.setRequestHeader("Content-Type", "application/json");
+                            request.send(JSON.stringify(postData));
 
                         });
                         td2.appendChild(removeButton);
@@ -454,6 +481,7 @@
                         var newAccessForWhitelist = document.getElementById('newWhitelist-access').innerHTML;
 
                         var postData = new Object({
+                            "command": "add",
                             "email": newEmailForWhitelist,
                             "access": newAccessForWhitelist
                         });
