@@ -426,7 +426,7 @@ module.exports = function(app) {
             res.redirect('/');
         } else {
             //temporary object data, replace with database table
-            var whitelist = new Object({
+            var whitelist = new Object([{
                 "email": "test1@gmail.com",
                 "access": "admin"
             }, {
@@ -444,7 +444,7 @@ module.exports = function(app) {
             }, {
                 "email": "test5@gmail.com",
                 "access": "user"
-            });
+            }]);
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(whitelist));
         }
