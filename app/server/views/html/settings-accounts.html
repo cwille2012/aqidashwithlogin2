@@ -231,7 +231,7 @@
                     </div>
                     <a class="btn btn-primary" href="#" id="addUserWhitelist">Add email to whitelist</a><br>
                 </div>
-                <div class="card-footer small text-muted">Some text in footer</div>
+                <div class="card-footer small text-muted" id="usersTableUpdateTime"></div>
             </div>
             <!-- Blank div to give the page height to preview the fixed vs. static navbar-->
             <div style="height: 1000px;"></div>
@@ -334,6 +334,57 @@
                     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var updateTimeString = "Updated " + date + " at " + time;
                     document.getElementById('usersTableUpdateTime').innerHTML = updateTimeString;
+                }
+
+                //whitelist loading
+                if (!!document.getElementById('whitelistTableBody')) {
+                    function httpGet(theUrl) {
+                        var xmlHttp = new XMLHttpRequest();
+                        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+                        xmlHttp.send(null);
+                        return xmlHttp.responseText;
+                    }
+                    var address = String(window.location.href);
+                    var whitelistAccounts = httpGet(address.replace(/settings\/accounts/g, 'whitelist'));
+                    whitelistAccounts = JSON.parse(whitelistAccounts);
+                    for (var account in whitelistAccounts) {
+                        var userEmail = whitelistAccounts[account]['email'];
+                        var userAccess = whitelistAccounts[account]['access'];
+
+                        var tr = document.createElement("tr");
+
+                        var td0 = document.createElement("td");
+                        var text0 = document.createTextNode(userEmail);
+                        td0.appendChild(text0);
+                        tr.appendChild(td0);
+
+                        var td1 = document.createElement("td");
+                        var text1 = document.createTextNode(userAccess);
+                        td1.appendChild(text1);
+                        tr.appendChild(td1);
+
+                        var td2 = document.createElement("td");
+                        var removeButton = document.createElement("button");
+                        removeButton.setAttribute("type", "button");
+                        removeButton.setAttribute("class", "btn btn-secondary");
+                        var removeText = document.createTextNode("Remove Email");
+                        removeButton.appendChild(removeText);
+                        removeButton.addEventListener('click', function(event) {
+
+
+                        });
+                        td2.appendChild(removeButton);
+                        tr.appendChild(td2);
+
+                        document.getElementById('whitelistTableBody').appendChild(tr);
+                    }
+                }
+                if (!!document.getElementById('whitelistTableUpdateTime')) {
+                    var today = new Date();
+                    var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var updateTimeString = "Updated " + date + " at " + time;
+                    document.getElementById('whitelistTableUpdateTime').innerHTML = updateTimeString;
                 }
             }
         </script>

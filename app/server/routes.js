@@ -421,6 +421,35 @@ module.exports = function(app) {
     //GET Handlers//
     //************//
 
+    app.get('/whitelist', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            //temporary object data, replace with database table
+            var whitelist = new Object({
+                "email": "test1@gmail.com",
+                "access": "admin"
+            }, {
+                "email": "test2@gmail.com",
+                "access": "manager"
+            }, {
+                "email": "test3@gmail.com",
+                "access": "user"
+            }, {
+                "email": "test3@gmail.com",
+                "access": "manager"
+            }, {
+                "email": "test4@gmail.com",
+                "access": "admin"
+            }, {
+                "email": "test5@gmail.com",
+                "access": "user"
+            });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(whitelist));
+        }
+    });
+
     app.get('/users', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
@@ -465,7 +494,7 @@ module.exports = function(app) {
                     "lat": "28.2920",
                     "status": "ok"
                 }
-            })
+            });
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(sensorData));
         }
