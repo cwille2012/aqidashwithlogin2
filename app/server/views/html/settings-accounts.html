@@ -367,10 +367,12 @@
                         var removeButton = document.createElement("button");
                         removeButton.setAttribute("type", "button");
                         removeButton.setAttribute("class", "btn btn-secondary");
+                        removeButton.setAttribute("id", userEmail);
                         var removeText = document.createTextNode("Remove Email");
                         removeButton.appendChild(removeText);
                         removeButton.addEventListener('click', function(event) {
-
+                            var accountEmail = String(event.target.id);
+                            console.log(accountEmail);
 
                         });
                         td2.appendChild(removeButton);
@@ -487,43 +489,6 @@
                 }
             });
         </script>
-
-        <!--<script>
-            $('#addEmailToWhitelist').click(function($e) {
-                $e.preventDefault();
-
-                var newEmailForWhitelist = document.getElementById('newWhitelist-email').innerHTML;
-                var newAccessForWhitelist = document.getElementById('newWhitelist-access').innerHTML;
-
-                var postData = new Object({
-                    "email": newEmailForWhitelist,
-                    "access": newAccessForWhitelist
-                });
-
-                var url = String(window.location.href);
-                url = url.replace(/settings\/dashboard/g, 'whitelist');
-                var method = "POST";
-
-                var shouldBeAsync = true;
-                var request = new XMLHttpRequest();
-
-                request.onload = function() {
-                    var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
-                    var data = request.responseText; // Returned data, e.g., an HTML document.
-                    console.log('status:' + status + ':' + data);
-                    if (status == 200) {
-                        console.log("added user to whitelist successfully");
-                        console.log(data);
-                    } else {
-                        console.log("added user to whitelist failed");
-                        console.log(data);
-                    }
-                }
-                request.open(method, url, shouldBeAsync);
-                request.setRequestHeader("Content-Type", "application/json");
-                request.send(JSON.stringify(postData));
-            });
-        </script>-->
 
         <script>
             $(window).on('hashchange', function(e) {
