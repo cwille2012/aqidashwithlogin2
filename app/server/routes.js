@@ -2,6 +2,13 @@ var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
 
+// var MongoClient = require('mongodb').MongoClient;
+// var dbHost = DB_HOST = "localhost";
+// var dbPort = DB_PORT = 27017;
+
+// var whitelistDbName = "whitelist";
+// var whitelistURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + whitelistDbName;
+
 module.exports = function(app) {
 
     //***************//
