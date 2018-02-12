@@ -1,0 +1,35 @@
+.bg-purple {
+    background-color: #703081 !important;
+    background: #703081 !important;
+    /*color: #fff !important;*/
+}
+
+.bg-purple a {
+    color: #fff !important;
+}
+
+.bg-purple .navbar-brand {
+    color: #fff !important;
+}
+
+.bg-purple .nav-link:hover {
+    background-color: #f1eaf2 !important;
+}
+
+.bg-purple .nav-link:hover .nav-link-text {
+    color: #703081 !important;
+}
+
+.bg-purple .nav-link:hover i {
+    color: #703081 !important;
+}
+
+.bg-purple .nav-link-text {
+    color: #fff !important;
+}
+
+.navbar-purple {
+    background-color: #703081 !important;
+    background: #703081 !important;
+    color: #fff !important;
+}
