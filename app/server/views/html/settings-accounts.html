@@ -390,10 +390,10 @@
                                 var data = request.responseText; // Returned data, e.g., an HTML document.
                                 console.log('status:' + status + ':' + data);
                                 if (status == 200) {
-                                    console.log("added user to whitelist successfully");
+                                    console.log("removed user from whitelist successfully");
                                     console.log(data);
                                 } else {
-                                    console.log("added user to whitelist failed");
+                                    console.log("removing user from whitelist failed");
                                     console.log(data);
                                 }
                             }
@@ -401,6 +401,8 @@
                             request.setRequestHeader("Content-Type", "application/json");
                             request.send(JSON.stringify(postData));
 
+                            loadScript();
+                            document.getElementById('whitelistTableBody').innerHTML = '';
                         });
                         td2.appendChild(removeButton);
                         tr.appendChild(td2);
