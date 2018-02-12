@@ -17,46 +17,10 @@
     <script src="/vendor/jquery-2.2.3.min.js"></script>
     <script src="/vendor/jquery.form.min.js"></script>
     <script src="/public/js/views/logout.js"></script>
-    <!--<style>
-        .bg-purple {
-            background-color: #703081 !important;
-            background: #703081 !important;
-            /*color: #fff !important;*/
-        }
-        
-        .bg-purple a {
-            color: #fff !important;
-        }
-        
-        .bg-purple .navbar-brand {
-            color: #fff !important;
-        }
-        
-        .bg-purple .nav-link:hover {
-            background-color: #f1eaf2 !important;
-        }
-        
-        .bg-purple .nav-link:hover .nav-link-text {
-            color: #703081 !important;
-        }
-        
-        .bg-purple .nav-link:hover i {
-            color: #703081 !important;
-        }
-        
-        .bg-purple .nav-link-text {
-            color: #fff !important;
-        }
-        
-        .navbar-purple {
-            background-color: #703081 !important;
-            background: #703081 !important;
-            color: #fff !important;
-        }
-    </style>-->
+    <script src="/js/controllers/loadDefaults.js"></script>
 </head>
 
-<body class="fixed-nav sticky-footer bg-purple" id="page-top" onload="loadScript()">
+<body class="fixed-nav sticky-footer bg-purple" id="page-top" onload="loadDefaults(); loadScript()">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-purple bg-purple fixed-top" id="mainNav">
         <a class="navbar-brand" href="/dashboard">Air Quality</a>
