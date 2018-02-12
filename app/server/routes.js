@@ -390,7 +390,7 @@ module.exports = function(app) {
                     var dbo = db.db("node-login");
                     var dbquery = { email: updateEmail };
                     var newvalue = { $set: { defaultColor: String(req.body.value) } };
-                    dbo.collection("customers").updateOne(dbquery, newvalue, function(err, res) {
+                    dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
                         console.log("Default color updated");
                         db.close();
@@ -402,7 +402,7 @@ module.exports = function(app) {
                     var dbo = db.db("node-login");
                     var dbquery = { email: updateEmail };
                     var newvalue = { $set: { defaultNavbarPos: String(req.body.value) } };
-                    dbo.collection("customers").updateOne(dbquery, newvalue, function(err, res) {
+                    dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
                         console.log("Default nav position updated");
                         db.close();
