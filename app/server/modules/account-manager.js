@@ -96,6 +96,11 @@ exports.addNewAccount = function(newData, callback) {
                                         console.log(newData);
                                         accounts.insert(newData, { safe: true }, callback);
                                     });
+                                    dbo.collection("whitelist").deleteOne(query, function(err, obj) {
+                                        if (err) throw err;
+                                        console.log("Account created, removed from whitelist");
+                                        db.close();
+                                    });
                                 }
                             } else {
                                 console.log('user not in whitelist');
