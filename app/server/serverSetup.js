@@ -18,7 +18,6 @@ MongoClient.connect(databaseURL, function(err, db) {
 
 MongoClient.connect(databaseURL, function(err, db) {
     if (err) throw err;
-    console.log("Connected to Dashboard Database");
     var dbo = db.db("dashboard");
     dbo.createCollection("dashsettings", function(err, res) {
         if (err) throw err;
@@ -29,7 +28,6 @@ MongoClient.connect(databaseURL, function(err, db) {
 
 MongoClient.connect(databaseURL, function(err, db) {
     if (err) throw err;
-    console.log("Connected to Dashboard Database");
     var dbo = db.db("dashboard");
     dbo.createCollection("sensors", function(err, res) {
         if (err) throw err;

@@ -402,6 +402,31 @@ module.exports = function(app) {
             console.log("Email: " + req.session.user.email);
             console.log("Data received: ");
             console.log(req.body);
+            if (req.body.command == "add") {
+                //add to whitelist collection
+                var receivedEmail = String(req.body.email);
+                var receivedAccess = String(req.body.access);
+                MongoClient.connect(databaseURL, function(err, db) {
+                    if (err) throw err;
+                    var dbo = db.db("dashboard");
+                    var newObj = { email: receivedEmail, access: receivedAccess };
+                    console.log("Object to insert:")
+                    console.log(newObj);
+                    dbo.collection("whitelist").insertOne(newObj, function(err, res) {
+                        if (err) throw err;
+                        console.log("Object inserted");
+                        db.close();
+                    });
+                });
+            } else if (req.body.command == "remove") {
+                //remove from whitelist collection
+            } else {
+                //error
+            }
+
+
+
+
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
             //Add or remove field from database
