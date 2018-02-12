@@ -22,7 +22,9 @@ $(document).ready(function() {
                 localStorage.setItem("dataDashUserName", responseText['user']);
                 localStorage.setItem("dataDashCountry", responseText['country']);
                 localStorage.setItem("dataDashUserID", responseText['_id']);
-                localStorage.setItem("dataDashPassHash", responseText['pass']);
+                localStorage.setItem("dataDashDefaultColor", responseText['defaultColor']);
+                localStorage.setItem("dataDashDefaultNavPos", responseText['defaultNavbarPos']);
+
                 window.location.href = '/dashboard';
             }
         },

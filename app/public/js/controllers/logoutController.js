@@ -5,6 +5,8 @@ $("#btn-logout").click(() => {
     localStorage.removeItem("dataDashCountry");
     localStorage.removeItem("dataDashUserID");
     localStorage.removeItem("dataDashPassHash");
+    localStorage.removeItem("dataDashDefaultColor");
+    localStorage.removeItem("dataDashDefaultNavPos");
     $.ajax({
         url: "/logout",
         type: "POST",
