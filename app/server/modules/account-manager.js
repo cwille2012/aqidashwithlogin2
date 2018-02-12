@@ -94,7 +94,7 @@ exports.addNewAccount = function(newData, callback) {
                                 //user is in whitelist so make an account
                                 saltAndHash(newData.pass, function(hash) {
                                     newData.pass = hash;
-                                    newData.access = String(req.body.access);
+                                    newData.access = String(result[0].access);
                                     newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
                                     console.log(newData);
                                     accounts.insert(newData, { safe: true }, callback);
