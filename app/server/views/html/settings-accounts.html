@@ -401,8 +401,8 @@
                             request.setRequestHeader("Content-Type", "application/json");
                             request.send(JSON.stringify(postData));
 
-                            loadScript();
                             document.getElementById('whitelistTableBody').innerHTML = '';
+                            loadScript();
                         });
                         td2.appendChild(removeButton);
                         tr.appendChild(td2);
