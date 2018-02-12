@@ -6,7 +6,6 @@ var moment = require('moment');
 //added code:
 var MongoClient = require('mongodb').MongoClient;
 
-
 /*
 	ESTABLISH DATABASE CONNECTION
 */
@@ -71,9 +70,6 @@ exports.manualLogin = function(user, pass, callback) {
 }
 
 /* record insertion, update & deletion methods */
-
-
-//test code:
 exports.addNewAccount = function(newData, callback) {
     accounts.findOne({ user: newData.user }, function(e, o) {
         if (o) {
@@ -103,8 +99,8 @@ exports.addNewAccount = function(newData, callback) {
                                 }
                             } else {
                                 console.log('user not in whitelist');
-                                console.log('Calling callback');
-                                callback('not-authorized');
+                                //console.log('Calling callback');
+                                //callback('not-authorized');
                             }
                             db.close();
                         });
@@ -114,9 +110,6 @@ exports.addNewAccount = function(newData, callback) {
         }
     });
 }
-
-
-
 
 
 //functional code:
