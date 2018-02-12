@@ -202,6 +202,7 @@
                                     <th>Full Name</th>
                                     <th>Email</th>
                                     <th>Access</th>
+                                    <th>Remove User</th>
                                 </tr>
                             </thead>
                             <tbody id="usersTableBody">
@@ -326,6 +327,11 @@
                         var text4 = document.createTextNode(userAccess);
                         td4.appendChild(text4);
                         tr.appendChild(td4);
+
+                        var td5 = document.createElement("td");
+                        var text5 = document.createTextNode("Remove Button");
+                        td5.appendChild(text5);
+                        tr.appendChild(td5);
 
                         document.getElementById('usersTableBody').appendChild(tr);
                     }
