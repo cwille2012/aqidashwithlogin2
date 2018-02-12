@@ -3,6 +3,10 @@ var MongoDB = require('mongodb').Db;
 var Server = require('mongodb').Server;
 var moment = require('moment');
 
+//added code:
+var MongoClient = require('mongodb').MongoClient;
+
+
 /*
 	ESTABLISH DATABASE CONNECTION
 */
@@ -10,6 +14,12 @@ var moment = require('moment');
 var dbName = process.env.DB_NAME || 'node-login';
 var dbHost = process.env.DB_HOST || 'localhost'
 var dbPort = process.env.DB_PORT || 27017;
+
+//added code:
+var databaseName = "dashboard";
+var databaseURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + databaseName;
+var whitelistName = 'whitelist';
+
 
 var db = new MongoDB(dbName, new Server(dbHost, dbPort, { auto_reconnect: true }), { w: 1 });
 db.open(function(e, d) {
@@ -61,7 +71,9 @@ exports.manualLogin = function(user, pass, callback) {
 }
 
 /* record insertion, update & deletion methods */
-//move whitelist validation here?
+
+
+//test code:
 exports.addNewAccount = function(newData, callback) {
     accounts.findOne({ user: newData.user }, function(e, o) {
         if (o) {
@@ -71,19 +83,64 @@ exports.addNewAccount = function(newData, callback) {
                 if (o) {
                     callback('email-taken');
                 } else {
-                    saltAndHash(newData.pass, function(hash) {
-                        newData.pass = hash;
-                        // append date stamp when record was created //
-                        newData.access = "admin";
-                        newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
-                        console.log(newData);
-                        accounts.insert(newData, { safe: true }, callback);
+                    var requestedEmail = String(newData.email);
+                    MongoClient.connect(databaseURL, function(err, db) {
+                        if (err) throw err;
+                        var dbo = db.db("dashboard");
+                        var query = { email: requestedEmail };
+                        dbo.collection("whitelist").find(query).toArray(function(err, result) {
+                            if (err) throw err;
+                            if (result[0].email == req.body.email) {
+                                //user is in whitelist so make an account
+                                saltAndHash(newData.pass, function(hash) {
+                                    newData.pass = hash;
+                                    newData.access = String(req.body.access);
+                                    newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+                                    console.log(newData);
+                                    accounts.insert(newData, { safe: true }, callback);
+                                });
+
+                            } else {
+                                console.log('user not in whitelist');
+                                console.log('Calling callback');
+                                callback('not-authorized');
+                            }
+                            db.close();
+                        });
                     });
                 }
             });
         }
     });
 }
+
+
+
+
+
+//functional code:
+// exports.addNewAccount = function(newData, callback) {
+//     accounts.findOne({ user: newData.user }, function(e, o) {
+//         if (o) {
+//             callback('username-taken');
+//         } else {
+//             accounts.findOne({ email: newData.email }, function(e, o) {
+//                 if (o) {
+//                     callback('email-taken');
+//                 } else {
+//                     saltAndHash(newData.pass, function(hash) {
+//                         newData.pass = hash;
+//                         // append date stamp when record was created //
+//                         newData.access = "admin";
+//                         newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+//                         console.log(newData);
+//                         accounts.insert(newData, { safe: true }, callback);
+//                     });
+//                 }
+//             });
+//         }
+//     });
+// }
 
 exports.updateAccount = function(newData, callback) {
     accounts.findOne({ _id: getObjectId(newData.id) }, function(e, o) {
