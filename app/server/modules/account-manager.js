@@ -90,7 +90,7 @@ exports.addNewAccount = function(newData, callback) {
                         var query = { email: requestedEmail };
                         dbo.collection("whitelist").find(query).toArray(function(err, result) {
                             if (err) throw err;
-                            if (result[0].email == req.body.email) {
+                            if (result[0].email == requestedEmail) {
                                 //user is in whitelist so make an account
                                 saltAndHash(newData.pass, function(hash) {
                                     newData.pass = hash;
