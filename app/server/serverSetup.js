@@ -3,7 +3,7 @@ var databaseHost = "localhost";
 var databasePort = 27017;
 
 var databaseName = "dashboard";
-var databaseURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + databaseName;
+var databaseURL = 'mongodb://' + databaseHost + ':' + databasePort + '/' + databaseName;
 
 MongoClient.connect(whitelistURL, function(err, db) {
     if (err) throw err;
