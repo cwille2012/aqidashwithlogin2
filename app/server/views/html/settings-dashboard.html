@@ -316,6 +316,7 @@
                     console.log('status:' + status + ':' + data);
                     if (status == 200) {
                         console.log("default nav position successfully");
+                        localStorage.setItem("dataDashDefaultNavPos", navbarPosition);
                         console.log(data);
                     } else {
                         console.log("default nav position could not be changed");
@@ -386,6 +387,7 @@
                     console.log('status:' + status + ':' + data);
                     if (status == 200) {
                         console.log("default color changed successfully");
+                        localStorage.setItem("dataDashDefaultColor", defaultColor);
                         console.log(data);
                     } else {
                         console.log("default color could not be changed");
