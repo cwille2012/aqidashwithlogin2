@@ -17,6 +17,8 @@
     <script src="/vendor/jquery-2.2.3.min.js"></script>
     <script src="/vendor/jquery.form.min.js"></script>
     <script src="/public/js/views/logout.js"></script>
+    <!--Custom Page Scripts-->
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" onload="loadScript()">
@@ -382,6 +384,8 @@
         <script src="/js/dashboard/sb-admin.js"></script>
         <script src="/js/dashboard/sb-admin-datatables.js"></script>
         <script src="/js/dashboard/sb-admin-charts.js"></script>
+        <script src="/js/controllers/hide-hash.js"></script>
+        <script src="/js/controllers/logoutController.js"></script>
 
         <!--Local Script Files-->
         <script>
@@ -393,31 +397,6 @@
                 document.getElementById("userEmail").innerHTML = localStorage.getItem("dataDashEmail");
                 document.getElementById("userCountry").innerHTML = localStorage.getItem("dataDashCountry");
             }
-        </script>
-
-        <script>
-            $("#btn-logout").click(() => {
-                localStorage.removeItem("dataDashFullName");
-                localStorage.removeItem("dataDashEmail");
-                localStorage.removeItem("dataDashUserName");
-                localStorage.removeItem("dataDashCountry");
-                localStorage.removeItem("dataDashUserID");
-                localStorage.removeItem("dataDashPassHash");
-                $.ajax({
-                    url: "/logout",
-                    type: "POST",
-                    data: {
-                        logout: true
-                    },
-                    success: function(data) {
-                        console.log("hup");
-                        location.reload();
-                    },
-                    error: function(jqXHR) {
-                        console.log(jqXHR.responseText + ' :: ' + jqXHR.statusText);
-                    }
-                });
-            });
         </script>
     </div>
 </body>
