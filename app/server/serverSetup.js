@@ -1,30 +1,25 @@
 var MongoClient = require('mongodb').MongoClient;
-var dbHost = DB_HOST = "localhost";
-var dbPort = DB_PORT = 27017;
+var databaseHost = "localhost";
+var databasePort = 27017;
 
-var whitelistDb = "whitelist";
-var whitelistURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + whitelistDb;
-
-var dashSettingsDb = "dashsettings";
-var dashSettingsURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + dashSettingsDb;
-
-var sensorsDb = "sensors";
-var sensorsURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + sensorsDb;
+var databaseName = "dashboard";
+var databaseURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + databaseName;
 
 MongoClient.connect(whitelistURL, function(err, db) {
     if (err) throw err;
-    console.log("Whitelist database created!");
-    db.close();
-});
-
-MongoClient.connect(dashSettingsURL, function(err, db) {
-    if (err) throw err;
-    console.log("Dashboard settings database created!");
-    db.close();
-});
-
-MongoClient.connect(sensorsURL, function(err, db) {
-    if (err) throw err;
-    console.log("Sensor database created!");
+    console.log("Dashboard database created!");
+    var dbo = db.db("dashboard");
+    dbo.createCollection("whitelist", function(err, res) {
+        if (err) throw err;
+        console.log("Whitelist collection created!");
+    });
+    dbo.createCollection("dashsettings", function(err, res) {
+        if (err) throw err;
+        console.log("Dashboard settings collection created!");
+    });
+    dbo.createCollection("sensors", function(err, res) {
+        if (err) throw err;
+        console.log("Sensor collection created!");
+    });
     db.close();
 });
