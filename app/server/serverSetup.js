@@ -12,8 +12,8 @@ MongoClient.connect(databaseURL, function(err, db) {
     dbo.createCollection("whitelist", function(err, res) {
         if (err) throw err;
         console.log("Whitelist collection created!");
+        db.close();
     });
-    db.close();
 });
 
 MongoClient.connect(databaseURL, function(err, db) {
@@ -23,8 +23,8 @@ MongoClient.connect(databaseURL, function(err, db) {
     dbo.createCollection("dashsettings", function(err, res) {
         if (err) throw err;
         console.log("Dashboard settings collection created!");
+        db.close();
     });
-    db.close();
 });
 
 MongoClient.connect(databaseURL, function(err, db) {
@@ -34,6 +34,6 @@ MongoClient.connect(databaseURL, function(err, db) {
     dbo.createCollection("sensors", function(err, res) {
         if (err) throw err;
         console.log("Sensor collection created!");
+        db.close();
     });
-    db.close();
 });
