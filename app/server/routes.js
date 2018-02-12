@@ -420,13 +420,21 @@ module.exports = function(app) {
                 });
             } else if (req.body.command == "remove") {
                 //remove from whitelist collection
+                var receivedEmail = String(req.body.email);
+                MongoClient.connect(databaseURL, function(err, db) {
+                    if (err) throw err;
+                    var dbo = db.db("dashboard");
+                    var dbquery = { email: receivedEmail };
+                    dbo.collection("whitelist").deleteOne(dbquery, function(err, obj) {
+                        if (err) throw err;
+                        console.log("Address deleted");
+                        db.close();
+                    });
+                });
             } else {
                 //error
+                console.log("Invalid or no command specified");
             }
-
-
-
-
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
             //Add or remove field from database
@@ -458,27 +466,42 @@ module.exports = function(app) {
             res.redirect('/');
         } else {
             //temporary object data, replace with database table
-            var whitelist = new Object([{
-                "email": "test1@gmail.com",
-                "access": "admin"
-            }, {
-                "email": "test2@gmail.com",
-                "access": "manager"
-            }, {
-                "email": "test3@gmail.com",
-                "access": "user"
-            }, {
-                "email": "test3@gmail.com",
-                "access": "manager"
-            }, {
-                "email": "test4@gmail.com",
-                "access": "admin"
-            }, {
-                "email": "test5@gmail.com",
-                "access": "user"
-            }]);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify(whitelist));
+            // var whitelist = new Object([{
+            //     "email": "test1@gmail.com",
+            //     "access": "admin"
+            // }, {
+            //     "email": "test2@gmail.com",
+            //     "access": "manager"
+            // }, {
+            //     "email": "test3@gmail.com",
+            //     "access": "user"
+            // }, {
+            //     "email": "test3@gmail.com",
+            //     "access": "manager"
+            // }, {
+            //     "email": "test4@gmail.com",
+            //     "access": "admin"
+            // }, {
+            //     "email": "test5@gmail.com",
+            //     "access": "user"
+            // }]);
+
+
+            MongoClient.connect(databaseURL, function(err, db) {
+                if (err) throw err;
+                var dbo = db.db("dashboard");
+                dbo.collection("whitelist").find({}).toArray(function(err, result) {
+                    if (err) throw err;
+                    console.log(result);
+                    var whitelist = result;
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify(whitelist));
+                    db.close();
+                });
+            });
+
+            // res.writeHead(200, { 'Content-Type': 'application/json' });
+            // res.end(JSON.stringify(whitelist));
         }
     });
 
