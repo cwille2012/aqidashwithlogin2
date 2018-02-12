@@ -302,23 +302,38 @@ module.exports = function(app) {
     })
 
     app.post('/signup', function(req, res) {
-        if (true) { // if (req.body['email'] is in whitelist)
-            AM.addNewAccount({
-                name: req.body['name'],
-                email: req.body['email'],
-                user: req.body['user'],
-                pass: req.body['pass'],
-                country: req.body['country']
-            }, function(e) {
-                if (e) {
-                    res.status(400).send(e);
+        //check if requested email is in the whitelist
+        var requestedEmail = String(req.body.email);
+        MongoClient.connect(databaseURL, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("dashboard");
+            var query = { email: requestedEmail };
+            dbo.collection("whitelist").find(query).toArray(function(err, result) {
+                if (err) throw err;
+                console.log(result);
+                if (result.email == req.body.email) {
+                    AM.addNewAccount({
+                        name: req.body['name'],
+                        email: req.body['email'],
+                        user: req.body['user'],
+                        pass: req.body['pass'],
+                        country: req.body['country']
+                    }, function(e) {
+                        if (e) {
+                            res.status(400).send(e);
+                        } else {
+                            res.status(200).send('ok');
+                        }
+                    });
                 } else {
-                    res.status(200).send('ok');
+                    res.status(400).send('account not whitelisted');
                 }
+                db.close();
             });
-        } else {
-            res.status(400).send('account not whitelisted');
-        }
+        });
+        //auto add permissions to user database from whitelist
+        //delete from whitelist on successful account creation
+        //delete from whitelist after creation can be a admin setting
     });
 
     app.post('/lost-password', function(req, res) {
@@ -410,7 +425,7 @@ module.exports = function(app) {
                     if (err) throw err;
                     var dbo = db.db("dashboard");
                     var newObj = { email: receivedEmail, access: receivedAccess };
-                    console.log("Object to insert:")
+                    console.log("Object to insert:");
                     console.log(newObj);
                     dbo.collection("whitelist").insertOne(newObj, function(err, res) {
                         if (err) throw err;
@@ -465,43 +480,17 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            //temporary object data, replace with database table
-            // var whitelist = new Object([{
-            //     "email": "test1@gmail.com",
-            //     "access": "admin"
-            // }, {
-            //     "email": "test2@gmail.com",
-            //     "access": "manager"
-            // }, {
-            //     "email": "test3@gmail.com",
-            //     "access": "user"
-            // }, {
-            //     "email": "test3@gmail.com",
-            //     "access": "manager"
-            // }, {
-            //     "email": "test4@gmail.com",
-            //     "access": "admin"
-            // }, {
-            //     "email": "test5@gmail.com",
-            //     "access": "user"
-            // }]);
-
-
             MongoClient.connect(databaseURL, function(err, db) {
                 if (err) throw err;
                 var dbo = db.db("dashboard");
                 dbo.collection("whitelist").find({}).toArray(function(err, result) {
                     if (err) throw err;
-                    console.log(result);
                     var whitelist = result;
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify(whitelist));
                     db.close();
                 });
             });
-
-            // res.writeHead(200, { 'Content-Type': 'application/json' });
-            // res.end(JSON.stringify(whitelist));
         }
     });
 

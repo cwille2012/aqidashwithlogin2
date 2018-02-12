@@ -16,6 +16,21 @@ MongoClient.connect(databaseURL, function(err, db) {
     });
 });
 
+var adminEmail = "admin@admin.com";
+var adminAccess = "admin";
+MongoClient.connect(databaseURL, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("dashboard");
+    var newObj = { email: adminEmail, access: adminAccess };
+    console.log("Object to insert:")
+    console.log(newObj);
+    dbo.collection("whitelist").insertOne(newObj, function(err, res) {
+        if (err) throw err;
+        console.log("Default admin inserted");
+        db.close();
+    });
+});
+
 MongoClient.connect(databaseURL, function(err, db) {
     if (err) throw err;
     var dbo = db.db("dashboard");
