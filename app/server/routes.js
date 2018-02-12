@@ -311,6 +311,8 @@ module.exports = function(app) {
             dbo.collection("whitelist").find(query).toArray(function(err, result) {
                 if (err) throw err;
                 console.log(result);
+                console.log(result.email);
+                console.log(req.body.email);
                 if (result.email == req.body.email) {
                     AM.addNewAccount({
                         name: req.body['name'],
