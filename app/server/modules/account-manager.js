@@ -74,7 +74,9 @@ exports.addNewAccount = function(newData, callback) {
                     saltAndHash(newData.pass, function(hash) {
                         newData.pass = hash;
                         // append date stamp when record was created //
+                        newData.access = "admin";
                         newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+                        console.log(newData);
                         accounts.insert(newData, { safe: true }, callback);
                     });
                 }

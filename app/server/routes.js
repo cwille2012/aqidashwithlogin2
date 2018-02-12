@@ -310,9 +310,6 @@ module.exports = function(app) {
             var query = { email: requestedEmail };
             dbo.collection("whitelist").find(query).toArray(function(err, result) {
                 if (err) throw err;
-                console.log(result);
-                console.log(result[0].email);
-                console.log(req.body.email);
                 if (result[0].email == req.body.email) {
                     AM.addNewAccount({
                         name: req.body['name'],
