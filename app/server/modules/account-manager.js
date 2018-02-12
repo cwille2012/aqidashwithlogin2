@@ -90,16 +90,17 @@ exports.addNewAccount = function(newData, callback) {
                         var query = { email: requestedEmail };
                         dbo.collection("whitelist").find(query).toArray(function(err, result) {
                             if (err) throw err;
-                            if (result[0].email == requestedEmail) {
-                                //user is in whitelist so make an account
-                                saltAndHash(newData.pass, function(hash) {
-                                    newData.pass = hash;
-                                    newData.access = String(result[0].access);
-                                    newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
-                                    console.log(newData);
-                                    accounts.insert(newData, { safe: true }, callback);
-                                });
-
+                            if (result.length > 0) {
+                                if (result[0].email == requestedEmail) {
+                                    //user is in whitelist so make an account
+                                    saltAndHash(newData.pass, function(hash) {
+                                        newData.pass = hash;
+                                        newData.access = String(result[0].access);
+                                        newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+                                        console.log(newData);
+                                        accounts.insert(newData, { safe: true }, callback);
+                                    });
+                                }
                             } else {
                                 console.log('user not in whitelist');
                                 console.log('Calling callback');
