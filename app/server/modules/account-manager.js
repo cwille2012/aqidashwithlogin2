@@ -92,6 +92,7 @@ exports.addNewAccount = function(newData, callback) {
                                     saltAndHash(newData.pass, function(hash) {
                                         newData.pass = hash;
                                         newData.access = String(result[0].access);
+                                        newData.defaultColor = "purple";
                                         newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
                                         console.log(newData);
                                         accounts.insert(newData, { safe: true }, callback);

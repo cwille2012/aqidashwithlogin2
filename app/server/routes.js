@@ -382,9 +382,40 @@ module.exports = function(app) {
             console.log("Email: " + req.session.user.email);
             console.log("Data received: ");
             console.log(req.body);
+            var updateEmail = String(req.session.user.email);
+            //Change default settings in database
+            if (req.body.field == "defaultColor") {
+                MongoClient.connect(databaseURL, function(err, db) {
+                    if (err) throw err;
+                    var dbo = db.db("node-login");
+                    var dbquery = { email: updateEmail };
+                    var newvalue = { $set: { defaultColor: String(req.body.value) } };
+                    dbo.collection("customers").updateOne(dbquery, newvalue, function(err, res) {
+                        if (err) throw err;
+                        console.log("Default color updated");
+                        db.close();
+                    });
+                });
+            } else if (req.body.field == "defaultNavbarPos") {
+                MongoClient.connect(databaseURL, function(err, db) {
+                    if (err) throw err;
+                    var dbo = db.db("node-login");
+                    var dbquery = { email: updateEmail };
+                    var newvalue = { $set: { defaultNavbarPos: String(req.body.value) } };
+                    dbo.collection("customers").updateOne(dbquery, newvalue, function(err, res) {
+                        if (err) throw err;
+                        console.log("Default nav position updated");
+                        db.close();
+                    });
+                });
+            } else {
+                //error
+                console.log('Error, parameter not found');
+            }
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
-            //Change default settings in database
+
+
         }
     });
 
