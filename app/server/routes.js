@@ -317,40 +317,6 @@ module.exports = function(app) {
         });
     });
 
-    // app.post('/signup', function(req, res) {
-    //     //check if requested email is in the whitelist
-    //     var requestedEmail = String(req.body.email);
-    //     MongoClient.connect(databaseURL, function(err, db) {
-    //         if (err) throw err;
-    //         var dbo = db.db("dashboard");
-    //         var query = { email: requestedEmail };
-    //         dbo.collection("whitelist").find(query).toArray(function(err, result) {
-    //             if (err) throw err;
-    //             if (result[0].email == req.body.email) {
-    //                 AM.addNewAccount({
-    //                     name: req.body['name'],
-    //                     email: req.body['email'],
-    //                     user: req.body['user'],
-    //                     pass: req.body['pass'],
-    //                     country: req.body['country']
-    //                 }, function(e) {
-    //                     if (e) {
-    //                         res.status(400).send(e);
-    //                     } else {
-    //                         res.status(200).send('ok');
-    //                     }
-    //                 });
-    //             } else {
-    //                 res.status(400).send('account not whitelisted');
-    //             }
-    //             db.close();
-    //         });
-    //     });
-    //auto add permissions to user database from whitelist
-    //delete from whitelist on successful account creation
-    //delete from whitelist after creation can be a admin setting
-    // });
-
     app.post('/lost-password', function(req, res) {
         // look up user account by email
         AM.getAccountByEmail(req.body['email'], function(o) {
