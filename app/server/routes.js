@@ -1,3 +1,5 @@
+import { request } from 'http';
+
 var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
@@ -352,21 +354,40 @@ module.exports = function(app) {
         })
     });
 
-    app.post('/delete', function(req, res) {
+    app.post('/users/remove', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            AM.deleteAccount(req.body.id, function(e, obj) {
-                if (!e) {
-                    res.clearCookie('user');
-                    res.clearCookie('pass');
-                    req.session.destroy(function(e) { res.status(200).send('ok'); });
-                } else {
-                    res.status(400).send('record not found');
-                }
-            });
+            var command = req.body.command;
+            var accountID = request.body.userID;
+            if (command == "remove") {
+                console.log("removing user " + accountID);
+                // AM.deleteAccount(accountID, function(e, obj) {
+                //     if (!e) {
+                //         res.status(200).send('ok');
+                //     } else {
+                //         res.status(400).send('could not delete user');
+                //     }
+                // });
+            }
         }
     });
+
+    // app.post('/delete', function(req, res) {
+    //     if (req.session.user == null) {
+    //         res.redirect('/');
+    //     } else {
+    //         AM.deleteAccount(req.body.id, function(e, obj) {
+    //             if (!e) {
+    //                 res.clearCookie('user');
+    //                 res.clearCookie('pass');
+    //                 req.session.destroy(function(e) { res.status(200).send('ok'); });
+    //             } else {
+    //                 res.status(400).send('record not found');
+    //             }
+    //         });
+    //     }
+    // });
 
     //***********************//
     //Dashboard POST Handlers//

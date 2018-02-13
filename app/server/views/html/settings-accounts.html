@@ -331,8 +331,48 @@
                         tr.appendChild(td4);
 
                         var td5 = document.createElement("td");
-                        var text5 = document.createTextNode("Remove Button");
-                        td5.appendChild(text5);
+                        var removeUserButton = document.createElement("button");
+                        removeUserButton.setAttribute("type", "button");
+                        removeUserButton.setAttribute("class", "btn btn-secondary");
+                        removeUserButton.setAttribute("id", userID);
+                        var removeText = document.createTextNode("Remove User");
+                        removeUserButton.appendChild(removeText);
+                        removeUserButton.addEventListener('click', function(event) {
+                            var accountID = String(event.target.id);
+
+                            var postData = new Object({
+                                "command": "remove",
+                                "userID": accountID
+                            });
+
+                            var url = String(window.location.href);
+                            url = url.replace(/settings\/accounts/g, 'users/remove');
+                            var method = "POST";
+
+                            var shouldBeAsync = true;
+                            var request = new XMLHttpRequest();
+
+                            request.onload = function() {
+                                var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+                                var data = request.responseText; // Returned data, e.g., an HTML document.
+                                console.log('status:' + status + ':' + data);
+                                if (status == 200) {
+                                    console.log("removed user successfully");
+                                    console.log(data);
+                                } else {
+                                    console.log("removing user failed");
+                                    console.log(data);
+                                }
+                            }
+                            request.open(method, url, shouldBeAsync);
+                            request.setRequestHeader("Content-Type", "application/json");
+                            request.send(JSON.stringify(postData));
+
+                            document.getElementById('usersTableBody').innerHTML = '';
+                            document.getElementById('whitelistTableBody').innerHTML = '';
+                            loadScript();
+                        });
+                        td5.appendChild(removeUserButton);
                         tr.appendChild(td5);
 
                         document.getElementById('usersTableBody').appendChild(tr);
