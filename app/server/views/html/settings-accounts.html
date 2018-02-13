@@ -184,7 +184,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Dashboard</a>
+                    <a href="/dashboard" style="color: #007bff!important">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Settings</li>
             </ol>
@@ -333,7 +333,7 @@
                         var td5 = document.createElement("td");
                         var removeUserButton = document.createElement("button");
                         removeUserButton.setAttribute("type", "button");
-                        removeUserButton.setAttribute("class", "btn btn-secondary");
+                        removeUserButton.setAttribute("class", "btn btn-danger");
                         removeUserButton.setAttribute("id", userID);
                         var removeText = document.createTextNode("Remove User");
                         removeUserButton.appendChild(removeText);
@@ -416,7 +416,7 @@
                         var td2 = document.createElement("td");
                         var removeButton = document.createElement("button");
                         removeButton.setAttribute("type", "button");
-                        removeButton.setAttribute("class", "btn btn-secondary");
+                        removeButton.setAttribute("class", "btn btn-danger");
                         removeButton.setAttribute("id", userEmail);
                         var removeText = document.createTextNode("Remove Email");
                         removeButton.appendChild(removeText);
