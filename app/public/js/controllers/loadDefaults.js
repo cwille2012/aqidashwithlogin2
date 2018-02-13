@@ -1,6 +1,6 @@
 function loadDefaults() {
     if (String(localStorage.getItem("dataDashDefaultColor")) == "purple") {
-        console.log("default color is purple");
+        //console.log("default color is purple");
         if ($('#mainNav').hasClass('bg-dark')) {
             $('#mainNav').removeClass('bg-dark');
         }
@@ -27,7 +27,7 @@ function loadDefaults() {
             $('#page-top').addClass('bg-purple')
         }
     } else if (String(localStorage.getItem("dataDashDefaultColor")) == "dark") {
-        console.log("default color is dark");
+        //console.log("default color is dark");
         if ($('#mainNav').hasClass('bg-purple')) {
             $('#mainNav').removeClass('bg-purple');
         }
