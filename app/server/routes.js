@@ -358,7 +358,7 @@ module.exports = function(app) {
             res.redirect('/');
         } else {
             var command = req.body.command;
-            var accountID = request.body.userID;
+            var accountID = req.body.userID;
             if (command == "remove") {
                 console.log("removing user " + accountID);
                 // AM.deleteAccount(accountID, function(e, obj) {
