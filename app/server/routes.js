@@ -357,17 +357,18 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
+            console.log("access: " + req.session.access);
             var command = req.body.command;
             var accountID = req.body.userID;
             if (command == "remove") {
                 console.log("removing user " + accountID);
-                AM.deleteAccount(accountID, function(e, obj) {
-                    if (!e) {
-                        res.status(200).send('ok');
-                    } else {
-                        res.status(400).send('could not delete user');
-                    }
-                });
+                // AM.deleteAccount(accountID, function(e, obj) {
+                //     if (!e) {
+                //         res.status(200).send('ok');
+                //     } else {
+                //         res.status(400).send('could not delete user');
+                //     }
+                // });
             }
         }
     });
