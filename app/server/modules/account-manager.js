@@ -117,31 +117,6 @@ exports.addNewAccount = function(newData, callback) {
     });
 }
 
-
-//functional code:
-// exports.addNewAccount = function(newData, callback) {
-//     accounts.findOne({ user: newData.user }, function(e, o) {
-//         if (o) {
-//             callback('username-taken');
-//         } else {
-//             accounts.findOne({ email: newData.email }, function(e, o) {
-//                 if (o) {
-//                     callback('email-taken');
-//                 } else {
-//                     saltAndHash(newData.pass, function(hash) {
-//                         newData.pass = hash;
-//                         // append date stamp when record was created //
-//                         newData.access = "admin";
-//                         newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
-//                         console.log(newData);
-//                         accounts.insert(newData, { safe: true }, callback);
-//                     });
-//                 }
-//             });
-//         }
-//     });
-// }
-
 exports.updateAccount = function(newData, callback) {
     accounts.findOne({ _id: getObjectId(newData.id) }, function(e, o) {
         o.name = newData.name;
