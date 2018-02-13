@@ -381,23 +381,6 @@ module.exports = function(app) {
         }
     });
 
-
-    // app.post('/delete', function(req, res) {
-    //     if (req.session.user == null) {
-    //         res.redirect('/');
-    //     } else {
-    //         AM.deleteAccount(req.body.id, function(e, obj) {
-    //             if (!e) {
-    //                 res.clearCookie('user');
-    //                 res.clearCookie('pass');
-    //                 req.session.destroy(function(e) { res.status(200).send('ok'); });
-    //             } else {
-    //                 res.status(400).send('record not found');
-    //             }
-    //         });
-    //     }
-    // });
-
     //***********************//
     //Dashboard POST Handlers//
     //***********************//
