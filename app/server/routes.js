@@ -573,6 +573,14 @@ module.exports = function(app) {
     //APP GET Handlers//
     //****************//
 
+    app.get('/app/sensors', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.end(JSON.stringify("list of sensors for mobile"));
+        }
+    });
+
     app.get('/app/data', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
