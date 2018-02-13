@@ -558,8 +558,12 @@
                     var addText = document.createTextNode("Add Email");
                     addButton.appendChild(addText);
                     addButton.addEventListener('click', function(event) {
-                        var newEmailForWhitelist = document.getElementById('newWhitelist-email').innerHTML;
-                        var newAccessForWhitelist = document.getElementById('newWhitelist-access').innerHTML;
+                        var newEmailForWhitelist = document.getElementById('newWhitelist-email').value;
+
+                        var dropdown = document.getElementById('newWhitelist-email');
+                        var newAccessForWhitelist = dropdown.options[options.seletedIndex].value;
+                        console.log("email to add: " + newEmailForWhitelist);
+                        console.log("selected access: " + newAccessForWhitelist);
 
                         var postData = new Object({
                             "command": "add",
