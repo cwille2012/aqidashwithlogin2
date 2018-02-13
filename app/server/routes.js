@@ -569,7 +569,17 @@ module.exports = function(app) {
         }
     });
 
+    //****************//
+    //APP GET Handlers//
+    //****************//
 
+    app.get('/app/data', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.end(JSON.stringify("consolidated data to be sent to mobile"));
+        }
+    });
 
     //*********//
     //404 Catch//
