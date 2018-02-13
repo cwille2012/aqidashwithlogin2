@@ -358,17 +358,25 @@ module.exports = function(app) {
             res.redirect('/');
         } else {
             console.log("access: " + req.session.access);
+            var userAccess = req.session.access;
             var command = req.body.command;
             var accountID = req.body.userID;
             if (command == "remove") {
-                console.log("removing user " + accountID);
-                // AM.deleteAccount(accountID, function(e, obj) {
-                //     if (!e) {
-                //         res.status(200).send('ok');
-                //     } else {
-                //         res.status(400).send('could not delete user');
-                //     }
-                // });
+                if ((userAccess == "admin") || (userAccess == "manager")) {
+                    console.log("removing user " + accountID);
+                    AM.deleteAccount(accountID, function(e, obj) {
+                        if (!e) {
+                            res.status(200).send('ok');
+                            console.log('user removed');
+                        } else {
+                            res.status(400).send('could not delete user');
+                            console.log('could not delete user');
+                        }
+                    });
+                } else {
+                    res.status(400).send('not authorized');
+                    console.log('need admin access to remove user');
+                }
             }
         }
     });
