@@ -481,54 +481,15 @@
                     var tr = document.createElement("tr");
 
                     var td0 = document.createElement("td");
-                    // td0.setAttribute("id", "newWhitelist-email");
-                    // var text0 = document.createTextNode("Email");
-                    // td0.appendChild(text0);
-                    // td0.addEventListener('click', function(event) {
-                    //     var $this = $(this);
-                    //     var listenID = String(event.target.id);
-                    //     var $input = $('<input>', {
-                    //         value: $this.text(),
-                    //         type: 'text',
-                    //         id: String('newWhitelist-email'),
-                    //         blur: function() {
-                    //             $this.text(this.value);
-                    //         },
-                    //         keyup: function(e) {
-                    //             if (e.which === 13) $input.blur();
-                    //         }
-                    //     }).appendTo($this.empty()).focus();
-                    // });
-
                     var emailInput = document.createElement("input");
                     emailInput.setAttribute("type", "text");
                     emailInput.setAttribute("placeholder", "Email");
                     emailInput.setAttribute("id", "newWhitelist-email");
 
                     td0.appendChild(emailInput);
-
                     tr.appendChild(td0);
 
                     var td1 = document.createElement("td");
-                    // td1.setAttribute("id", "newWhitelist-access");
-                    // var text1 = document.createTextNode("Access");
-                    // td1.appendChild(text1);
-                    // td1.addEventListener('click', function(event) {
-                    //     var $this = $(this);
-                    //     var listenID = String(event.target.id);
-                    //     var $input = $('<input>', {
-                    //         value: $this.text(),
-                    //         type: 'text',
-                    //         id: String('newWhitelist-access'),
-                    //         blur: function() {
-                    //             $this.text(this.value);
-                    //         },
-                    //         keyup: function(e) {
-                    //             if (e.which === 13) $input.blur();
-                    //         }
-                    //     }).appendTo($this.empty()).focus();
-                    // });
-
                     var accessDropdown = document.createElement("select");
                     accessDropdown.setAttribute("id", "newWhitelist-access");
                     var dropdownOption0 = document.createElement('option');
