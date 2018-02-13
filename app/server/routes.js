@@ -354,6 +354,7 @@ module.exports = function(app) {
         })
     });
 
+    /*
     app.post('/users/remove', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
@@ -372,6 +373,7 @@ module.exports = function(app) {
             }
         }
     });
+    */
 
     // app.post('/delete', function(req, res) {
     //     if (req.session.user == null) {
