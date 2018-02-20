@@ -15,7 +15,7 @@ $(document).ready(function() {
                 av.showInvalidEmail();
             } else if (e.responseText == 'username-taken') {
                 av.showInvalidUserName();
-            }
+            } //add other else if for new callback
         }
     });
     $('#name-tf').focus();
