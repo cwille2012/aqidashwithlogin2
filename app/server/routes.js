@@ -356,7 +356,7 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            console.log(req);
+            console.log(req.session.user.email);
             var userAccess = req.session.access;
             var command = req.body.command;
             var accountID = req.body.userID;
@@ -373,7 +373,7 @@ module.exports = function(app) {
                     });
                 } else {
                     res.status(400).send('not authorized');
-                    console.log('Unauthorized user (' + req.session.email + ') tried to remove user: ' + accountID);
+                    console.log('Unauthorized user (' + req.session.user.email + ') tried to remove user: ' + accountID);
                 }
             }
         }
