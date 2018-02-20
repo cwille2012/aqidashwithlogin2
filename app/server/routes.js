@@ -352,12 +352,11 @@ module.exports = function(app) {
         })
     });
 
-
     app.post('/users/remove', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            console.log("access: " + req.session.access);
+            console.log(req);
             var userAccess = req.session.access;
             var command = req.body.command;
             var accountID = req.body.userID;
@@ -389,7 +388,6 @@ module.exports = function(app) {
             res.status(400).send('not authorized');
         } else {
             console.log("POST to dashboard settings received from: " + req.session.user.email);
-            console.log("Data received: ");
             console.log(req.body);
             var updateEmail = String(req.session.user.email);
             //Change default settings in database
@@ -434,7 +432,6 @@ module.exports = function(app) {
         } else {
             console.log("POST to whitelist received from: " + req.session.user.email);
             if (req.body.command == "add") {
-                //add to whitelist collection
                 var receivedEmail = String(req.body.email);
                 var receivedAccess = String(req.body.access);
                 MongoClient.connect(databaseURL, function(err, db) {
@@ -450,7 +447,6 @@ module.exports = function(app) {
                     });
                 });
             } else if (req.body.command == "remove") {
-                //remove from whitelist collection
                 var receivedEmail = String(req.body.email);
                 MongoClient.connect(databaseURL, function(err, db) {
                     if (err) throw err;
@@ -475,7 +471,6 @@ module.exports = function(app) {
             res.status(400).send('not authorized');
         } else {
             console.log("POST to sensors received: from: " + req.session.user.email);
-            console.log("Data received: ");
             console.log(req.body);
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
