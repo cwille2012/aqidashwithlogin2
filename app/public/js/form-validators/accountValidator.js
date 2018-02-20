@@ -49,7 +49,7 @@ AccountValidator.prototype.showInvalidUserName = function() {
 
 AccountValidator.prototype.showNotAuthorized = function() {
     this.controlGroups[2].addClass('error');
-    this.showErrors(['Sorry, you are not authorized to make an account.']);
+    this.showErrors(['You are not authorized to make an account.']);
 }
 
 AccountValidator.prototype.validateForm = function() {

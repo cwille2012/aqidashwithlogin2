@@ -21,7 +21,7 @@ module.exports = function(app) {
         } else {
             // check if user credentials are saved
             if (req.cookies.user == undefined || req.cookies.pass == undefined) {
-                res.render('login', { title: 'Hello - Please Login To Your Account' });
+                res.render('login', { title: 'Please Login To Your Account' });
             } else {
                 // attempt auto login
                 AM.autoLogin(req.cookies.user, req.cookies.pass, function(o) {
@@ -29,7 +29,7 @@ module.exports = function(app) {
                         req.session.user = o;
                         res.redirect('/dashboard');
                     } else {
-                        res.render('login', { title: 'Hello - Please Login To Your Account' });
+                        res.render('login', { title: 'Please Login To Your Account' });
                     }
                 });
             }
@@ -363,19 +363,18 @@ module.exports = function(app) {
             var accountID = req.body.userID;
             if (command == "remove") {
                 if ((userAccess == "admin") || (userAccess == "manager")) {
-                    console.log("removing user " + accountID);
                     AM.deleteAccount(accountID, function(e, obj) {
                         if (!e) {
                             res.status(200).send('ok');
-                            console.log('user removed');
+                            console.log("removed user: " + accountID);
                         } else {
                             res.status(400).send('could not delete user');
-                            console.log('could not delete user');
+                            console.log("could not remove user: " + accountID);
                         }
                     });
                 } else {
                     res.status(400).send('not authorized');
-                    console.log('need admin access to remove user');
+                    console.log('Unauthorized user (' + req.session.email + ') tried to remove user: ' + accountID);
                 }
             }
         }
@@ -389,10 +388,7 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.status(400).send('not authorized');
         } else {
-            console.log("POST to dashboard settings received:");
-            console.log("From user: " + req.session.user._id);
-            console.log("Name: " + req.session.user.name);
-            console.log("Email: " + req.session.user.email);
+            console.log("POST to dashboard settings received from: " + req.session.user.email);
             console.log("Data received: ");
             console.log(req.body);
             var updateEmail = String(req.session.user.email);
@@ -405,7 +401,7 @@ module.exports = function(app) {
                     var newvalue = { $set: { defaultColor: String(req.body.value) } };
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
-                        console.log("Default color updated");
+                        console.log("Update successful");
                         db.close();
                     });
                 });
@@ -417,7 +413,7 @@ module.exports = function(app) {
                     var newvalue = { $set: { defaultNavbarPos: String(req.body.value) } };
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
-                        console.log("Default nav position updated");
+                        console.log("Update successful");
                         db.close();
                     });
                 });
@@ -436,12 +432,7 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.status(400).send('not authorized');
         } else {
-            console.log("POST to whitelist received:");
-            console.log("From user: " + req.session.user._id);
-            console.log("Name: " + req.session.user.name);
-            console.log("Email: " + req.session.user.email);
-            console.log("Data received: ");
-            console.log(req.body);
+            console.log("POST to whitelist received from: " + req.session.user.email);
             if (req.body.command == "add") {
                 //add to whitelist collection
                 var receivedEmail = String(req.body.email);
@@ -450,11 +441,11 @@ module.exports = function(app) {
                     if (err) throw err;
                     var dbo = db.db("dashboard");
                     var newObj = { email: receivedEmail, access: receivedAccess };
-                    console.log("Object to insert:");
+                    console.log("Data to insert:");
                     console.log(newObj);
                     dbo.collection("whitelist").insertOne(newObj, function(err, res) {
                         if (err) throw err;
-                        console.log("Object inserted");
+                        console.log("Insert successful");
                         db.close();
                     });
                 });
@@ -472,12 +463,10 @@ module.exports = function(app) {
                     });
                 });
             } else {
-                //error
                 console.log("Invalid or no command specified");
             }
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
-            //Add or remove field from database
         }
     });
 
@@ -485,15 +474,12 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.status(400).send('not authorized');
         } else {
-            console.log("POST to sensors received:");
-            console.log("From user: " + req.session.user._id);
-            console.log("Name: " + req.session.user.name);
-            console.log("Email: " + req.session.user.email);
+            console.log("POST to sensors received: from: " + req.session.user.email);
             console.log("Data received: ");
             console.log(req.body);
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
-            //edit field in database
+            console.log("Sensor modifications not supported yet");
         }
     });
 

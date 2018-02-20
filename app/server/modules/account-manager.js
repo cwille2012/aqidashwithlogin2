@@ -14,7 +14,6 @@ var dbName = process.env.DB_NAME || 'node-login';
 var dbHost = process.env.DB_HOST || 'localhost'
 var dbPort = process.env.DB_PORT || 27017;
 
-//added code:
 var databaseName = "dashboard";
 var databaseURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + databaseName;
 var whitelistName = 'whitelist';
@@ -99,13 +98,12 @@ exports.addNewAccount = function(newData, callback) {
                                     });
                                     dbo.collection("whitelist").deleteOne(query, function(err, obj) {
                                         if (err) throw err;
-                                        console.log("Account created, removed from whitelist");
+                                        console.log("Authorized user created account, removed from whitelist: " + requestedEmail);
                                         db.close();
                                     });
                                 }
                             } else {
-                                console.log('user not in whitelist');
-                                //console.log('Calling callback');
+                                console.log('Unauthorized user tried to make account: ' + requestedEmail);
                                 callback('not-authorized');
                             }
                             db.close();
