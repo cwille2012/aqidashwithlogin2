@@ -10,7 +10,7 @@ EM.server = require("emailjs/email").server.connect({
 
 EM.dispatchResetPasswordLink = function(account, callback) {
     EM.server.send({
-        from: process.env.EMAIL_FROM || 'CCC-USA <dashboardreset@gmail.com>',
+        from: process.env.EMAIL_FROM || 'CCC USA <dashboardreset@gmail.com>',
         to: account.email,
         subject: 'Password Reset',
         text: 'Please follow the link below to reset your password.',
