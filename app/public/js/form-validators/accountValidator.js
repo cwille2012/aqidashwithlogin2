@@ -47,6 +47,11 @@ AccountValidator.prototype.showInvalidUserName = function() {
     this.showErrors(['That username is already in use.']);
 }
 
+AccountValidator.prototype.showNotAuthorized = function() {
+    this.controlGroups[2].addClass('error');
+    this.showErrors(['Sorry, you are not authorized to make an account.']);
+}
+
 AccountValidator.prototype.validateForm = function() {
     var e = [];
     for (var i = 0; i < this.controlGroups.length; i++) this.controlGroups[i].removeClass('error');

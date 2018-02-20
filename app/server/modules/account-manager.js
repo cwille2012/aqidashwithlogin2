@@ -106,7 +106,7 @@ exports.addNewAccount = function(newData, callback) {
                             } else {
                                 console.log('user not in whitelist');
                                 //console.log('Calling callback');
-                                //callback('not-authorized');
+                                callback('not-authorized');
                             }
                             db.close();
                         });
