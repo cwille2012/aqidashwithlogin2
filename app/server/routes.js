@@ -356,7 +356,6 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            //console.log(req.body);
             var userAccess = req.session.user.access;
             var command = req.body.command;
             var accountID = req.body.userID;
