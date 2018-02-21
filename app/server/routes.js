@@ -702,7 +702,7 @@ function logAlarm(alarmText, alarmStatus) {
         var epochTime = String((new Date).getTime());
         var newObj = { epoch: epochTime, time: alarmTime, text: String(alarmText), status: String(alarmStatus) };
         console.log(newObj);
-        console.log("[" + alarmStatus + "] " + alarmTime + " " + alarmText);
+        console.log("[" + alarmStatus + "] [" + alarmTime + "] " + alarmText);
         dbo.collection("alarms").insertOne(newObj, function(err, res) {
             if (err) throw err;
             db.close();
@@ -713,7 +713,7 @@ function logAlarm(alarmText, alarmStatus) {
 
 // For todays date;
 Date.prototype.today = function() {
-    return ((this.getDate() < 10) ? "0" : "") + this.getDate() + "/" + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + "/" + this.getFullYear();
+    return (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + "/" ((this.getDate() < 10) ? "0" : "") + this.getDate() + "/" + this.getFullYear();
 }
 
 // For the time now
