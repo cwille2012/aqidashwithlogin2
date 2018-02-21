@@ -303,6 +303,9 @@ module.exports = function(app) {
             }, function(e, o) {
                 if (e) {
                     res.status(400).send('error-updating-account');
+                    var alarmText = String("could not update account: " + req.body['email'] + " " + e);
+                    var alarmStatus = "info";
+                    logAlarm(alarmText, alarmStatus);
                 } else {
                     req.session.user = o;
                     // update user login cookies if they exist
@@ -310,6 +313,9 @@ module.exports = function(app) {
                         res.cookie('user', o.user, { maxAge: 900000 });
                         res.cookie('pass', o.pass, { maxAge: 900000 });
                     }
+                    var alarmText = String("user account updated: " + req.body['email']);
+                    var alarmStatus = "info";
+                    logAlarm(alarmText, alarmStatus);
                     res.status(200).send('ok');
                 }
             });
@@ -332,8 +338,14 @@ module.exports = function(app) {
         }, function(e) {
             if (e) {
                 res.status(400).send(e);
+                var alarmText = String("new user signup failed: " + req.body['email'] + " " + e);
+                var alarmStatus = "info";
+                logAlarm(alarmText, alarmStatus);
             } else {
                 res.status(200).send('ok');
+                var alarmText = String("new user signup: " + req.body['email']);
+                var alarmStatus = "info";
+                logAlarm(alarmText, alarmStatus);
             }
         });
     });
@@ -347,9 +359,15 @@ module.exports = function(app) {
                     // TODO add an ajax loader to give user feedback //
                     if (!e) {
                         res.status(200).send('ok');
+                        var alarmText = String("reset password email sent to: " + req.body['email']);
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
                     } else {
                         for (k in e) console.log('ERROR : ', k, e[k]);
                         res.status(400).send('unable to dispatch password reset');
+                        var alarmText = String("error sending password reset email to: " + req.body['email']);
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
                     }
                 });
             } else {
@@ -367,8 +385,14 @@ module.exports = function(app) {
         AM.updatePassword(email, nPass, function(e, o) {
             if (o) {
                 res.status(200).send('ok');
+                var alarmText = String("user updated password successfully: " + email);
+                var alarmStatus = "info";
+                logAlarm(alarmText, alarmStatus);
             } else {
                 res.status(400).send('unable to update password');
+                var alarmText = String("updating user password failed: " + email);
+                var alarmStatus = "info";
+                logAlarm(alarmText, alarmStatus);
             }
         })
     });
@@ -385,15 +409,24 @@ module.exports = function(app) {
                     AM.deleteAccount(accountID, function(e, obj) {
                         if (!e) {
                             res.status(200).send('ok');
-                            console.log("removed user: " + accountID);
+                            //console.log("removed user: " + accountID);
+                            var alarmText = String("removed user: " + accountID);
+                            var alarmStatus = "info";
+                            logAlarm(alarmText, alarmStatus);
                         } else {
                             res.status(400).send('could not delete user');
-                            console.log("could not remove user: " + accountID);
+                            //console.log("could not remove user: " + accountID);
+                            var alarmText = String("could not remove user: " + accountID);
+                            var alarmStatus = "info";
+                            logAlarm(alarmText, alarmStatus);
                         }
                     });
                 } else {
                     res.status(400).send('not authorized');
-                    console.log('Unauthorized user (' + req.session.user.email + ') tried to remove user: ' + accountID);
+                    //console.log('Unauthorized user (' + req.session.user.email + ') tried to remove user: ' + accountID);
+                    var alarmText = String('unauthorized user (' + req.session.user.email + ') tried to remove user: ' + accountID);
+                    var alarmStatus = "info";
+                    logAlarm(alarmText, alarmStatus);
                 }
             }
         }
@@ -407,8 +440,8 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.status(400).send('not authorized');
         } else {
-            console.log("POST to dashboard settings received from: " + req.session.user.email);
-            console.log(req.body);
+            //console.log("POST to dashboard settings received from: " + req.session.user.email);
+            //console.log(req.body);
             var updateEmail = String(req.session.user.email);
             //Change default settings in database
             if (req.body.field == "defaultColor") {
@@ -419,7 +452,10 @@ module.exports = function(app) {
                     var newvalue = { $set: { defaultColor: String(req.body.value) } };
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
-                        console.log("Update successful");
+                        //console.log("Update successful");
+                        var alarmText = String(receivedEmail + " updated navbar color");
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
                         db.close();
                     });
                 });
@@ -431,7 +467,10 @@ module.exports = function(app) {
                     var newvalue = { $set: { defaultNavbarPos: String(req.body.value) } };
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
-                        console.log("Update successful");
+                        //console.log("Update successful");
+                        var alarmText = String(receivedEmail + " updated navbar position");
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
                         db.close();
                     });
                 });
@@ -450,7 +489,7 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.status(400).send('not authorized');
         } else {
-            console.log("POST to whitelist received from: " + req.session.user.email);
+            //console.log("POST to whitelist received from: " + req.session.user.email);
             if (req.body.command == "add") {
                 var receivedEmail = String(req.body.email);
                 var receivedAccess = String(req.body.access);
@@ -458,11 +497,14 @@ module.exports = function(app) {
                     if (err) throw err;
                     var dbo = db.db("dashboard");
                     var newObj = { email: receivedEmail, access: receivedAccess };
-                    console.log("Data to insert:");
-                    console.log(newObj);
+                    //console.log("Data to insert:");
+                    //console.log(newObj);
                     dbo.collection("whitelist").insertOne(newObj, function(err, res) {
                         if (err) throw err;
-                        console.log("Insert successful");
+                        //console.log("Insert successful");
+                        var alarmText = String(receivedEmail + " added to whitelist as " + access);
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
                         db.close();
                     });
                 });
@@ -474,12 +516,18 @@ module.exports = function(app) {
                     var dbquery = { email: receivedEmail };
                     dbo.collection("whitelist").deleteOne(dbquery, function(err, obj) {
                         if (err) throw err;
-                        console.log("Address deleted");
+                        //console.log("Address deleted");
+                        var alarmText = String(receivedEmail + " removed from whitelist");
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
                         db.close();
                     });
                 });
             } else {
-                console.log("Invalid or no command specified");
+                //console.log("Invalid or no command specified");
+                var alarmText = String("could not remove user from whitelist");
+                var alarmStatus = "info";
+                logAlarm(alarmText, alarmStatus);
             }
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
@@ -490,8 +538,11 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.status(400).send('not authorized');
         } else {
-            console.log("POST to sensors received: from: " + req.session.user.email);
-            console.log(req.body);
+            //console.log("POST to sensors received: from: " + req.session.user.email);
+            //console.log(req.body);
+            var alarmText = String(req.session.user.email + " updated sensor information");
+            var alarmStatus = "info";
+            logAlarm(alarmText, alarmStatus);
             var responseText = JSON.stringify(req.body);
             res.status(200).send(responseText);
             console.log("Sensor modifications not supported yet");
@@ -570,9 +621,45 @@ module.exports = function(app) {
         }
     });
 
-    //****************//
-    //APP GET Handlers//
-    //****************//
+    app.get('/alarms/all', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            MongoClient.connect(databaseURL, function(err, db) {
+                if (err) throw err;
+                var dbo = db.db("dashboard");
+                dbo.collection("alarms").find({}).toArray(function(err, result) {
+                    if (err) throw err;
+                    var alarms = result;
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify(alarms));
+                    db.close();
+                });
+            });
+        }
+    });
+
+    app.get('/alarms/danger', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            MongoClient.connect(databaseURL, function(err, db) {
+                if (err) throw err;
+                var dbo = db.db("dashboard");
+                dbo.collection("alarms").find({ ststus: "danger" }).toArray(function(err, result) {
+                    if (err) throw err;
+                    var alarms = result;
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify(alarms));
+                    db.close();
+                });
+            });
+        }
+    });
+
+    //***********************//
+    //Mobile App GET Handlers//
+    //***********************//
 
     app.get('/app/sensors', function(req, res) {
         if (req.session.user == null) {
@@ -603,3 +690,33 @@ module.exports = function(app) {
     });
 
 };
+
+function logAlarm(alarmText, alarmStatus) {
+    if (alarmStatus === undefined) {
+        alarmStatus = "info";
+    }
+    MongoClient.connect(databaseURL, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("dashboard");
+        var alarmTime = String(new Date().today() + " " + new Date().timeNow());
+        var epochTime = String((new Date).getTime());
+        var newObj = { epoch: epochTime, time: alarmTime, text: String(alarmText), status: String(alarmStatus) };
+        console.log(newObj);
+        console.log("[" + alarmStatus + "] " + alarmTime + " " + alarmText);
+        dbo.collection("alarms").insertOne(newObj, function(err, res) {
+            if (err) throw err;
+            db.close();
+        });
+    });
+
+}
+
+// For todays date;
+Date.prototype.today = function() {
+    return ((this.getDate() < 10) ? "0" : "") + this.getDate() + "/" + (((this.getMonth() + 1) < 10) ? "0" : "") + (this.getMonth() + 1) + "/" + this.getFullYear();
+}
+
+// For the time now
+Date.prototype.timeNow = function() {
+    return ((this.getHours() < 10) ? "0" : "") + this.getHours() + ":" + ((this.getMinutes() < 10) ? "0" : "") + this.getMinutes() + ":" + ((this.getSeconds() < 10) ? "0" : "") + this.getSeconds();
+}
