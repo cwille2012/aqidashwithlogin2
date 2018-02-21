@@ -11,6 +11,27 @@ var databaseURL = 'mongodb://' + dbHost + ':' + dbPort + '/' + databaseName;
 
 module.exports = function(app) {
 
+    //******************//
+    //Data POST Handlers//
+    //******************//
+
+    app.post('/data', function(req, res) {
+        MongoClient.connect(databaseURL, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("dashboard");
+            var newObj = req.body;
+            console.log("Data received:");
+            console.log(newObj);
+            // dbo.collection("data").insertOne(newObj, function(err, res) {
+            //     if (err) throw err;
+            //     console.log("Insert successful");
+            //     db.close();
+            // });
+        });
+        //check new data to see if a new sensor id is added
+        res.status(200).send('ok');
+    });
+
     //***************//
     //Account Loading//
     //***************//
