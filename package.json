@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "Webserver with login",
     "author": "Christopher Wille",
+    "website": {
+        "url": "https://nodejs-login.herokuapp.com"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/cwille2012/logintest.git"
@@ -18,25 +21,12 @@
         "jade": "1.11.0",
         "moment": "2.10.3",
         "mongodb": "2.2.19",
-        "stylus": "0.52.4",
-        "d3-request": "^1.0.5",
-        "deck.gl": "^5.0.0",
-        "luma.gl": "^5.0.0",
-        "react": "^16.2.0",
-        "react-dom": "^16.2.0",
-        "react-map-gl": "^3.2.0"
-    },
-    "devDependencies": {
-        "buble-loader": "^0.4.0",
-        "webpack": "^2.2.0",
-        "webpack-dev-server": "^2.2.0"
+        "stylus": "0.52.4"
     },
     "engines": {
         "node": "4.2.1"
     },
     "scripts": {
-        "start": "webpack-dev-server --progress --hot --port 9600",
-        "build": "webpack --output-filename bundle.js"
-
+        "start": "node app.js"
     }
 }
