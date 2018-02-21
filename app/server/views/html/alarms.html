@@ -268,7 +268,7 @@
                         return xmlHttp.responseText;
                     }
                     var address = String(window.location.href);
-                    address = address.replace(/settings\/alarms/g, 'alarms/all')
+                    address = address.replace(/alarms/g, 'alarms/all')
                     var alarms = httpGet(address);
                     console.log(address);
                     console.log(alarms);
