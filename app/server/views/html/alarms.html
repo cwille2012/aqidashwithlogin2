@@ -270,8 +270,6 @@
                     var address = String(window.location.href);
                     address = address.replace(/alarms/g, 'alarms/all')
                     var alarms = httpGet(address);
-                    console.log(address);
-                    console.log(alarms);
                     alarms = JSON.parse(alarms);
                     for (var alarm in alarms) {
                         var alarmTime = alarms[alarm]['time'];
@@ -292,7 +290,7 @@
 
                         var td2 = document.createElement("td");
                         var text2 = document.createTextNode(alarmText);
-                        td1.appendChild(text2);
+                        td2.appendChild(text2);
                         tr.appendChild(td2);
 
                         document.getElementById('alarmTableBody').appendChild(tr);
