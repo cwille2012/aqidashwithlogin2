@@ -453,7 +453,7 @@ module.exports = function(app) {
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
                         //console.log("Update successful");
-                        var alarmText = String(receivedEmail + " updated navbar color");
+                        var alarmText = String(updateEmail + " updated navbar color");
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
                         db.close();
@@ -468,7 +468,7 @@ module.exports = function(app) {
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
                         //console.log("Update successful");
-                        var alarmText = String(receivedEmail + " updated navbar position");
+                        var alarmText = String(updateEmail + " updated navbar position");
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
                         db.close();
