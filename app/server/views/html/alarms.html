@@ -269,6 +269,7 @@
                     }
                     var address = String(window.location.href);
                     var alarms = httpGet(address.replace(/settings\/alarms/g, 'alarms/all'));
+                    console.log(alarms);
                     alarms = JSON.parse(alarms);
                     for (var alarm in alarms) {
                         var alarmTime = alarms[alarm]['time'];
