@@ -487,9 +487,9 @@ module.exports = function(app) {
 
     app.post('/whitelist', function(req, res) {
         if (req.session.user == null) {
-            console.log(req.session);
             res.status(400).send('not authorized');
         } else {
+            console.log(req.session);
             //console.log("POST to whitelist received from: " + req.session.user.email);
             if (req.body.command == "add") {
                 var receivedEmail = String(req.body.email);
@@ -503,7 +503,7 @@ module.exports = function(app) {
                     dbo.collection("whitelist").insertOne(newObj, function(err, res) {
                         if (err) throw err;
                         //console.log("Insert successful");
-                        var alarmText = String(receivedEmail + " added to whitelist as " + access);
+                        var alarmText = String(receivedEmail + " added to whitelist as " + receivedAccess);
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
                         db.close();
