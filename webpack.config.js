@@ -5,37 +5,44 @@
 const resolve = require('path').resolve;
 const webpack = require('webpack');
 
+//added
+var http = require('http');
+var express = require('express');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var errorHandler = require('errorhandler');
+var cookieParser = require('cookie-parser');
+var MongoStore = require('connect-mongo')(session);
+
 const CONFIG = {
-  entry: {
-    app: resolve('./app.js')
-  },
+    entry: {
+        app: resolve('./app.js')
+    },
 
-  devtool: 'source-map',
+    devtool: 'source-map',
 
-  module: {
-    rules: [
-      {
-        // Compile ES2015 using buble
-        test: /\.js$/,
-        loader: 'buble-loader',
-        include: [resolve('.')],
-        exclude: [/node_modules/],
-        options: {
-          objectAssign: 'Object.assign'
+    module: {
+        rules: [{
+            // Compile ES2015 using buble
+            test: /\.js$/,
+            loader: 'buble-loader',
+            include: [resolve('.')],
+            exclude: [/node_modules/],
+            options: {
+                objectAssign: 'Object.assign'
+            }
+        }]
+    },
+
+    resolve: {
+        alias: {
+            // From mapbox-gl-js README. Required for non-browserify bundlers (e.g. webpack):
+            'mapbox-gl$': resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
         }
-      }
-    ]
-  },
+    },
 
-  resolve: {
-    alias: {
-      // From mapbox-gl-js README. Required for non-browserify bundlers (e.g. webpack):
-      'mapbox-gl$': resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
-    }
-  },
-
-  // Optional: Enables reading mapbox token from environment variable
-  plugins: [new webpack.EnvironmentPlugin(['MapboxAccessToken'])]
+    // Optional: Enables reading mapbox token from environment variable
+    plugins: [new webpack.EnvironmentPlugin(['MapboxAccessToken'])]
 };
 
 // This line enables bundling against src in this repo rather than installed deck.gl module
