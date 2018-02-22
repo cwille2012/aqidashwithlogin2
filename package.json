@@ -21,7 +21,18 @@
         "jade": "1.11.0",
         "moment": "2.10.3",
         "mongodb": "2.2.19",
-        "stylus": "0.52.4"
+        "stylus": "0.52.4",
+        "d3-request": "^1.0.5",
+        "deck.gl": "^5.0.0",
+        "luma.gl": "^5.0.0",
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "react-map-gl": "^3.2.0"
+    },
+    "devDependencies": {
+        "buble-loader": "^0.4.0",
+        "webpack": "^2.2.0",
+        "webpack-dev-server": "^2.2.0"
     },
     "engines": {
         "node": "4.2.1"
