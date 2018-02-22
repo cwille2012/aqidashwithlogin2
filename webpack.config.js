@@ -33,7 +33,7 @@ const CONFIG = {
     },
 
     output: {
-        filename: 'bundle.js'
+        filename: '/app/public/bundle.js'
     },
 
     // Optional: Enables reading mapbox token from environment variable
