@@ -260,7 +260,7 @@ module.exports = function(app) {
     });
 
     app.get('/settings/sensors', function(req, res) {
-        if ((req.session.user.access != 'admin') || (req.session.user.access != 'manager')) {
+        if ((req.session.user.access != 'admin') && (req.session.user.access != 'manager')) {
             res.redirect('/');
         } else {
             res.sendFile(__dirname + '/views/html/settings-sensors.html', (err, html) => {
@@ -524,7 +524,7 @@ module.exports = function(app) {
     });
 
     app.post('/sensors', function(req, res) {
-        if ((req.session.user.access != 'admin') || (req.session.user.access != 'manager')) {
+        if ((req.session.user.access != 'admin') && (req.session.user.access != 'manager')) {
             res.status(400).send('not authorized');
         } else {
             var alarmText = String(req.session.user.email + " updated sensor information");
@@ -609,8 +609,8 @@ module.exports = function(app) {
     });
 
     app.get('/alarms/all', function(req, res) {
-        if (req.session.user == null) {
-            res.redirect('/');
+        if (req.session.user != 'admin') {
+            res.redirect('/alarms/danger');
         } else {
             MongoClient.connect(databaseURL, function(err, db) {
                 if (err) throw err;
