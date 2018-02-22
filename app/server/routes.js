@@ -486,10 +486,10 @@ module.exports = function(app) {
     });
 
     app.post('/whitelist', function(req, res) {
-        if (req.session.user == null) {
+        if (req.session.user.access != 'admin') {
             res.status(400).send('not authorized');
         } else {
-            console.log(req.session);
+            //console.log(req.session);
             //console.log("POST to whitelist received from: " + req.session.user.email);
             if (req.body.command == "add") {
                 var receivedEmail = String(req.body.email);
