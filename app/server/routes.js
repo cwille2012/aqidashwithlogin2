@@ -224,7 +224,7 @@ module.exports = function(app) {
     });
 
     app.get('/settings/accounts', function(req, res) {
-        if (req.session.user == null) {
+        if (req.session.user.access != 'admin') {
             res.redirect('/');
         } else {
             res.sendFile(__dirname + '/views/html/settings-accounts.html', (err, html) => {
@@ -260,7 +260,7 @@ module.exports = function(app) {
     });
 
     app.get('/settings/sensors', function(req, res) {
-        if (req.session.user == null) {
+        if ((req.session.user.access != 'admin') || (req.session.user.access != 'manager')) {
             res.redirect('/');
         } else {
             res.sendFile(__dirname + '/views/html/settings-sensors.html', (err, html) => {
@@ -398,36 +398,31 @@ module.exports = function(app) {
     });
 
     app.post('/users/remove', function(req, res) {
-        if (req.session.user == null) {
-            res.redirect('/');
+        if (req.session.user.access != 'admin') {
+            var alarmText = String('unauthorized user (' + req.session.user.email + ') tried to remove user: ' + req.body.userID);
+            var alarmStatus = "info";
+            logAlarm(alarmText, alarmStatus);
+            res.status(400).send('not authorized');
         } else {
             var userAccess = req.session.user.access;
             var command = req.body.command;
             var accountID = req.body.userID;
             if (command == "remove") {
-                if ((userAccess == "admin") || (userAccess == "manager")) {
-                    AM.deleteAccount(accountID, function(e, obj) {
-                        if (!e) {
-                            res.status(200).send('ok');
-                            //console.log("removed user: " + accountID);
-                            var alarmText = String("removed user: " + accountID);
-                            var alarmStatus = "info";
-                            logAlarm(alarmText, alarmStatus);
-                        } else {
-                            res.status(400).send('could not delete user');
-                            //console.log("could not remove user: " + accountID);
-                            var alarmText = String("could not remove user: " + accountID);
-                            var alarmStatus = "info";
-                            logAlarm(alarmText, alarmStatus);
-                        }
-                    });
-                } else {
-                    res.status(400).send('not authorized');
-                    //console.log('Unauthorized user (' + req.session.user.email + ') tried to remove user: ' + accountID);
-                    var alarmText = String('unauthorized user (' + req.session.user.email + ') tried to remove user: ' + accountID);
-                    var alarmStatus = "info";
-                    logAlarm(alarmText, alarmStatus);
-                }
+                AM.deleteAccount(accountID, function(e, obj) {
+                    if (!e) {
+                        res.status(200).send('ok');
+                        //console.log("removed user: " + accountID);
+                        var alarmText = String("removed user: " + accountID);
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
+                    } else {
+                        res.status(400).send('could not delete user');
+                        //console.log("could not remove user: " + accountID);
+                        var alarmText = String("could not remove user: " + accountID);
+                        var alarmStatus = "info";
+                        logAlarm(alarmText, alarmStatus);
+                    }
+                });
             }
         }
     });
@@ -489,8 +484,6 @@ module.exports = function(app) {
         if (req.session.user.access != 'admin') {
             res.status(400).send('not authorized');
         } else {
-            //console.log(req.session);
-            //console.log("POST to whitelist received from: " + req.session.user.email);
             if (req.body.command == "add") {
                 var receivedEmail = String(req.body.email);
                 var receivedAccess = String(req.body.access);
@@ -498,11 +491,8 @@ module.exports = function(app) {
                     if (err) throw err;
                     var dbo = db.db("dashboard");
                     var newObj = { email: receivedEmail, access: receivedAccess };
-                    //console.log("Data to insert:");
-                    //console.log(newObj);
                     dbo.collection("whitelist").insertOne(newObj, function(err, res) {
                         if (err) throw err;
-                        //console.log("Insert successful");
                         var alarmText = String(receivedEmail + " added to whitelist as " + receivedAccess);
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
@@ -517,7 +507,6 @@ module.exports = function(app) {
                     var dbquery = { email: receivedEmail };
                     dbo.collection("whitelist").deleteOne(dbquery, function(err, obj) {
                         if (err) throw err;
-                        //console.log("Address deleted");
                         var alarmText = String(receivedEmail + " removed from whitelist");
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
@@ -525,7 +514,6 @@ module.exports = function(app) {
                     });
                 });
             } else {
-                //console.log("Invalid or no command specified");
                 var alarmText = String("could not remove user from whitelist");
                 var alarmStatus = "info";
                 logAlarm(alarmText, alarmStatus);
@@ -536,11 +524,9 @@ module.exports = function(app) {
     });
 
     app.post('/sensors', function(req, res) {
-        if (req.session.user == null) {
+        if ((req.session.user.access != 'admin') || (req.session.user.access != 'manager')) {
             res.status(400).send('not authorized');
         } else {
-            //console.log("POST to sensors received: from: " + req.session.user.email);
-            //console.log(req.body);
             var alarmText = String(req.session.user.email + " updated sensor information");
             var alarmStatus = "info";
             logAlarm(alarmText, alarmStatus);
@@ -555,7 +541,7 @@ module.exports = function(app) {
     //************//
 
     app.get('/whitelist', function(req, res) {
-        if (req.session.user == null) {
+        if (req.session.user.access != 'admin') {
             res.redirect('/');
         } else {
             MongoClient.connect(databaseURL, function(err, db) {
@@ -573,7 +559,7 @@ module.exports = function(app) {
     });
 
     app.get('/users', function(req, res) {
-        if (req.session.user == null) {
+        if (req.session.user.access != 'admin') {
             res.redirect('/');
         } else {
             AM.getAllRecords(function(e, accounts) {
