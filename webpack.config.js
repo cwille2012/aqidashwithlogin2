@@ -33,7 +33,7 @@ const CONFIG = {
     },
 
     output: {
-        path: resolve(__dirname, "/app/public"),
+        path: resolve('./app/public'),
         filename: 'bundle.js'
     },
 
