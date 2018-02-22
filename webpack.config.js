@@ -5,18 +5,9 @@
 const resolve = require('path').resolve;
 const webpack = require('webpack');
 
-//added
-var http = require('http');
-var express = require('express');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var errorHandler = require('errorhandler');
-var cookieParser = require('cookie-parser');
-var MongoStore = require('connect-mongo')(session);
-
 const CONFIG = {
     entry: {
-        app: resolve('./app.js')
+        app: resolve('./index.js')
     },
 
     devtool: 'source-map',
@@ -39,6 +30,10 @@ const CONFIG = {
             // From mapbox-gl-js README. Required for non-browserify bundlers (e.g. webpack):
             'mapbox-gl$': resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
         }
+    },
+
+    output: {
+        filename: 'bundle.js'
     },
 
     // Optional: Enables reading mapbox token from environment variable
