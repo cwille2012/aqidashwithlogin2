@@ -681,6 +681,18 @@ module.exports = function(app) {
     //404 Catch//
     //*********//
 
+    app.get('/bundle.js', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            res.sendFile(__dirname + '/bundle.js', (err, html) => {
+                if (err) {
+                    res.end("Not found");
+                }
+            });
+        }
+    });
+
     app.get('*', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
