@@ -37,6 +37,6 @@
     "scripts": {
         "start": "node app.js",
         "start-local": "export MapboxAccessToken='pk.eyJ1IjoiY3dpbGxlMjAxMiIsImEiOiJjajJxdWJyeXEwMDE5MzNydXF2cm1sbDU1In0.kCKIz6Ivh3EfNOmEfTANOA' && webpack-dev-server --progress --hot --port 3000",
-        "build": "export MapboxAccessToken='pk.eyJ1IjoiY3dpbGxlMjAxMiIsImEiOiJjajJxdWJyeXEwMDE5MzNydXF2cm1sbDU1In0.kCKIz6Ivh3EfNOmEfTANOA' && webpack --output-filename bundle.js"
+        "build": "export MapboxAccessToken='pk.eyJ1IjoiY3dpbGxlMjAxMiIsImEiOiJjajJxdWJyeXEwMDE5MzNydXF2cm1sbDU1In0.kCKIz6Ivh3EfNOmEfTANOA' && webpack --output-filename /app/public/bundle.js"
     }
 }
