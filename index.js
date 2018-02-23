@@ -11,7 +11,7 @@ const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
 
 // Source data CSV
 const DATA_URL =
-    'https://raw.githubusercontent.com/uber-common/deck.gl-data/master/examples/icon/meteorites.json'; // eslint-disable-line
+    './mapdata/mapdata.json'; // eslint-disable-line
 
 class Root extends Component {
     constructor(props) {
