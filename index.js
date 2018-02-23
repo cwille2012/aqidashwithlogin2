@@ -13,6 +13,7 @@ const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
 const DATA_URL =
     './mapdata/mapdata.json'; // eslint-disable-line
 
+/*
 class Root extends Component {
     constructor(props) {
         super(props);
@@ -75,7 +76,39 @@ class Root extends Component {
         );
     }
 }
+*/
 
-if (!!document.getElementById('mapHolder')) {
-    render( < Root / > , document.getElementById('mapHolder').appendChild(document.createElement('div')));
-}
+
+const ICON_MAPPING = {
+    marker: { x: 0, y: 0, width: 32, height: 32, mask: true }
+};
+
+var data = { position: [-122.4, 37.7], icon: 'marker', size: 24, color: [255, 0, 0] };
+
+const App = ({ data, viewport }) => {
+
+        /**
+         * Data format:
+         * [
+         *   {position: [-122.4, 37.7], icon: 'marker', size: 24, color: [255, 0, 0]},
+         *   ...
+         * ]
+         */
+
+        const layer = new IconLayer({
+            id: 'icon-layer',
+            data,
+            iconAtlas: './mapdata/icon.png',
+            iconMapping: ICON_MAPPING
+        });
+
+        return ( < DeckGL {...viewport }
+            layers = {
+                [layer]
+            }
+            />);
+        };
+
+        if (!!document.getElementById('mapHolder')) {
+            render( < Root / > , document.getElementById('mapHolder').appendChild(document.createElement('div')));
+        }
