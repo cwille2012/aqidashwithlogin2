@@ -13,7 +13,6 @@ const MAPBOX_TOKEN = process.env.MapboxAccessToken; // eslint-disable-line
 const DATA_URL =
     './mapdata/mapdata.json'; // eslint-disable-line
 
-
 class Root extends Component {
     constructor(props) {
         super(props);
