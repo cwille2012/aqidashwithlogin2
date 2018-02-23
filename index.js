@@ -31,7 +31,7 @@ class Root extends Component {
                 this.setState({ data: response });
             }
         });
-        requestJson('./public/mapdata/location-icon-mapping.json', (error, response) => {
+        requestJson('./mapdata/location-icon-mapping.json', (error, response) => {
             if (!error) {
                 this.setState({ iconMapping: response });
             }
