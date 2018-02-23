@@ -67,7 +67,7 @@ class Root extends Component {
             <
             DeckGLOverlay viewport = { viewport }
             data = { data }
-            iconAtlas = "data/location-icon-atlas.png"
+            iconAtlas = "mapdata/location-icon-atlas.png"
             iconMapping = { iconMapping }
             showCluster = { true }
             /> < /
