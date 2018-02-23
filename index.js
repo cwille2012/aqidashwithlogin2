@@ -85,7 +85,7 @@ const ICON_MAPPING = {
 
 var data = { position: [-122.4, 37.7], icon: 'marker', size: 24, color: [255, 0, 0] };
 
-const App = ({ data, viewport }) => {
+const Root = ({ data, viewport }) => {
 
         /**
          * Data format:
