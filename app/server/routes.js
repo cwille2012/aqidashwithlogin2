@@ -609,7 +609,7 @@ module.exports = function(app) {
     });
 
     app.get('/alarms/all', function(req, res) {
-        if (req.session.user != 'admin') {
+        if (req.session.user.access != 'admin') {
             res.redirect('/alarms/danger');
         } else {
             MongoClient.connect(databaseURL, function(err, db) {
