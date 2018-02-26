@@ -682,10 +682,29 @@
                     "user": userName
                 });
 
+                var url = String(window.location.href);
+                url = url.replace(/settings\/dashboard/g, 'control');
+                var method = "POST";
+
+                var shouldBeAsync = true;
+                var request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    var status = request.status;
+                    var data = request.responseText;
+                    console.log('status:' + status + ':' + data);
+                    if (status == 200) {
+                        console.log("updated user successfully");
+                        console.log(data);
+                    } else {
+                        console.log("updating user failed");
+                        console.log(data);
+                    }
+                }
                 console.log(postData);
-                // request.open(method, url, shouldBeAsync);
-                // request.setRequestHeader("Content-Type", "application/json");
-                // request.send(JSON.stringify(postData));
+                request.open(method, url, shouldBeAsync);
+                request.setRequestHeader("Content-Type", "application/json");
+                request.send(JSON.stringify(postData));
             });
         </script>
 
@@ -700,10 +719,25 @@
 
         <script>
             function loadScript() {
-                document.getElementById("user-tf").value = localStorage.getItem("dataDashUserName");
-                document.getElementById("name-tf").value = localStorage.getItem("dataDashFullName");
-                document.getElementById("email-tf").value = localStorage.getItem("dataDashEmail");
-                setSelectedIndex(document.getElementById('country-list'), String(localStorage.getItem("dataDashCountry")));
+                function httpGet(theUrl) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.open("GET", theUrl, false); // false for synchronous request
+                    xmlHttp.send(null);
+                    return xmlHttp.responseText;
+                }
+                var address = String(window.location.href);
+                var currentUser = httpGet(address.replace(/settings\/accounts/g, 'currentuser'));
+                currentUser = JSON.parse(currentUser);
+
+                document.getElementById("user-tf").value = currentUser.user;
+                document.getElementById("name-tf").value = currentUser.name;
+                document.getElementById("email-tf").value = currentUser.email;
+                setSelectedIndex(document.getElementById('country-list'), String(currentUser.country));
+
+                // document.getElementById("user-tf").value = localStorage.getItem("dataDashUserName");
+                // document.getElementById("name-tf").value = localStorage.getItem("dataDashFullName");
+                // document.getElementById("email-tf").value = localStorage.getItem("dataDashEmail");
+                // setSelectedIndex(document.getElementById('country-list'), String(localStorage.getItem("dataDashCountry")));
                 //add current user country:
                 //localStorage.getItem("dataDashCountry");
             }

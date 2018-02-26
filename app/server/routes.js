@@ -568,6 +568,19 @@ module.exports = function(app) {
         }
     });
 
+    app.get('/currentuser', function(req, res) {
+        if (req.session.user == null) {
+            res.redirect('/');
+        } else {
+            AM.getAccountByEmail(req.session.user.email, function(e, account) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                account['pass'] = 'hidden';
+                console.log(account);
+                res.end(JSON.stringify(account));
+            })
+        }
+    });
+
     app.get('/sensors', function(req, res) {
         if (req.session.user == null) {
             res.redirect('/');
