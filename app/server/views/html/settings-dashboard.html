@@ -196,19 +196,19 @@
             <div class="form-group">
                 <label class="control-label col-sm-3">Name</label>
                 <div class="col-sm-9">
-                    <input id="name-tf" type="text" name="name" value="" class="form-control">
+                    <input id="name-tf" type="text" name="name" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3">Email</label>
                 <div class="col-sm-9">
-                    <input id="email-tf" type="text" name="email" value="" class="form-control">
+                    <input id="email-tf" type="text" name="email" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-3">Username</label>
                 <div class="col-sm-9">
-                    <input id="user-tf" type="text" name="user" value="" class="form-control disabled">
+                    <input id="user-tf" type="text" name="user" class="form-control disabled">
                 </div>
             </div>
             <div class="form-group">
@@ -422,7 +422,9 @@
 
         <script>
             function loadScript() {
-                //nothing to do on load
+                document.getElementById("user-tf").innerHTML = localStorage.getItem("dataDashUserName");
+                document.getElementById("name-tf").innerHTML = localStorage.getItem("dataDashFullName");
+                document.getElementById("email-tf").innerHTML = localStorage.getItem("dataDashEmail");
             }
         </script>
     </div>
