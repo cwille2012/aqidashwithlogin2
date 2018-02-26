@@ -574,7 +574,7 @@ module.exports = function(app) {
         } else {
             AM.getAccountByEmail(req.session.user.email, function(e, account) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                account['pass'] = 'hidden';
+                //account['pass'] = 'hidden';
                 console.log(account);
                 res.end(JSON.stringify(account));
             })
