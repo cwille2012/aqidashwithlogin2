@@ -57,18 +57,6 @@ module.exports = function(app) {
         }
     });
 
-    app.get('/control', function(req, res) {
-        if (req.session.user == null) {
-            res.redirect('/');
-        } else {
-            res.render('control', {
-                title: 'Control Panel',
-                countries: CT,
-                udata: req.session.user
-            });
-        }
-    });
-
     app.get('/signup', function(req, res) {
         res.render('signup', { title: 'Signup', countries: CT });
     });
@@ -294,7 +282,6 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            console.log(req.body);
             AM.updateAccount({
                 id: req.session.user._id,
                 name: req.body['name'],
@@ -577,7 +564,6 @@ module.exports = function(app) {
                 for (var account in accounts) {
                     accounts[account]['pass'] = 'hidden';
                     if (accounts[account]['email'] == req.session.user.email) {
-                        console.log(accounts[account]);
                         res.end(JSON.stringify(accounts[account]));
                     }
                 }

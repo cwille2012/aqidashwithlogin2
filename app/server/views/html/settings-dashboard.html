@@ -469,6 +469,9 @@
                 <button type="submit" id="account-form-submit" class="btn btn-primary">Submit</button>
             </div>
             <hr>
+            <h3>Map Settings</h3>
+            <p>The default position, zoom and color of the dashboard map can be set below.</p>
+            <hr>
             <h3>Dashboard Settings</h3>
             <p>The navbar position can be either fixed or static, and it supports the dark and purple color schemes.</p>
             <a class="btn btn-primary" href="#" id="toggleNavPosition">Toggle Fixed/Static Navbar</a><br>
@@ -701,7 +704,6 @@
                         console.log(data);
                     }
                 }
-                console.log(postData);
                 request.open(method, url, shouldBeAsync);
                 request.setRequestHeader("Content-Type", "application/json");
                 request.send(JSON.stringify(postData));
@@ -713,7 +715,7 @@
                 $e.preventDefault();
                 var userName = localStorage.getItem("dataDashUserName");
 
-
+                console.log('removing own accounts not fiished');
             });
         </script>
 
@@ -727,20 +729,12 @@
                 }
                 var address = String(window.location.href);
                 var currentUser = httpGet(address.replace(/settings\/dashboard/g, 'currentuser'));
-                console.log(currentUser);
                 currentUser = JSON.parse(currentUser);
 
                 document.getElementById("user-tf").value = currentUser.user;
                 document.getElementById("name-tf").value = currentUser.name;
                 document.getElementById("email-tf").value = currentUser.email;
                 setSelectedIndex(document.getElementById('country-list'), String(currentUser.country));
-
-                // document.getElementById("user-tf").value = localStorage.getItem("dataDashUserName");
-                // document.getElementById("name-tf").value = localStorage.getItem("dataDashFullName");
-                // document.getElementById("email-tf").value = localStorage.getItem("dataDashEmail");
-                // setSelectedIndex(document.getElementById('country-list'), String(localStorage.getItem("dataDashCountry")));
-                //add current user country:
-                //localStorage.getItem("dataDashCountry");
             }
         </script>
 
