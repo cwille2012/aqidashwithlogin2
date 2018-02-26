@@ -422,9 +422,9 @@
 
         <script>
             function loadScript() {
-                document.getElementById("user-tf").innerHTML = localStorage.getItem("dataDashUserName");
-                document.getElementById("name-tf").innerHTML = localStorage.getItem("dataDashFullName");
-                document.getElementById("email-tf").innerHTML = localStorage.getItem("dataDashEmail");
+                document.getElementById("user-tf").value = localStorage.getItem("dataDashUserName");
+                document.getElementById("name-tf").value = localStorage.getItem("dataDashFullName");
+                document.getElementById("email-tf").value = localStorage.getItem("dataDashEmail");
             }
         </script>
     </div>
