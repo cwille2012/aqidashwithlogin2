@@ -192,6 +192,7 @@
             <hr>
             <h3>User Settings</h3>
             <p>Personal account settings and contact information can be adjusted below.</p>
+            <form method="post" id="account-form" class="form-horizontal well"></form>
             <div class="form-group">
                 <label class="control-label col-sm-3">Name</label>
                 <div class="col-sm-9">
@@ -204,6 +205,23 @@
                     <input id="email-tf" type="text" name="email" value="" class="form-control">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Username</label>
+                <div class="col-sm-9">
+                    <input id="user-tf" type="text" name="user" value="" class="form-control disabled">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Password</label>
+                <div class="col-sm-9">
+                    <input id="pass-tf" type="password" name="pass" value="" class="form-control">
+                </div>
+            </div>
+            <div class="form-buttons">
+                <button type="button" id="account-form-btn1" class="btn btn-default"></button>
+                <button type="submit" id="account-form-btn2" class="btn btn-primary"></button>
+            </div>
+            </form>
             <hr>
             <h3>Dashboard Settings</h3>
             <p>The navbar position can be either fixed or static, and it supports the dark and purple color schemes.</p>
