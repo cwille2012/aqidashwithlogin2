@@ -205,6 +205,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-sm-3">Location</label>
+                <div class="col-sm-9">
+                    <select id="country-list" name="country" class="form-control">
+                    <option>Please select a country</option>
+                    <option selected>United States</option>
+                </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="control-label col-sm-3">Username</label>
                 <div class="col-sm-9">
                     <input id="user-tf" type="text" name="user" class="form-control disabled" disabled>
@@ -217,8 +226,8 @@
                 </div>
             </div>
             <div class="form-buttons">
-                <button type="button" id="account-form-btn1" class="btn btn-danger">Delete Account</button>
-                <button type="submit" id="account-form-btn2" class="btn btn-primary">Submit</button>
+                <button type="button" id="account-form-delete" class="btn btn-danger">Delete Account</button>
+                <button type="submit" id="account-form-submit" class="btn btn-primary">Submit</button>
             </div>
             <hr>
             <h3>Dashboard Settings</h3>
@@ -419,10 +428,32 @@
         </script>
 
         <script>
+            $('#account-form-submit').click(function($e) {
+                $e.preventDefault();
+                var userName = localStorage.getItem("dataDashUserName");
+                var userFullName = document.getElementById("name-tf").value;
+                var userEmail = document.getElementById("email-tf").value;
+                var userCountry = ""; //get value from dropdown
+
+            });
+        </script>
+
+        <script>
+            $('#account-form-delete').click(function($e) {
+                $e.preventDefault();
+                var userName = localStorage.getItem("dataDashUserName");
+
+
+            });
+        </script>
+
+        <script>
             function loadScript() {
                 document.getElementById("user-tf").value = localStorage.getItem("dataDashUserName");
                 document.getElementById("name-tf").value = localStorage.getItem("dataDashFullName");
                 document.getElementById("email-tf").value = localStorage.getItem("dataDashEmail");
+                //add current user country:
+                //localStorage.getItem("dataDashCountry");
             }
         </script>
     </div>
