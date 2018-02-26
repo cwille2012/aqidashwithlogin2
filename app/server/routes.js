@@ -294,6 +294,7 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
+            console.log(req.body);
             AM.updateAccount({
                 id: req.session.user._id,
                 name: req.body['name'],
@@ -603,6 +604,8 @@ module.exports = function(app) {
             //when edit pressed add delete column
             //sensor add button
             //add fire alarm sensor settings
+            //click on sensor on map show floor plans for buildings
+            //add security certificates (https)
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(sensorData));
         }
