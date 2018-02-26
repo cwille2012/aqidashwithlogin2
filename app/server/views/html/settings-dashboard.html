@@ -726,7 +726,7 @@
                     return xmlHttp.responseText;
                 }
                 var address = String(window.location.href);
-                var currentUser = httpGet(address.replace(/settings\/accounts/g, 'currentuser'));
+                var currentUser = httpGet(address.replace(/settings\/dashboard/g, 'currentuser'));
                 console.log(currentUser);
                 currentUser = JSON.parse(currentUser);
 
