@@ -572,6 +572,7 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
+            console.log(req.session.user);
             AM.getAccountByEmail(req.session.user.email, function(e, account) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 //account['pass'] = 'hidden';
