@@ -351,7 +351,6 @@ module.exports = function(app) {
     });
 
     app.post('/lost-password', function(req, res) {
-        // look up user account by email
         AM.getAccountByEmail(req.body['email'], function(o) {
             if (o) {
                 EM.dispatchResetPasswordLink(o, function(e, m) {
@@ -411,13 +410,11 @@ module.exports = function(app) {
                 AM.deleteAccount(accountID, function(e, obj) {
                     if (!e) {
                         res.status(200).send('ok');
-                        //console.log("removed user: " + accountID);
                         var alarmText = String("removed user: " + accountID);
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
                     } else {
                         res.status(400).send('could not delete user');
-                        //console.log("could not remove user: " + accountID);
                         var alarmText = String("could not remove user: " + accountID);
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
@@ -447,7 +444,6 @@ module.exports = function(app) {
                     var newvalue = { $set: { defaultColor: String(req.body.value) } };
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
-                        //console.log("Update successful");
                         var alarmText = String(updateEmail + " updated navbar color");
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
@@ -462,7 +458,6 @@ module.exports = function(app) {
                     var newvalue = { $set: { defaultNavbarPos: String(req.body.value) } };
                     dbo.collection("accounts").updateOne(dbquery, newvalue, function(err, res) {
                         if (err) throw err;
-                        //console.log("Update successful");
                         var alarmText = String(updateEmail + " updated navbar position");
                         var alarmStatus = "info";
                         logAlarm(alarmText, alarmStatus);
