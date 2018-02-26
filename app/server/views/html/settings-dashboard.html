@@ -727,6 +727,7 @@
                 }
                 var address = String(window.location.href);
                 var currentUser = httpGet(address.replace(/settings\/accounts/g, 'currentuser'));
+                console.log(currentUser);
                 currentUser = JSON.parse(currentUser);
 
                 document.getElementById("user-tf").value = currentUser.user;
