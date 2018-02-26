@@ -598,6 +598,11 @@ module.exports = function(app) {
                     "status": "ok"
                 }
             });
+            //add address and room number
+            //add edit button
+            //when edit pressed add delete column
+            //sensor add button
+            //add fire alarm sensor settings
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(sensorData));
         }
