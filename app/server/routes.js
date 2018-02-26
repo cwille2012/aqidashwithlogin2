@@ -572,12 +572,15 @@ module.exports = function(app) {
         if (req.session.user == null) {
             res.redirect('/');
         } else {
-            console.log(req.session.user);
-            AM.getAccountByEmail(req.session.user.email, function(e, account) {
+            AM.getAllRecords(function(e, accounts) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                //account['pass'] = 'hidden';
-                console.log(account);
-                res.end(JSON.stringify(account));
+                for (var account in accounts) {
+                    accounts[account]['pass'] = 'hidden';
+                    if (accounts[account]['email'] == req.session.user.email) {
+                        console.log(accounts[account]);
+                        res.end(JSON.stringify(accounts[account]));
+                    }
+                }
             })
         }
     });
